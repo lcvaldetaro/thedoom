@@ -20,11 +20,39 @@ class App : Application()  {
 
         appContext = this
         directoryFile = if (Build.VERSION.SDK_INT >= 24) appContext.dataDir else File(filesDir.path)
-        packageFolder = com.gepetto.utils.gcGetAppFolder(this)
-        versionString = com.gepetto.utils.gcGetAppVersion(this)
-        versionBuild  = com.gepetto.utils.gcGetAppBuild(this)
+        packageFolder = gcGetAppFolder(this)
+        versionString = gcGetAppVersion(this)
+        versionBuild  = gcGetAppBuild(this)
 
         DoomTools.init(packageFolder)
     }
 }
 
+fun gcGetAppBuild(ctx: Context) : Long {
+    return if (Build.VERSION.SDK_INT >= 28) {
+        ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).longVersionCode
+    } else {
+        ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).versionCode.toLong()
+    }
+}
+
+fun gcGetAppVersion(ctx: Context) : String {
+    return ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).versionName.toString()
+}
+
+fun makeFilesDirectory(packageFolder: String) : String {
+    val packageFiles = "${packageFolder}/files"
+    val packageFile = File(packageFiles)
+
+    packageFile.mkdir()
+
+    return packageFiles
+}
+
+fun gcGetAppFolder(ctx: Context) : String {
+    val packageFolder = ctx.getExternalFilesDir(null)!!.absolutePath + "/"
+
+    makeFilesDirectory(packageFolder)
+
+    return packageFolder
+}

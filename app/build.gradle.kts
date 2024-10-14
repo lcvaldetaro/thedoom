@@ -42,8 +42,6 @@ android {
 }
 
 dependencies {
-    // Gepetto-Utils
-    implementation(files("../libs/gepetto-utils-release.aar"))
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.core.ktx)
