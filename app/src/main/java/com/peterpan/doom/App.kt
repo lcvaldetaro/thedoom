@@ -19,16 +19,16 @@ class App : Application()  {
         super.onCreate()
 
         appContext = this
-        directoryFile = if (Build.VERSION.SDK_INT >= 24) appContext.dataDir else File(filesDir.path)
-        packageFolder = gcGetAppFolder(this)
-        versionString = gcGetAppVersion(this)
-        versionBuild  = gcGetAppBuild(this)
+        directoryFile = appContext.dataDir
+        packageFolder = getAppFolder(this)
+        versionString = getAppVersion(this)
+        versionBuild  = getAppBuild(this)
 
         DoomTools.init(packageFolder)
     }
 }
 
-fun gcGetAppBuild(ctx: Context) : Long {
+fun getAppBuild(ctx: Context) : Long {
     return if (Build.VERSION.SDK_INT >= 28) {
         ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).longVersionCode
     } else {
@@ -36,7 +36,7 @@ fun gcGetAppBuild(ctx: Context) : Long {
     }
 }
 
-fun gcGetAppVersion(ctx: Context) : String {
+fun getAppVersion(ctx: Context) : String {
     return ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).versionName.toString()
 }
 
@@ -49,7 +49,7 @@ fun makeFilesDirectory(packageFolder: String) : String {
     return packageFiles
 }
 
-fun gcGetAppFolder(ctx: Context) : String {
+fun getAppFolder(ctx: Context) : String {
     val packageFolder = ctx.getExternalFilesDir(null)!!.absolutePath + "/"
 
     makeFilesDirectory(packageFolder)
