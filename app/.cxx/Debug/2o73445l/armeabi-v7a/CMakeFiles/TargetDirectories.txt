@@ -1,0 +1,3 @@
+/Users/luiz/githubvaldetaro/Doom/app/.cxx/Debug/2o73445l/armeabi-v7a/CMakeFiles/peterpan.doom.dir
+/Users/luiz/githubvaldetaro/Doom/app/.cxx/Debug/2o73445l/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/luiz/githubvaldetaro/Doom/app/.cxx/Debug/2o73445l/armeabi-v7a/CMakeFiles/rebuild_cache.dir

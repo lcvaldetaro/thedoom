@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Used in View/Spinner1.java -->
+    <string-array name="LaunchFiles">
+        <item>Doom 1 (Shareware)</item>
+        <item>Primary FreeDoom</item>
+        <item>Ultimate Freedoom</item>
+        <!-- 
+        <item>Doom</item>
+        <item>Doom II </item>
+         -->
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="DoomFiles">
+        <item>Doom 1 (Shareware) 4MB</item>
+        <item>Plutonia Experiment (11MB)</item>
+        <!-- 
+        <item>Doom (14MB)</item>
+        <item>Doom II (15MB)</item>
+         -->
+    </string-array>
+    
+    <string-array name="Sound">
+        <item>Enabled</item>
+        <item>Disabled</item>
+    </string-array>
+
+    <string-array name="Size">
+        <item>Landscape</item>
+        <item>Portrait</item>
+    </string-array>
+    
+</resources>

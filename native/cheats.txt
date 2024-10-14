@@ -1,0 +1,26 @@
+Submitted by:IGN_Cheats
+Cheat Codes
+
+While playing, type any of these codes and have a blast.
+
+    IDDQD -- Invulnerability
+    IDBEHOLDI -- Temporary invisibility
+    IDBEHOLDR -- Temporary radiation suit
+    IDBEHOLDS -- Temporary berserk
+    IDBEHOLDA -- Temporary automap
+    IDBEHOLDV -- Temporary invulnerability
+    IDBEHOLDL -- Temporary light
+    IDKFA -- Full health, ammo, weapons, armor and keys
+    IDFA -- Full health, ammo, weapons, and armor
+    IDDT -- Change map detail
+    IDCHOPPERS -- Gain chainsaw
+    IDCLEVxx -- Warp to level 'xx' where xx is 01 to 19
+    IDMYPOS -- Displays your position and bearing
+    IDMUSxx -- Music select. 'xx' is ...
+
+[Show More]
+Submitted by:IGN_Cheats
+Secret Level
+
+To teleport directly to the secret level, type "idclev19" while playing.
+

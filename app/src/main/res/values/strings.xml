@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Doom</string>
+    <string name="srv_name">Doom Server</string>
+</resources>

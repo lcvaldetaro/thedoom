@@ -1,0 +1,10 @@
+dooms.wad     - Original Doom - Shareware
+doom1.wad     - Original Doom
+doomu.wad     - Ultimate Doom - Thy Flesh Consumed
+doom2.wad     - Doom 2 - Hell on Earth
+tnt.wad       - Final Doom TNT: Evilution
+plutonia.wad  - Final Doom The Plutonia Experiment
+doom3.wad     - Doom 3 - Ressurection Of Evil
+freedoom1.wad - Free Doom Phase 1
+freedoom2.wad - Ultimate Free Doom - Free Doom Phase 2
+freedm.wad    - Free Doom Death Match
