@@ -1,3 +1,0 @@
-/Users/luiz/thedoom/app/.cxx/Debug/2o73445l/x86/CMakeFiles/peterpan.doom.dir
-/Users/luiz/thedoom/app/.cxx/Debug/2o73445l/x86/CMakeFiles/edit_cache.dir
-/Users/luiz/thedoom/app/.cxx/Debug/2o73445l/x86/CMakeFiles/rebuild_cache.dir
