@@ -35,14 +35,15 @@
 #ifdef __GNUG__
 #pragma implementation "doomstat.h"
 #endif
+
 #include "doomstat.h"
 
 // Game Mode - identify IWAD as shareware, retail etc.
 GameMode_t gamemode = indetermined;
-GameMission_t   gamemission = doom;
+GameMission_t gamemission = doom;
 
 // Language.
-Language_t   language = english;
+Language_t language = english;
 
 // Set if homebrew PWAD stuff has been added.
 boolean modifiedgame;
@@ -57,19 +58,19 @@ int comp[COMP_TOTAL], default_comp[COMP_TOTAL];    // killough 10/98
 // v1.1-like pitched sounds
 int pitched_sounds;        // killough
 
-int     default_translucency; // config file says           // phares
+int default_translucency; // config file says           // phares
 boolean general_translucency; // true if translucency is ok // phares
 
 int demo_insurance, default_demo_insurance;        // killough 1/16/98
 
-int  allow_pushers = 1;      // MT_PUSH Things              // phares 3/10/98
-int  default_allow_pushers;  // killough 3/1/98: make local to each game
+int allow_pushers = 1;      // MT_PUSH Things              // phares 3/10/98
+int default_allow_pushers;  // killough 3/1/98: make local to each game
 
-int  variable_friction = 1;      // ice & mud               // phares 3/10/98
-int  default_variable_friction;  // killough 3/1/98: make local to each game
+int variable_friction = 1;      // ice & mud               // phares 3/10/98
+int default_variable_friction;  // killough 3/1/98: make local to each game
 
-int  weapon_recoil;              // weapon recoil                   // phares
-int  default_weapon_recoil;      // killough 3/1/98: make local to each game
+int weapon_recoil;              // weapon recoil                   // phares
+int default_weapon_recoil;      // killough 3/1/98: make local to each game
 
 int player_bobbing;  // whether player bobs or not          // phares 2/25/98
 int default_player_bobbing;  // killough 3/1/98: make local to each game
@@ -77,11 +78,11 @@ int default_player_bobbing;  // killough 3/1/98: make local to each game
 int monsters_remember;          // killough 3/1/98
 int default_monsters_remember;
 
-int monster_infighting=1;       // killough 7/19/98: monster<=>monster attacks
-int default_monster_infighting=1;
+int monster_infighting = 1;       // killough 7/19/98: monster<=>monster attacks
+int default_monster_infighting = 1;
 
-int monster_friction=1;       // killough 10/98: monsters affected by friction
-int default_monster_friction=1;
+int monster_friction = 1;       // killough 10/98: monsters affected by friction
+int default_monster_friction = 1;
 
 #ifdef DOGS
 int dogs, default_dogs;         // killough 7/19/98: Marine's best friend :)

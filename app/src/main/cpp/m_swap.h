@@ -46,7 +46,9 @@
  */
 
 #ifdef HAVE_CONFIG_H
+
 #include "config.h"
+
 #endif
 
 /* Endianess handling. */
@@ -61,7 +63,9 @@
 
 /* Try to use superfast macros on systems that support them */
 #ifdef HAVE_ASM_BYTEORDER_H
+
 #include <asm/byteorder.h>
+
 #ifdef __arch__swab16
 #define doom_swap_s  (signed short)__arch__swab16
 #endif
@@ -88,7 +92,7 @@
 #ifndef doom_swap_s
 #define doom_swap_s(x) \
         ((short int)((((unsigned short int)(x) & 0x00ff) << 8) | \
-                              (((unsigned short int)(x) & 0xff00) >> 8))) 
+                              (((unsigned short int)(x) & 0xff00) >> 8)))
 #endif
 
 /* Macros are named doom_XtoYT, where 

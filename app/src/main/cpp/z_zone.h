@@ -49,8 +49,11 @@
 // active before macro replacements below are in effect.
 
 #ifdef HAVE_CONFIG_H
+
 #include "config.h"
+
 #endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -59,8 +62,10 @@
 // ZONE MEMORY
 // PU - purge tags.
 
-enum {PU_FREE, PU_STATIC, PU_SOUND, PU_MUSIC, PU_LEVEL, PU_LEVSPEC, PU_CACHE,
-      /* Must always be last -- killough */ PU_MAX};
+enum {
+    PU_FREE, PU_STATIC, PU_SOUND, PU_MUSIC, PU_LEVEL, PU_LEVSPEC, PU_CACHE,
+    /* Must always be last -- killough */ PU_MAX
+};
 
 #define PU_PURGELEVEL PU_CACHE        /* First purgable tag's level */
 
@@ -68,20 +73,29 @@ enum {PU_FREE, PU_STATIC, PU_SOUND, PU_MUSIC, PU_LEVEL, PU_LEVSPEC, PU_CACHE,
 #define DA(x,y) ,x,y
 #define DAC(x,y) x,y
 #else
-#define DA(x,y) 
-#define DAC(x,y)
+#define DA(x, y)
+#define DAC(x, y)
 #endif
 
 void *(Z_Malloc)(size_t size, int tag, void **ptr DA(const char *, int));
+
 void (Z_Free)(void *ptr DA(const char *, int));
+
 void (Z_FreeTags)(int lowtag, int hightag DA(const char *, int));
+
 void (Z_ChangeTag)(void *ptr, int tag DA(const char *, int));
+
 void (Z_Init)(void);
+
 void Z_Close(void);
+
 void *(Z_Calloc)(size_t n, size_t n2, int tag, void **user DA(const char *, int));
+
 void *(Z_Realloc)(void *p, size_t n, int tag, void **user DA(const char *, int));
+
 char *(Z_Strdup)(const char *s, int tag, void **user DA(const char *, int));
-void (Z_CheckHeap)(DAC(const char *,int));   // killough 3/22/98: add file/line info
+
+void (Z_CheckHeap)(DAC(const char *, int));   // killough 3/22/98: add file/line info
 void Z_DumpHistory(char *);
 
 #ifdef INSTRUMENTED
@@ -114,8 +128,8 @@ void Z_DumpHistory(char *);
 
 #define malloc(n)          Z_Malloc(n,PU_STATIC,0)
 #define free(p)            Z_Free(p)
-#define realloc(p,n)       Z_Realloc(p,n,PU_STATIC,0)
-#define calloc(n1,n2)      Z_Calloc(n1,n2,PU_STATIC,0)
+#define realloc(p, n)       Z_Realloc(p,n,PU_STATIC,0)
+#define calloc(n1, n2)      Z_Calloc(n1,n2,PU_STATIC,0)
 #define strdup(s)          Z_Strdup(s,PU_STATIC,0)
 
 #else

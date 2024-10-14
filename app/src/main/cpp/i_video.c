@@ -33,13 +33,17 @@
  */
 
 #ifdef HAVE_CONFIG_H
+
 #include "config.h"
+
 #endif
 
 #include <stdlib.h>
 
 #ifdef HAVE_UNISTD_H
+
 #include <unistd.h>
+
 #endif
 
 #include "m_argv.h"
@@ -62,10 +66,11 @@
 // Vladimir
 #include "include/jni_doom.h"
 
-int gl_colorbuffer_bits=16;
-int gl_depthbuffer_bits=16;
+int gl_colorbuffer_bits = 16;
+int gl_depthbuffer_bits = 16;
 
 extern void M_QuitDOOM(int choice);
+
 #ifdef DISABLE_DOUBLEBUFFER
 int use_doublebuffer = 0;
 #else
@@ -82,11 +87,10 @@ int desired_fullscreen;
  **********************************************************/
 typedef struct Image XImage;
 
-struct Image
-{
-	int width;
-	int height;
-	byte * data;
+struct Image {
+    int width;
+    int height;
+    byte *data;
 };
 
 /**
@@ -94,33 +98,31 @@ struct Image
  */
 typedef struct Color XColor;
 
-struct Color
-{
-	int red;
-	int green;
-	int blue;
-	//int pixel;
+struct Color {
+    int red;
+    int green;
+    int blue;
+    //int pixel;
 };
 
 // The Image
-XImage *		image;
+XImage *image;
 
 
 /**
  * XImage Constructor
  */
-XImage * XCreateImage(int width, int height)
-{
-	XImage * this = (XImage*) malloc(sizeof(XImage));
+XImage *XCreateImage(int width, int height) {
+    XImage *this = (XImage *) malloc(sizeof(XImage));
 
-	// set width, height
-	this->width = width;
-	this->height = height;
+    // set width, height
+    this->width = width;
+    this->height = height;
 
-	// allocate image buffer
-	this->data = (byte *)malloc (width * height);
+    // allocate image buffer
+    this->data = (byte *) malloc (width * height);
 
-	return this;
+    return this;
 }
 
 /**********************************************************
@@ -130,10 +132,10 @@ XImage * XCreateImage(int width, int height)
 
 ////////////////////////////////////////////////////////////////////////////
 // Input code
-int             leds_always_off = 0; // Expected by m_misc, not relevant
+int leds_always_off = 0; // Expected by m_misc, not relevant
 
 // Mouse handling
-extern int     usemouse;        // config file var
+extern int usemouse;        // config file var
 static boolean mouse_enabled; // usemouse, but can be overriden by -nomouse
 static boolean mouse_currently_grabbed;
 
@@ -282,8 +284,7 @@ static void I_GetEvent() //SDL_Event *Event)
 // I_StartTic
 //
 
-void I_StartTic (void)
-{
+void I_StartTic(void) {
 
 /*
   SDL_Event Event;
@@ -306,17 +307,15 @@ void I_StartTic (void)
 //
 // I_StartFrame
 //
-void I_StartFrame (void)
-{
+void I_StartFrame(void) {
 }
 
 //
 // I_InitInputs
 //
 
-static void I_InitInputs(void)
-{
-  printf ("i_video::I_InitInputs\n");
+static void I_InitInputs(void) {
+    printf("i_video::I_InitInputs\n");
 /*
   int nomouse_parm = M_CheckParm("-nomouse");
 
@@ -336,19 +335,18 @@ static void I_InitInputs(void)
 //
 // Returns true if it thinks we can afford to skip this frame
 
-inline static boolean I_SkipFrame(void)
-{
-  static int frameno;
+inline static boolean I_SkipFrame(void) {
+    static int frameno;
 
-  frameno++;
-  switch (gamestate) {
-  case GS_LEVEL:
-    if (!paused)
-      return false;
-  default:
-    // Skip odd frames
-    return (frameno & 1) ? true : false;
-  }
+    frameno++;
+    switch (gamestate) {
+        case GS_LEVEL:
+            if (!paused)
+                return false;
+        default:
+            // Skip odd frames
+            return (frameno & 1) ? true : false;
+    }
 }
 
 ///////////////////////////////////////////////////////////
@@ -356,73 +354,71 @@ inline static boolean I_SkipFrame(void)
 //
 
 // Color pallete
-static XColor * colours;
+static XColor *colours;
 
-static void I_UploadNewPalette(int pal)
-{
-  // This is used to replace the current 256 colour cmap with a new one
-  // Used by 256 colour PseudoColor modes
+static void I_UploadNewPalette(int pal) {
+    // This is used to replace the current 256 colour cmap with a new one
+    // Used by 256 colour PseudoColor modes
 
-  // Array of SDL_Color structs used for setting the 256-colour palette
+    // Array of SDL_Color structs used for setting the 256-colour palette
 //  static SDL_Color* colours;
 
-  static int cachedgamma;
-  static size_t num_pals;
+    static int cachedgamma;
+    static size_t num_pals;
 
 
-  if (V_GetMode() == VID_MODEGL)
-    return;
+    if (V_GetMode() == VID_MODEGL)
+        return;
 
 
-  //jni_printf("I_UploadNewPalette New palette: %d, cached gamma: %d, usegamma: %d"
-  //		  , pal, cachedgamma, usegamma);
+    //jni_printf("I_UploadNewPalette New palette: %d, cached gamma: %d, usegamma: %d"
+    //		  , pal, cachedgamma, usegamma);
 
-  if ((colours == NULL) || (cachedgamma != usegamma)) {
+    if ((colours == NULL) || (cachedgamma != usegamma)) {
 
-    int pplump = W_GetNumForName("PLAYPAL");
-    int gtlump = (W_CheckNumForName)("GAMMATBL",ns_prboom);
+        int pplump = W_GetNumForName("PLAYPAL");
+        int gtlump = (W_CheckNumForName)("GAMMATBL", ns_prboom);
 
-    //jni_printf("I_UploadNewPalette pplump:%d, gtlump: %d\n"
-    //		, pplump, gtlump);
+        //jni_printf("I_UploadNewPalette pplump:%d, gtlump: %d\n"
+        //		, pplump, gtlump);
 
-    register const byte * palette = W_CacheLumpNum(pplump);
-    register const byte * const gtable = (const byte *)W_CacheLumpNum(gtlump) + 256*(cachedgamma = usegamma);
+        register const byte *palette = W_CacheLumpNum(pplump);
+        register const byte *const gtable = (const byte *) W_CacheLumpNum(gtlump) + 256 * (cachedgamma = usegamma);
 
-    register int i;
+        register int i;
 
-    num_pals = W_LumpLength(pplump) / (3*256);
-    num_pals *= 256;
+        num_pals = W_LumpLength(pplump) / (3 * 256);
+        num_pals *= 256;
 
-    if (!colours) {
-      // First call - allocate and prepare colour array
-      colours = malloc(sizeof(*colours)*num_pals);
+        if (!colours) {
+            // First call - allocate and prepare colour array
+            colours = malloc(sizeof(*colours) * num_pals);
+        }
+
+        ii_printf("I_UploadNewPalette Setting %d colors. Colormap size: %d", (sizeof(*colours) * num_pals), num_pals);
+
+        // set the colormap entries
+        for (i = 0; (size_t) i < num_pals; i++) {
+            colours[i].red = gtable[palette[0]];
+            colours[i].green = gtable[palette[1]];
+            colours[i].blue = gtable[palette[2]];
+            palette += 3;
+        }
+
+        W_UnlockLumpNum(pplump);
+        W_UnlockLumpNum(gtlump);
+        num_pals /= 256;
     }
-
-    ii_printf("I_UploadNewPalette Setting %d colors. Colormap size: %d"
-    		, (sizeof(*colours)*num_pals), num_pals);
-
-    // set the colormap entries
-    for (i=0 ; (size_t)i<num_pals ; i++) {
-      colours[i].red 	= gtable[palette[0]];
-      colours[i].green 	= gtable[palette[1]];
-      colours[i].blue	= gtable[palette[2]];
-      palette += 3;
-    }
-
-    W_UnlockLumpNum(pplump);
-    W_UnlockLumpNum(gtlump);
-    num_pals/=256;
-  }
 
 
 #ifdef RANGECHECK
-  if ((size_t)pal >= num_pals)
-    I_Error("I_UploadNewPalette: Palette number out of range (%d>=%d)",
-      pal, num_pals);
+    if ((size_t)pal >= num_pals)
+      I_Error("I_UploadNewPalette: Palette number out of range (%d>=%d)",
+        pal, num_pals);
 #endif
 
-  // store the colors to the current display
-  // SDL_SetColors(SDL_GetVideoSurface(), colours+256*pal, 0, 256);
+    // store the colors to the current display
+    // SDL_SetColors(SDL_GetVideoSurface(), colours+256*pal, 0, 256);
 /*
   SDL_SetPalette(
       SDL_GetVideoSurface(),
@@ -433,15 +429,13 @@ static void I_UploadNewPalette(int pal)
 //////////////////////////////////////////////////////////////////////////////
 // Graphics API
 
-void I_ShutdownGraphics(void)
-{
+void I_ShutdownGraphics(void) {
 }
 
 //
 // I_UpdateNoBlit
 //
-void I_UpdateNoBlit (void)
-{
+void I_UpdateNoBlit(void) {
 }
 
 //
@@ -451,30 +445,29 @@ void I_UpdateNoBlit (void)
 
 static int newpal = 0;
 
-void I_FinishUpdate (void)
-{
-  if (I_SkipFrame()) return;
+void I_FinishUpdate(void) {
+    if (I_SkipFrame()) return;
 
-  // screen size
-  int size = SCREENWIDTH * SCREENHEIGHT;
+    // screen size
+    int size = SCREENWIDTH * SCREENHEIGHT;
 
-  // ARGB pixels
-  int pixels[size], i;
+    // ARGB pixels
+    int pixels[size], i;
 
 
-  for ( i = 0 ; i < size ; i ++) {
-	byte b = screens[0].data[i];
+    for (i = 0; i < size; i++) {
+        byte b = screens[0].data[i];
 
-	XColor color = colours[b];
+        XColor color = colours[b];
 
-	pixels[i] = (0xFF << 24)
-		| (color.red << 16)
-		| (color.green << 8)
-		| color.blue;
-  }
+        pixels[i] = (0xFF << 24)
+                    | (color.red << 16)
+                    | (color.green << 8)
+                    | color.blue;
+    }
 
-  // Send pixels to java
-  jni_send_pixels(pixels);
+    // Send pixels to java
+    jni_send_pixels(pixels);
 
 /*
 #ifdef MONITOR_VISIBILITY
@@ -511,15 +504,15 @@ void I_FinishUpdate (void)
       SDL_UnlockSurface(screen);
   }
 */
-  /* Update the display buffer (flipping video pages if supported)
-   * If we need to change palette, that implicitely does a flip */
+    /* Update the display buffer (flipping video pages if supported)
+     * If we need to change palette, that implicitely does a flip */
 /*
   if (newpal != NO_PALETTE_CHANGE) {
     I_UploadNewPalette(newpal);
     newpal = NO_PALETTE_CHANGE;
   }
 */
-  //SDL_Flip(screen);
+    //SDL_Flip(screen);
 
 }
 
@@ -530,31 +523,28 @@ void I_FinishUpdate (void)
 //
 // I_SetPalette
 //
-void I_SetPalette (int pal)
-{
-  newpal = pal;
-  //jni_printf("I_SetPalette New Palette: %d\n", pal);
+void I_SetPalette(int pal) {
+    newpal = pal;
+    //jni_printf("I_SetPalette New Palette: %d\n", pal);
 
-  // Vladimir: Gotta set palette colors
-  if (newpal != NO_PALETTE_CHANGE) {
-    I_UploadNewPalette(newpal);
-    newpal = NO_PALETTE_CHANGE;
-  }
+    // Vladimir: Gotta set palette colors
+    if (newpal != NO_PALETTE_CHANGE) {
+        I_UploadNewPalette(newpal);
+        newpal = NO_PALETTE_CHANGE;
+    }
 
 }
 
 // I_PreInitGraphics
 
-static void I_ShutdownSDL(void)
-{
-  //SDL_Quit();
-  return;
+static void I_ShutdownSDL(void) {
+    //SDL_Quit();
+    return;
 }
 
 
-void I_PreInitGraphics(void)
-{
-  printf ("I_PreInitGraphics\n");
+void I_PreInitGraphics(void) {
+    printf("I_PreInitGraphics\n");
 
 /*
   // Initialize SDL
@@ -628,15 +618,14 @@ static void I_ClosestResolution (int *width, int *height, int flags)
 // CPhipps -
 // I_CalculateRes
 // Calculates the screen resolution, possibly using the supplied guide
-void I_CalculateRes(unsigned int width, unsigned int height)
-{
-  printf("I_CalculateRes w:%d h:%d\n", width, height);
+void I_CalculateRes(unsigned int width, unsigned int height) {
+    printf("I_CalculateRes w:%d h:%d\n", width, height);
 
-  // e6y: how about 1680x1050?
-  /*
-  SCREENWIDTH = (width+3) & ~3;
-  SCREENHEIGHT = (height+3) & ~3;
-  */
+    // e6y: how about 1680x1050?
+    /*
+    SCREENWIDTH = (width+3) & ~3;
+    SCREENHEIGHT = (height+3) & ~3;
+    */
 
 // e6y
 // GLBoom will try to set the closest supported resolution
@@ -653,12 +642,12 @@ void I_CalculateRes(unsigned int width, unsigned int height)
     SCREENHEIGHT = height;
     SCREENPITCH = SCREENWIDTH;
   } else { */
-    SCREENWIDTH = (width+15) & ~15;
+    SCREENWIDTH = (width + 15) & ~15;
     SCREENHEIGHT = height;
     if (!(SCREENWIDTH % 1024)) {
-      SCREENPITCH = SCREENWIDTH*V_GetPixelDepth()+32;
+        SCREENPITCH = SCREENWIDTH * V_GetPixelDepth() + 32;
     } else {
-      SCREENPITCH = SCREENWIDTH*V_GetPixelDepth();
+        SCREENPITCH = SCREENWIDTH * V_GetPixelDepth();
     }
 //  }
 }
@@ -666,52 +655,49 @@ void I_CalculateRes(unsigned int width, unsigned int height)
 // CPhipps -
 // I_SetRes
 // Sets the screen resolution
-void I_SetRes(void)
-{
-  int i;
+void I_SetRes(void) {
+    int i;
 
-  // Tell Java graphics have inited
-  ii_printf("I_SetRes: Creating %dx%d image.", SCREENWIDTH, SCREENHEIGHT);
-  jni_init_graphics(SCREENWIDTH, SCREENHEIGHT);
+    // Tell Java graphics have inited
+    ii_printf("I_SetRes: Creating %dx%d image.", SCREENWIDTH, SCREENHEIGHT);
+    jni_init_graphics(SCREENWIDTH, SCREENHEIGHT);
 
-  I_CalculateRes(SCREENWIDTH, SCREENHEIGHT);
+    I_CalculateRes(SCREENWIDTH, SCREENHEIGHT);
 
-  // set first three to standard values
-  for (i=0; i<3; i++) {
-    screens[i].width = SCREENWIDTH;
-    screens[i].height = SCREENHEIGHT;
-    screens[i].byte_pitch = SCREENPITCH;
-    screens[i].short_pitch = SCREENPITCH / V_GetModePixelDepth(VID_MODE16);
-    screens[i].int_pitch = SCREENPITCH / V_GetModePixelDepth(VID_MODE32);
-  }
+    // set first three to standard values
+    for (i = 0; i < 3; i++) {
+        screens[i].width = SCREENWIDTH;
+        screens[i].height = SCREENHEIGHT;
+        screens[i].byte_pitch = SCREENPITCH;
+        screens[i].short_pitch = SCREENPITCH / V_GetModePixelDepth(VID_MODE16);
+        screens[i].int_pitch = SCREENPITCH / V_GetModePixelDepth(VID_MODE32);
+    }
 
-  // statusbar
-  screens[4].width = SCREENWIDTH;
-  screens[4].height = (ST_SCALED_HEIGHT+1);
-  screens[4].byte_pitch = SCREENPITCH;
-  screens[4].short_pitch = SCREENPITCH / V_GetModePixelDepth(VID_MODE16);
-  screens[4].int_pitch = SCREENPITCH / V_GetModePixelDepth(VID_MODE32);
+    // statusbar
+    screens[4].width = SCREENWIDTH;
+    screens[4].height = (ST_SCALED_HEIGHT + 1);
+    screens[4].byte_pitch = SCREENPITCH;
+    screens[4].short_pitch = SCREENPITCH / V_GetModePixelDepth(VID_MODE16);
+    screens[4].int_pitch = SCREENPITCH / V_GetModePixelDepth(VID_MODE32);
 
-  //lprintf(LO_INFO,"I_SetRes: Using resolution %dx%d\n", SCREENWIDTH, SCREENHEIGHT);
-  ii_printf("I_SetRes: Using resolution %dx%d", SCREENWIDTH, SCREENHEIGHT);
+    //lprintf(LO_INFO,"I_SetRes: Using resolution %dx%d\n", SCREENWIDTH, SCREENHEIGHT);
+    ii_printf("I_SetRes: Using resolution %dx%d", SCREENWIDTH, SCREENHEIGHT);
 }
 
-void I_InitGraphics(void)
-{
-  //char titlebuffer[2048];
-  static int    firsttime=1;
+void I_InitGraphics(void) {
+    //char titlebuffer[2048];
+    static int firsttime = 1;
 
-  if (firsttime)
-  {
-    firsttime = 0;
+    if (firsttime) {
+        firsttime = 0;
 
-    atexit(I_ShutdownGraphics);
-    lprintf(LO_INFO, "I_InitGraphics: %dx%d\n", SCREENWIDTH, SCREENHEIGHT);
+        atexit(I_ShutdownGraphics);
+        lprintf(LO_INFO, "I_InitGraphics: %dx%d\n", SCREENWIDTH, SCREENHEIGHT);
 
-    /* Set the video mode */
-    I_UpdateVideoMode();
+        /* Set the video mode */
+        I_UpdateVideoMode();
 
-    /* Setup the window title */
+        /* Setup the window title */
 /*
     strcpy(titlebuffer,PACKAGE);
     strcat(titlebuffer," ");
@@ -719,59 +705,54 @@ void I_InitGraphics(void)
     SDL_WM_SetCaption(titlebuffer, titlebuffer);
 */
 
-    /* Initialize the input system */
-    I_InitInputs();
-  }
+        /* Initialize the input system */
+        I_InitInputs();
+    }
 }
 
-int I_GetModeFromString(const char *modestr)
-{
-  video_mode_t mode;
+int I_GetModeFromString(const char *modestr) {
+    video_mode_t mode;
 
-  if (!stricmp(modestr,"15")) {
-    mode = VID_MODE15;
-  } else if (!stricmp(modestr,"15bit")) {
-    mode = VID_MODE15;
-  } else if (!stricmp(modestr,"16")) {
-    mode = VID_MODE16;
-  } else if (!stricmp(modestr,"16bit")) {
-    mode = VID_MODE16;
-  } else if (!stricmp(modestr,"32")) {
-    mode = VID_MODE32;
-  } else if (!stricmp(modestr,"32bit")) {
-    mode = VID_MODE32;
-  } else if (!stricmp(modestr,"gl")) {
-    mode = VID_MODEGL;
-  } else if (!stricmp(modestr,"OpenGL")) {
-    mode = VID_MODEGL;
-  } else {
-    mode = VID_MODE8;
-  }
-  return mode;
+    if (!stricmp(modestr, "15")) {
+        mode = VID_MODE15;
+    } else if (!stricmp(modestr, "15bit")) {
+        mode = VID_MODE15;
+    } else if (!stricmp(modestr, "16")) {
+        mode = VID_MODE16;
+    } else if (!stricmp(modestr, "16bit")) {
+        mode = VID_MODE16;
+    } else if (!stricmp(modestr, "32")) {
+        mode = VID_MODE32;
+    } else if (!stricmp(modestr, "32bit")) {
+        mode = VID_MODE32;
+    } else if (!stricmp(modestr, "gl")) {
+        mode = VID_MODEGL;
+    } else if (!stricmp(modestr, "OpenGL")) {
+        mode = VID_MODEGL;
+    } else {
+        mode = VID_MODE8;
+    }
+    return mode;
 }
 
-void I_UpdateVideoMode(void)
-{
-  //int init_flags;
-  int i;
-  video_mode_t mode;
+void I_UpdateVideoMode(void) {
+    //int init_flags;
+    int i;
+    video_mode_t mode;
 
-  ii_printf("I_UpdateVideoMode: %dx%d (%s) default VM=%s\n"
-    , SCREENWIDTH, SCREENHEIGHT
-    , desired_fullscreen ? "fullscreen" : "nofullscreen"
-    , default_videomode);
+    ii_printf("I_UpdateVideoMode: %dx%d (%s) default VM=%s\n", SCREENWIDTH, SCREENHEIGHT, desired_fullscreen ? "fullscreen" : "nofullscreen", default_videomode);
 
-  mode = I_GetModeFromString(default_videomode);
+    mode = I_GetModeFromString(default_videomode);
 
-  if ((i=M_CheckParm("-vidmode")) && i<myargc-1) {
-    mode = I_GetModeFromString(myargv[i+1]);
-  }
+    if ((i = M_CheckParm("-vidmode")) && i < myargc - 1) {
+        mode = I_GetModeFromString(myargv[i + 1]);
+    }
 
-  V_InitMode(mode);
-  V_DestroyUnusedTrueColorPalettes();
-  V_FreeScreens();
+    V_InitMode(mode);
+    V_DestroyUnusedTrueColorPalettes();
+    V_FreeScreens();
 
-  I_SetRes();
+    I_SetRes();
 /*
   // Initialize SDL with this graphics mode
   if (V_GetMode() == VID_MODEGL) {
@@ -815,9 +796,9 @@ void I_UpdateVideoMode(void)
   lprintf(LO_INFO, "I_UpdateVideoMode: 0x%x, %s, %s\n", init_flags, screen->pixels ? "SDL buffer" : "own buffer", SDL_MUSTLOCK(screen) ? "lock-and-copy": "direct access");
 */
 
-  mouse_currently_grabbed = false;
+    mouse_currently_grabbed = false;
 
-  // Get the info needed to render to the display
+    // Get the info needed to render to the display
 /*
   if (!SDL_MUSTLOCK(screen))
   {
@@ -832,12 +813,12 @@ void I_UpdateVideoMode(void)
     screens[0].not_on_heap = false;
 //  }
 
-  V_AllocScreens();
+    V_AllocScreens();
 
-  // Hide pointer while over this window
-  //SDL_ShowCursor(0);
+    // Hide pointer while over this window
+    //SDL_ShowCursor(0);
 
-  R_InitBuffer(SCREENWIDTH, SCREENHEIGHT);
+    R_InitBuffer(SCREENWIDTH, SCREENHEIGHT);
 
 //jni_printf("End I_UpdateVideoMode");
 /*

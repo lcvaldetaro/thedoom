@@ -45,21 +45,21 @@
 // POV related.
 //
 
-extern fixed_t  viewcos;
-extern fixed_t  viewsin;
-extern int      viewwidth;
-extern int      viewheight;
-extern int      viewwindowx;
-extern int      viewwindowy;
-extern int      centerx;
-extern int      centery;
-extern fixed_t  centerxfrac;
-extern fixed_t  centeryfrac;
-extern fixed_t  viewheightfrac; //e6y: for correct clipping of things
-extern fixed_t  projection;
+extern fixed_t viewcos;
+extern fixed_t viewsin;
+extern int viewwidth;
+extern int viewheight;
+extern int viewwindowx;
+extern int viewwindowy;
+extern int centerx;
+extern int centery;
+extern fixed_t centerxfrac;
+extern fixed_t centeryfrac;
+extern fixed_t viewheightfrac; //e6y: for correct clipping of things
+extern fixed_t projection;
 // proff 11/06/98: Added for high-res
-extern fixed_t  projectiony;
-extern int      validcount;
+extern fixed_t projectiony;
+extern int validcount;
 
 //
 // Rendering stats
@@ -90,7 +90,7 @@ extern int numcolormaps;    // killough 4/4/98: dynamic number of maps
 extern const lighttable_t **colormaps;
 // killough 3/20/98, 4/4/98: end dynamic colormaps
 
-extern int          extralight;
+extern int extralight;
 extern const lighttable_t *fixedcolormap;
 
 // Number of diminishing brightness levels.
@@ -103,9 +103,13 @@ extern const lighttable_t *fixedcolormap;
 //
 
 PUREFUNC int R_PointOnSide(fixed_t x, fixed_t y, const node_t *node);
+
 PUREFUNC int R_PointOnSegSide(fixed_t x, fixed_t y, const seg_t *line);
+
 angle_t R_PointToAngle(fixed_t x, fixed_t y);
+
 angle_t R_PointToAngle2(fixed_t x1, fixed_t y1, fixed_t x2, fixed_t y2);
+
 subsector_t *R_PointInSubsector(fixed_t x, fixed_t y);
 
 //

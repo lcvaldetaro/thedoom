@@ -47,7 +47,9 @@
 #ifdef FRENCH
 #include "d_french.h"
 #else
+
 #include "d_englsh.h"
+
 #endif
 
 /* Note this is not externally modifiable through DEH/BEX
@@ -75,6 +77,6 @@
 
 extern const size_t NUM_QUITMESSAGES;  /* Calculated in dstrings.c */
 
-extern const char* const endmsg[];   /* killough 1/18/98 const added */
+extern const char *const endmsg[];   /* killough 1/18/98 const added */
 
 #endif

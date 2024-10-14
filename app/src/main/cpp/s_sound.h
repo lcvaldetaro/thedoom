@@ -68,7 +68,7 @@ void S_StartSoundAtVolume(void *origin, int sound_id, int volume);
 #define PICKUP_SOUND (0x8000)
 
 // Stop sound for thing at <origin>
-void S_StopSound(void* origin);
+void S_StopSound(void *origin);
 
 // Start music using <music_id> from sounds.h
 void S_StartMusic(int music_id);
@@ -81,13 +81,16 @@ void S_StopMusic(void);
 
 // Stop and resume music, during game PAUSE.
 void S_PauseSound(void);
+
 void S_ResumeSound(void);
 
 //
 // Updates music & sounds
 //
-void S_UpdateSounds(void* listener);
+void S_UpdateSounds(void *listener);
+
 void S_SetMusicVolume(int volume);
+
 void S_SetSfxVolume(int volume);
 
 // machine-independent sound params

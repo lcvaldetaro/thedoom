@@ -1,26 +1,26 @@
 {
   "buildFiles": [
-    "/Users/luiz/githubvaldetaro/Doom/app/CMakeLists.txt"
+    "/Users/luiz/thedoom/app/CMakeLists.txt"
   ],
   "cleanCommandsComponents": [
     [
       "/Users/luiz/Library/Android/sdk/cmake/3.22.1/bin/ninja",
       "-C",
-      "/Users/luiz/githubvaldetaro/Doom/app/.cxx/Debug/2o73445l/x86",
+      "/Users/luiz/thedoom/app/.cxx/Debug/2o73445l/x86",
       "clean"
     ]
   ],
   "buildTargetsCommandComponents": [
     "/Users/luiz/Library/Android/sdk/cmake/3.22.1/bin/ninja",
     "-C",
-    "/Users/luiz/githubvaldetaro/Doom/app/.cxx/Debug/2o73445l/x86",
+    "/Users/luiz/thedoom/app/.cxx/Debug/2o73445l/x86",
     "{LIST_OF_TARGETS_TO_BUILD}"
   ],
   "libraries": {
     "peterpan.doom::@6890427a1f51a3e7e1df": {
       "artifactName": "peterpan.doom",
       "abi": "x86",
-      "output": "/Users/luiz/githubvaldetaro/Doom/app/build/intermediates/cxx/Debug/2o73445l/obj/x86/libpeterpan.doom.so",
+      "output": "/Users/luiz/thedoom/app/build/intermediates/cxx/Debug/2o73445l/obj/x86/libpeterpan.doom.so",
       "runtimeFiles": []
     }
   }

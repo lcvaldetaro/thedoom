@@ -67,53 +67,78 @@
  * coordinates are given for a 320*200 view screen.
  */
 
-typedef enum
-{
-  ps_weapon,
-  ps_flash,
-  NUMPSPRITES
+typedef enum {
+    ps_weapon,
+    ps_flash,
+    NUMPSPRITES
 } psprnum_t;
 
-typedef struct
-{
-  state_t *state;       /* a NULL state means not active */
-  int     tics;
-  fixed_t sx;
-  fixed_t sy;
+typedef struct {
+    state_t *state;       /* a NULL state means not active */
+    int tics;
+    fixed_t sx;
+    fixed_t sy;
 } pspdef_t;
 
-extern int weapon_preferences[2][NUMWEAPONS+1];      /* killough 5/2/98 */
+extern int weapon_preferences[2][NUMWEAPONS + 1];      /* killough 5/2/98 */
 int P_WeaponPreferred(int w1, int w2);
 
 struct player_s;
+
 int P_SwitchWeapon(struct player_s *player);
+
 boolean P_CheckAmmo(struct player_s *player);
+
 void P_SetupPsprites(struct player_s *curplayer);
+
 void P_MovePsprites(struct player_s *curplayer);
+
 void P_DropWeapon(struct player_s *player);
 
 void A_Light0();
+
 void A_WeaponReady();
+
 void A_Lower();
+
 void A_Raise();
+
 void A_Punch();
+
 void A_ReFire();
+
 void A_FirePistol();
+
 void A_Light1();
+
 void A_FireShotgun();
+
 void A_Light2();
+
 void A_FireShotgun2();
+
 void A_CheckReload();
+
 void A_OpenShotgun2();
+
 void A_LoadShotgun2();
+
 void A_CloseShotgun2();
+
 void A_FireCGun();
+
 void A_GunFlash();
+
 void A_FireMissile();
+
 void A_Saw();
+
 void A_FirePlasma();
+
 void A_BFGsound();
+
 void A_FireBFG();
+
 void A_BFGSpray();
 
 #endif

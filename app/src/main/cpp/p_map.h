@@ -49,33 +49,41 @@
 boolean P_TryMove(mobj_t *thing, fixed_t x, fixed_t y, boolean dropoff);
 
 // killough 8/9/98: extra argument for telefragging
-boolean P_TeleportMove(mobj_t *thing, fixed_t x, fixed_t y,boolean boss);
-void    P_SlideMove(mobj_t *mo);
+boolean P_TeleportMove(mobj_t *thing, fixed_t x, fixed_t y, boolean boss);
+
+void P_SlideMove(mobj_t *mo);
+
 boolean P_CheckSight(mobj_t *t1, mobj_t *t2);
-void    P_UseLines(player_t *player);
+
+void P_UseLines(player_t *player);
 
 // killough 8/2/98: add 'mask' argument to prevent friends autoaiming at others
-fixed_t P_AimLineAttack(mobj_t *t1,angle_t angle,fixed_t distance, uint_64_t mask);
+fixed_t P_AimLineAttack(mobj_t *t1, angle_t angle, fixed_t distance, uint_64_t mask);
 
-void    P_LineAttack(mobj_t *t1, angle_t angle, fixed_t distance,
-                     fixed_t slope, int damage );
-void    P_RadiusAttack(mobj_t *spot, mobj_t *source, int damage);
+void P_LineAttack(mobj_t *t1, angle_t angle, fixed_t distance,
+                  fixed_t slope, int damage);
+
+void P_RadiusAttack(mobj_t *spot, mobj_t *source, int damage);
+
 boolean P_CheckPosition(mobj_t *thing, fixed_t x, fixed_t y);
 
 //jff 3/19/98 P_CheckSector(): new routine to replace P_ChangeSector()
-boolean P_ChangeSector(sector_t* sector,boolean crunch);
+boolean P_ChangeSector(sector_t *sector, boolean crunch);
+
 boolean P_CheckSector(sector_t *sector, boolean crunch);
-void    P_DelSeclist(msecnode_t*);                          // phares 3/16/98
-void    P_CreateSecNodeList(mobj_t*,fixed_t,fixed_t);       // phares 3/14/98
+
+void P_DelSeclist(msecnode_t *);                          // phares 3/16/98
+void P_CreateSecNodeList(mobj_t *, fixed_t, fixed_t);       // phares 3/14/98
 boolean Check_Sides(mobj_t *, int, int);                    // phares
 
-int     P_GetMoveFactor(const mobj_t *mo, int *friction);   // killough 8/28/98
-int     P_GetFriction(const mobj_t *mo, int *factor);       // killough 8/28/98
-void    P_ApplyTorque(mobj_t *mo);                          // killough 9/12/98
+int P_GetMoveFactor(const mobj_t *mo, int *friction);   // killough 8/28/98
+int P_GetFriction(const mobj_t *mo, int *factor);       // killough 8/28/98
+void P_ApplyTorque(mobj_t *mo);                          // killough 9/12/98
 
 /* cphipps 2004/08/30 */
-void	P_MapStart(void);
-void	P_MapEnd(void);
+void P_MapStart(void);
+
+void P_MapEnd(void);
 
 // If "floatok" true, move would be ok if within "tmfloorz - tmceilingz".
 extern boolean floatok;

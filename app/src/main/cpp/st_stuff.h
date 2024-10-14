@@ -55,7 +55,7 @@
 //
 
 // Called by main loop.
-boolean ST_Responder(event_t* ev);
+boolean ST_Responder(event_t *ev);
 
 // Called by main loop.
 void ST_Ticker(void);
@@ -70,18 +70,16 @@ void ST_Start(void);
 void ST_Init(void);
 
 // States for status bar code.
-typedef enum
-{
-  AutomapState,
-  FirstPersonState
+typedef enum {
+    AutomapState,
+    FirstPersonState
 } st_stateenum_t;
 
 // States for the chat code.
-typedef enum
-{
-  StartChatState,
-  WaitDestState,
-  GetChatState
+typedef enum {
+    StartChatState,
+    WaitDestState,
+    GetChatState
 } st_chatstateenum_t;
 
 // killough 5/2/98: moved from m_misc.c:

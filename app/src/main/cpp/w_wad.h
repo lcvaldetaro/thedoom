@@ -43,18 +43,16 @@
 // TYPES
 //
 
-typedef struct
-{
-  char identification[4];                  // Should be "IWAD" or "PWAD".
-  int  numlumps;
-  int  infotableofs;
+typedef struct {
+    char identification[4];                  // Should be "IWAD" or "PWAD".
+    int numlumps;
+    int infotableofs;
 } wadinfo_t;
 
-typedef struct
-{
-  int  filepos;
-  int  size;
-  char name[8];
+typedef struct {
+    int filepos;
+    int size;
+    char name[8];
 } filelump_t;
 
 //
@@ -64,22 +62,22 @@ typedef struct
 // CPhipps - defined enum in wider scope
 // Ty 08/29/98 - add source field to identify where this lump came from
 typedef enum {
-  // CPhipps - define elements in order of 'how new/unusual'
-  source_iwad=0,    // iwad file load 
-  source_pre,       // predefined lump
-  source_auto_load, // lump auto-loaded by config file
-  source_pwad,      // pwad file load
-  source_lmp,       // lmp file load
-  source_net        // CPhipps
+    // CPhipps - define elements in order of 'how new/unusual'
+    source_iwad = 0,    // iwad file load
+    source_pre,       // predefined lump
+    source_auto_load, // lump auto-loaded by config file
+    source_pwad,      // pwad file load
+    source_lmp,       // lmp file load
+    source_net        // CPhipps
 } wad_source_t;
 
 // CPhipps - changed wad init
 // We _must_ have the wadfiles[] the same as those actually loaded, so there 
 // is no point having these separate entities. This belongs here.
 typedef struct {
-  const char* name;
-  wad_source_t src;
-  int handle;
+    const char *name;
+    wad_source_t src;
+    int handle;
 } wadfile_info_t;
 
 extern wadfile_info_t *wadfiles;
@@ -89,47 +87,53 @@ extern size_t numwadfiles; // CPhipps - size of the wadfiles array
 void W_Init(void); // CPhipps - uses the above array
 void W_ReleaseAllWads(void); // Proff - Added for iwad switching
 void W_InitCache(void);
+
 void W_DoneCache(void);
 
-typedef struct
-{
-  // WARNING: order of some fields important (see info.c).
+typedef struct {
+    // WARNING: order of some fields important (see info.c).
 
-  char  name[9];
-  int   size;
+    char name[9];
+    int size;
 
-  // killough 1/31/98: hash table fields, used for ultra-fast hash table lookup
-  int index, next;
+    // killough 1/31/98: hash table fields, used for ultra-fast hash table lookup
+    int index, next;
 
-  // killough 4/17/98: namespace tags, to prevent conflicts between resources
-  enum {
-    ns_global=0,
-    ns_sprites,
-    ns_flats,
-    ns_colormaps,
-    ns_prboom
-  } li_namespace; // haleyjd 05/21/02: renamed from "namespace"
+    // killough 4/17/98: namespace tags, to prevent conflicts between resources
+    enum {
+        ns_global = 0,
+        ns_sprites,
+        ns_flats,
+        ns_colormaps,
+        ns_prboom
+    } li_namespace; // haleyjd 05/21/02: renamed from "namespace"
 
-  wadfile_info_t *wadfile;
-  int position;
-  wad_source_t source;
+    wadfile_info_t *wadfile;
+    int position;
+    wad_source_t source;
 } lumpinfo_t;
 
 extern lumpinfo_t *lumpinfo;
-extern int        numlumps;
+extern int numlumps;
 
 // killough 4/17/98: if W_CheckNumForName() called with only
 // one argument, pass ns_global as the default namespace
 
 #define W_CheckNumForName(name) (W_CheckNumForName)(name, ns_global)
-int     (W_CheckNumForName)(const char* name, int);   // killough 4/17/98
-int     W_GetNumForName (const char* name);
-int     W_LumpLength (int lump);
-void    W_ReadLump (int lump, void *dest);
+
+int (W_CheckNumForName)(const char *name, int);   // killough 4/17/98
+int W_GetNumForName(const char *name);
+
+int W_LumpLength(int lump);
+
+void W_ReadLump(int lump, void *dest);
+
 // CPhipps - modified for 'new' lump locking
-const void* W_CacheLumpNum (int lump);
-const void* W_LockLumpNum(int lump);
-void    W_UnlockLumpNum(int lump);
+const void *W_CacheLumpNum(int lump);
+
+const void *W_LockLumpNum(int lump);
+
+void W_UnlockLumpNum(int lump);
 
 // CPhipps - convenience macros
 //#define W_CacheLumpNum(num) (W_CacheLumpNum)((num),1)

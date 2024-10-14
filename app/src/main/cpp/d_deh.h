@@ -599,58 +599,58 @@ extern const char *s_HUSTR_PLRRED; // = HUSTR_PLRRED;
 //
 
 //#define AMSTR_FOLLOWON        "Follow Mode ON"
-extern const char* s_AMSTR_FOLLOWON; // = AMSTR_FOLLOWON;
+extern const char *s_AMSTR_FOLLOWON; // = AMSTR_FOLLOWON;
 //#define AMSTR_FOLLOWOFF       "Follow Mode OFF"
-extern const char* s_AMSTR_FOLLOWOFF; // = AMSTR_FOLLOWOFF;
+extern const char *s_AMSTR_FOLLOWOFF; // = AMSTR_FOLLOWOFF;
 
 //#define AMSTR_GRIDON  "Grid ON"
-extern const char* s_AMSTR_GRIDON; // = AMSTR_GRIDON;
+extern const char *s_AMSTR_GRIDON; // = AMSTR_GRIDON;
 //#define AMSTR_GRIDOFF "Grid OFF"
-extern const char* s_AMSTR_GRIDOFF; // = AMSTR_GRIDOFF;
+extern const char *s_AMSTR_GRIDOFF; // = AMSTR_GRIDOFF;
 
 //#define AMSTR_MARKEDSPOT      "Marked Spot"
-extern const char* s_AMSTR_MARKEDSPOT; // = AMSTR_MARKEDSPOT;
+extern const char *s_AMSTR_MARKEDSPOT; // = AMSTR_MARKEDSPOT;
 //#define AMSTR_MARKSCLEARED    "All Marks Cleared"
-extern const char* s_AMSTR_MARKSCLEARED; // = AMSTR_MARKSCLEARED;
+extern const char *s_AMSTR_MARKSCLEARED; // = AMSTR_MARKSCLEARED;
 
 // CPhipps - automap rotate & overlay
-extern const char* s_AMSTR_ROTATEON;
-extern const char* s_AMSTR_ROTATEOFF;
-extern const char* s_AMSTR_OVERLAYON;
-extern const char* s_AMSTR_OVERLAYOFF;
+extern const char *s_AMSTR_ROTATEON;
+extern const char *s_AMSTR_ROTATEOFF;
+extern const char *s_AMSTR_OVERLAYON;
+extern const char *s_AMSTR_OVERLAYOFF;
 
 //
 //      ST_stuff.C
 //
 
 //#define STSTR_MUS             "Music Change"
-extern const char* s_STSTR_MUS; // = STSTR_MUS;
+extern const char *s_STSTR_MUS; // = STSTR_MUS;
 //#define STSTR_NOMUS           "IMPOSSIBLE SELECTION"
-extern const char* s_STSTR_NOMUS; // = STSTR_NOMUS;
+extern const char *s_STSTR_NOMUS; // = STSTR_NOMUS;
 //#define STSTR_DQDON           "Degreelessness Mode On"
-extern const char* s_STSTR_DQDON; // = STSTR_DQDON;
+extern const char *s_STSTR_DQDON; // = STSTR_DQDON;
 //#define STSTR_DQDOFF  "Degreelessness Mode Off"
-extern const char* s_STSTR_DQDOFF; // = STSTR_DQDOFF;
+extern const char *s_STSTR_DQDOFF; // = STSTR_DQDOFF;
 
 //#define STSTR_KFAADDED        "Very Happy Ammo Added"
-extern const char* s_STSTR_KFAADDED; // = STSTR_KFAADDED;
+extern const char *s_STSTR_KFAADDED; // = STSTR_KFAADDED;
 //#define STSTR_FAADDED "Ammo (no keys) Added"
-extern const char* s_STSTR_FAADDED; // = STSTR_FAADDED;
+extern const char *s_STSTR_FAADDED; // = STSTR_FAADDED;
 
 //#define STSTR_NCON            "No Clipping Mode ON"
-extern const char* s_STSTR_NCON; // = STSTR_NCON;
+extern const char *s_STSTR_NCON; // = STSTR_NCON;
 //#define STSTR_NCOFF           "No Clipping Mode OFF"
-extern const char* s_STSTR_NCOFF; // = STSTR_NCOFF;
+extern const char *s_STSTR_NCOFF; // = STSTR_NCOFF;
 
 //#define STSTR_BEHOLD  "inVuln, Str, Inviso, Rad, Allmap, or Lite-amp"
-extern const char* s_STSTR_BEHOLD; // = STSTR_BEHOLD;
+extern const char *s_STSTR_BEHOLD; // = STSTR_BEHOLD;
 //#define STSTR_BEHOLDX "Power-up Toggled"
-extern const char* s_STSTR_BEHOLDX; // = STSTR_BEHOLDX;
+extern const char *s_STSTR_BEHOLDX; // = STSTR_BEHOLDX;
 
 //#define STSTR_CHOPPERS        "... doesn't suck - GM"
-extern const char* s_STSTR_CHOPPERS; // = STSTR_CHOPPERS;
+extern const char *s_STSTR_CHOPPERS; // = STSTR_CHOPPERS;
 //#define STSTR_CLEV            "Changing Level..."
-extern const char* s_STSTR_CLEV; // = STSTR_CLEV;
+extern const char *s_STSTR_CLEV; // = STSTR_CLEV;
 
 //
 //      F_Finale.C
@@ -673,7 +673,7 @@ extern const char* s_STSTR_CLEV; // = STSTR_CLEV;
 "The Shores of Hell and its amazing\n"\
 "sequel, Inferno!\n"
 */
-extern const char* s_E1TEXT; // = E1TEXT;
+extern const char *s_E1TEXT; // = E1TEXT;
 
 
 /*
@@ -696,7 +696,7 @@ extern const char* s_E1TEXT; // = E1TEXT;
 "Now, it's on to the final chapter of\n"\
 "DOOM! -- Inferno."
 */
-extern const char* s_E2TEXT; // = E2TEXT;
+extern const char *s_E2TEXT; // = E2TEXT;
 
 
 /*
@@ -719,7 +719,7 @@ extern const char* s_E2TEXT; // = E2TEXT;
 "spawn could have come through that\n"\
 "door with you ..."
 */
-extern const char* s_E3TEXT; // = E3TEXT;
+extern const char *s_E3TEXT; // = E3TEXT;
 
 
 /*
@@ -741,7 +741,7 @@ extern const char* s_E3TEXT; // = E3TEXT;
 "\n"\
 "next stop, hell on earth!"
 */
-extern const char* s_E4TEXT; // = E4TEXT;
+extern const char *s_E4TEXT; // = E4TEXT;
 
 
 // after level 6, put this:
@@ -761,7 +761,7 @@ extern const char* s_E4TEXT; // = E4TEXT;
 "SWITCH WHICH HOLDS EARTH'S POPULATION\n" \
 "HOSTAGE."
 */
-extern const char* s_C1TEXT; // = C1TEXT;
+extern const char *s_C1TEXT; // = C1TEXT;
 
 // After level 11, put this:
 
@@ -785,7 +785,7 @@ extern const char* s_C1TEXT; // = C1TEXT;
 "STARPORT.\" SLOWLY AND PAINFULLY YOU GET\n"\
 "UP AND RETURN TO THE FRAY."
 */
-extern const char* s_C2TEXT; // = C2TEXT;
+extern const char *s_C2TEXT; // = C2TEXT;
 
 
 // After level 20, put this:
@@ -802,7 +802,7 @@ extern const char* s_C2TEXT; // = C2TEXT;
 "OTHER SIDE. WHAT DO YOU CARE IF YOU'VE\n"\
 "GOT TO GO THROUGH HELL TO GET TO IT?"
 */
-extern const char* s_C3TEXT; // = C3TEXT;
+extern const char *s_C3TEXT; // = C3TEXT;
 
 
 // After level 29, put this:
@@ -825,7 +825,7 @@ extern const char* s_C3TEXT; // = C3TEXT;
 "HOME. REBUILDING EARTH OUGHT TO BE A\n"\
 "LOT MORE FUN THAN RUINING IT WAS.\n"
 */
-extern const char* s_C4TEXT; // = C4TEXT;
+extern const char *s_C4TEXT; // = C4TEXT;
 
 
 
@@ -839,7 +839,7 @@ extern const char* s_C4TEXT; // = C4TEXT;
 "WHO THE INMATES OF THIS CORNER OF HELL\n"\
 "WILL BE."
 */
-extern const char* s_C5TEXT; // = C5TEXT;
+extern const char *s_C5TEXT; // = C5TEXT;
 
 
 // Before level 32, put this:
@@ -850,7 +850,7 @@ extern const char* s_C5TEXT; // = C5TEXT;
 "SUPER SECRET LEVEL!  YOU'D BETTER\n"\
 "BLAZE THROUGH THIS ONE!\n"
 */
-extern const char* s_C6TEXT; // = C6TEXT;
+extern const char *s_C6TEXT; // = C6TEXT;
 
 
 // after map 06
@@ -870,7 +870,7 @@ extern const char* s_C6TEXT; // = C6TEXT;
 "moving, keep fighting, keep killing.\n"\
 "Oh yes, keep living, too."
 */
-extern const char* s_P1TEXT; // = P1TEXT;
+extern const char *s_P1TEXT; // = P1TEXT;
 
 
 // after map 11
@@ -884,7 +884,7 @@ extern const char* s_P1TEXT; // = P1TEXT;
 "\n"\
 "You're good at that kind of thing."
 */
-extern const char* s_P2TEXT; // = P2TEXT;
+extern const char *s_P2TEXT; // = P2TEXT;
 
 
 // after map 20
@@ -902,7 +902,7 @@ extern const char* s_P2TEXT; // = P2TEXT;
 "get ready to give the bastard a little Hell\n"\
 "of your own making!"
 */
-extern const char* s_P3TEXT; // = P3TEXT;
+extern const char *s_P3TEXT; // = P3TEXT;
 
 // after map 30
 
@@ -921,7 +921,7 @@ extern const char* s_P3TEXT; // = P3TEXT;
 "when you die, you'll need it for some\n"\
 "final cleaning-up ..."
 */
-extern const char* s_P4TEXT; // = P4TEXT;
+extern const char *s_P4TEXT; // = P4TEXT;
 
 // before map 31
 
@@ -932,7 +932,7 @@ extern const char* s_P4TEXT; // = P4TEXT;
 "two previous.  If not, be prepared to die\n"\
 "aplenty. For master marines only."
 */
-extern const char* s_P5TEXT; // = P5TEXT;
+extern const char *s_P5TEXT; // = P5TEXT;
 
 // before map 32
 
@@ -942,7 +942,7 @@ extern const char* s_P5TEXT; // = P5TEXT;
 "level we had ready for ya?  Now you know.\n"\
 "No one gets out alive."
 */
-extern const char* s_P6TEXT; // = P6TEXT;
+extern const char *s_P6TEXT; // = P6TEXT;
 
 
 /*
@@ -960,7 +960,7 @@ extern const char* s_P6TEXT; // = P6TEXT;
 "complex still has some warlike ordnance\n"\
 "laying around."
 */
-extern const char* s_T1TEXT; // = T1TEXT;
+extern const char *s_T1TEXT; // = T1TEXT;
 
 
 /*
@@ -975,7 +975,7 @@ extern const char* s_T1TEXT; // = T1TEXT;
 "\n"\
 "You don't plan to go down easy."
 */
-extern const char* s_T2TEXT; // = T2TEXT;
+extern const char *s_T2TEXT; // = T2TEXT;
 
 
 /*
@@ -989,7 +989,7 @@ extern const char* s_T2TEXT; // = T2TEXT;
 "Hefting your gun, an evil grin trickles\n"\
 "onto your face. Time to take some names."
 */
-extern const char* s_T3TEXT; // = T3TEXT;
+extern const char *s_T3TEXT; // = T3TEXT;
 
 /*
 #define T4TEXT \
@@ -1005,7 +1005,7 @@ extern const char* s_T3TEXT; // = T3TEXT;
 "A blue light begins to glow inside the\n"\
 "ruined skull of the demon-spitter."
 */
-extern const char* s_T4TEXT; // = T4TEXT;
+extern const char *s_T4TEXT; // = T4TEXT;
 
 
 /*
@@ -1016,7 +1016,7 @@ extern const char* s_T4TEXT; // = T4TEXT;
 "than usual. Can it?  Or maybe it's best\n"\
 "to let sleeping gods lie.."
 */
-extern const char* s_T5TEXT; // = T5TEXT;
+extern const char *s_T5TEXT; // = T5TEXT;
 
 
 /*
@@ -1032,86 +1032,86 @@ extern const char* s_T5TEXT; // = T5TEXT;
 "As you step off the transport, you hear\n"\
 "the stomp of a cyberdemon's iron shoe."
 */
-extern const char* s_T6TEXT; // = T6TEXT;
+extern const char *s_T6TEXT; // = T6TEXT;
 
 //
 // Character cast strings F_FINALE.C
 //
 //#define CC_ZOMBIE     "ZOMBIEMAN"
-extern const char* s_CC_ZOMBIE; // = CC_ZOMBIE;
+extern const char *s_CC_ZOMBIE; // = CC_ZOMBIE;
 //#define CC_SHOTGUN    "SHOTGUN GUY"
-extern const char* s_CC_SHOTGUN; // = CC_SHOTGUN;
+extern const char *s_CC_SHOTGUN; // = CC_SHOTGUN;
 //#define CC_HEAVY      "HEAVY WEAPON DUDE"
-extern const char* s_CC_HEAVY; // = CC_HEAVY;
+extern const char *s_CC_HEAVY; // = CC_HEAVY;
 //#define CC_IMP        "IMP"
-extern const char* s_CC_IMP; // = CC_IMP;
+extern const char *s_CC_IMP; // = CC_IMP;
 //#define CC_DEMON      "DEMON"
-extern const char* s_CC_DEMON; // = CC_DEMON;
+extern const char *s_CC_DEMON; // = CC_DEMON;
 //#define CC_LOST       "LOST SOUL"
-extern const char* s_CC_LOST; // = CC_LOST;
+extern const char *s_CC_LOST; // = CC_LOST;
 //#define CC_CACO       "CACODEMON"
-extern const char* s_CC_CACO; // = CC_CACO;
+extern const char *s_CC_CACO; // = CC_CACO;
 //#define CC_HELL       "HELL KNIGHT"
-extern const char* s_CC_HELL; // = CC_HELL;
+extern const char *s_CC_HELL; // = CC_HELL;
 //#define CC_BARON      "BARON OF HELL"
-extern const char* s_CC_BARON; // = CC_BARON;
+extern const char *s_CC_BARON; // = CC_BARON;
 //#define CC_ARACH      "ARACHNOTRON"
-extern const char* s_CC_ARACH; // = CC_ARACH;
+extern const char *s_CC_ARACH; // = CC_ARACH;
 //#define CC_PAIN       "PAIN ELEMENTAL"
-extern const char* s_CC_PAIN; // = CC_PAIN;
+extern const char *s_CC_PAIN; // = CC_PAIN;
 //#define CC_REVEN      "REVENANT"
-extern const char* s_CC_REVEN; // = CC_REVEN;
+extern const char *s_CC_REVEN; // = CC_REVEN;
 //#define CC_MANCU      "MANCUBUS"
-extern const char* s_CC_MANCU; // = CC_MANCU;
+extern const char *s_CC_MANCU; // = CC_MANCU;
 //#define CC_ARCH       "ARCH-VILE"
-extern const char* s_CC_ARCH; // = CC_ARCH;
+extern const char *s_CC_ARCH; // = CC_ARCH;
 //#define CC_SPIDER     "THE SPIDER MASTERMIND"
-extern const char* s_CC_SPIDER; // = CC_SPIDER;
+extern const char *s_CC_SPIDER; // = CC_SPIDER;
 //#define CC_CYBER      "THE CYBERDEMON"
-extern const char* s_CC_CYBER; // = CC_CYBER;
+extern const char *s_CC_CYBER; // = CC_CYBER;
 //#define CC_HERO       "OUR HERO"
-extern const char* s_CC_HERO; // = CC_HERO;
+extern const char *s_CC_HERO; // = CC_HERO;
 
 // Ty 03/30/98 - new substitutions for background textures during int screens
 // char*        bgflatE1 = "FLOOR4_8";
-extern const char* bgflatE1;
+extern const char *bgflatE1;
 // char*        bgflatE2 = "SFLR6_1";
-extern const char* bgflatE2;
+extern const char *bgflatE2;
 // char*        bgflatE3 = "MFLR8_4";
-extern const char* bgflatE3;
+extern const char *bgflatE3;
 // char*        bgflatE4 = "MFLR8_3";
-extern const char* bgflatE4;
+extern const char *bgflatE4;
 
 // char*        bgflat06 = "SLIME16";
-extern const char* bgflat06;
+extern const char *bgflat06;
 // char*        bgflat11 = "RROCK14";
-extern const char* bgflat11;
+extern const char *bgflat11;
 // char*        bgflat20 = "RROCK07";
-extern const char* bgflat20;
+extern const char *bgflat20;
 // char*        bgflat30 = "RROCK17";
-extern const char* bgflat30;
+extern const char *bgflat30;
 // char*        bgflat15 = "RROCK13";
-extern const char* bgflat15;
+extern const char *bgflat15;
 // char*        bgflat31 = "RROCK19";
-extern const char* bgflat31;
+extern const char *bgflat31;
 
 // char*        bgcastcall = "BOSSBACK"; // panel behind cast call
-extern const char* bgcastcall;
+extern const char *bgcastcall;
 
 // ignored if blank, general purpose startup announcements
 // char*        startup1 = "";
-extern const char* startup1;
+extern const char *startup1;
 // char*        startup2 = "";
-extern const char* startup2;
+extern const char *startup2;
 // char*        startup3 = "";
-extern const char* startup3;
+extern const char *startup3;
 // char*        startup4 = "";
-extern const char* startup4;
+extern const char *startup4;
 // char*        startup5 = "";
-extern const char* startup5;
+extern const char *startup5;
 
 // from g_game.c, prefix for savegame name like "boomsav"
-extern const char* savegamename;
+extern const char *savegamename;
 
 void D_BuildBEXTables(void);
 

@@ -47,8 +47,8 @@ extern int screenheightarray[MAX_SCREENWIDTH]; /* change to MAX_*  */ // dropoff
 
 /* Vars for R_DrawMaskedColumn */
 
-extern int     *mfloorclip;    // dropoff overflow
-extern int     *mceilingclip;  // dropoff overflow
+extern int *mfloorclip;    // dropoff overflow
+extern int *mceilingclip;  // dropoff overflow
 extern fixed_t spryscale;
 extern fixed_t sprtopscreen;
 extern fixed_t pspritescale;
@@ -62,11 +62,17 @@ void R_DrawMaskedColumn(const rpatch_t *patch,
                         const rcolumn_t *column,
                         const rcolumn_t *prevcolumn,
                         const rcolumn_t *nextcolumn);
+
 void R_SortVisSprites(void);
-void R_AddSprites(subsector_t* subsec, int lightlevel);
+
+void R_AddSprites(subsector_t *subsec, int lightlevel);
+
 void R_DrawPlayerSprites(void);
-void R_InitSprites(const char * const * namelist);
+
+void R_InitSprites(const char *const *namelist);
+
 void R_ClearSprites(void);
+
 void R_DrawMasked(void);
 
 #endif

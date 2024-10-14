@@ -34,7 +34,9 @@
  *-----------------------------------------------------------------------------*/
 
 #ifdef HAVE_CONFIG_H
+
 #include "config.h"
+
 #endif
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
@@ -43,18 +45,23 @@
 #ifdef _MSC_VER
 #include <io.h>
 #endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+
 #ifdef HAVE_UNISTD_H
+
 #include <unistd.h>
+
 #endif
+
 #include "doomtype.h"
 #include "lprintf.h"
 #include "i_main.h"
 #include "m_argv.h"
 
-int cons_error_mask = -1-LO_INFO; /* all but LO_INFO when redir'd */
+int cons_error_mask = -1 - LO_INFO; /* all but LO_INFO when redir'd */
 int cons_output_mask = -1;        /* all output enabled */
 
 /* cphipps - enlarged message buffer and made non-static
@@ -323,30 +330,29 @@ void Done_ConsoleWin(void)
 }
 #endif
 
-int lprintf(OutputLevels pri, const char *s, ...)
-{
-  int r=0;
-  char msg[MAX_MESSAGE_SIZE];
-  int lvl=pri;
+int lprintf(OutputLevels pri, const char *s, ...) {
+    int r = 0;
+    char msg[MAX_MESSAGE_SIZE];
+    int lvl = pri;
 
-  va_list v;
-  va_start(v,s);
+    va_list v;
+    va_start(v, s);
 #ifdef HAVE_VSNPRINTF
-  vsnprintf(msg,sizeof(msg),s,v);         /* print message in buffer  */
+    vsnprintf(msg,sizeof(msg),s,v);         /* print message in buffer  */
 #else
-  vsprintf(msg,s,v);
+    vsprintf(msg, s, v);
 #endif
-  va_end(v);
+    va_end(v);
 
-  if (lvl&cons_output_mask)               /* mask output as specified */
-  {
-    //r=fprintf(stdout,"%s",msg);
-     printf("%s",msg);
-  }
-  if (!isatty(1) && lvl&cons_error_mask)  /* if stdout redirected     */
-    printf("%s",msg);           /* select output at console */
+    if (lvl & cons_output_mask)               /* mask output as specified */
+    {
+        //r=fprintf(stdout,"%s",msg);
+        printf("%s", msg);
+    }
+    if (!isatty(1) && lvl & cons_error_mask)  /* if stdout redirected     */
+        printf("%s", msg);           /* select output at console */
 
-  return r;
+    return r;
 }
 
 /*

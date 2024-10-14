@@ -125,9 +125,8 @@ static CONSTFUNC fixed_t FixedMul(fixed_t a, fixed_t b)
 /* CPhipps - made __inline__ to inline, as specified in the gcc docs
  * Also made const */
 
-inline static CONSTFUNC fixed_t FixedMul(fixed_t a, fixed_t b)
-{
-  return (fixed_t)((int_64_t) a*b >> FRACBITS);
+inline static CONSTFUNC fixed_t FixedMul(fixed_t a, fixed_t b) {
+    return (fixed_t) ((int_64_t) a * b >> FRACBITS);
 }
 
 #endif /* I386_ASM */
@@ -182,12 +181,12 @@ static CONSTFUNC fixed_t FixedDiv(fixed_t a, fixed_t b)
       fixed_t result;
       asm (
           " idivl %3 ;"
-	  : "=a" (result)
-	  : "0" (a<<16),
-	    "d" (a>>16),
-	    "rm" (b)
-	  : "%cc"
-	  );
+      : "=a" (result)
+      : "0" (a<<16),
+        "d" (a>>16),
+        "rm" (b)
+      : "%cc"
+      );
       return result;
     }
   return ((a^b)>>31) ^ INT_MAX;
@@ -195,13 +194,13 @@ static CONSTFUNC fixed_t FixedDiv(fixed_t a, fixed_t b)
 # endif /* _MSC_VER */
 
 #else /* I386_ASM */
+
 /* CPhipps - made __inline__ to inline, as specified in the gcc docs
  * Also made const */
 
-inline static CONSTFUNC fixed_t FixedDiv(fixed_t a, fixed_t b)
-{
-  return ((unsigned)D_abs(a)>>14) >= (unsigned)D_abs(b) ? ((a^b)>>31) ^ INT_MAX :
-    (fixed_t)(((int_64_t) a << FRACBITS) / b);
+inline static CONSTFUNC fixed_t FixedDiv(fixed_t a, fixed_t b) {
+    return ((unsigned) D_abs(a) >> 14) >= (unsigned) D_abs(b) ? ((a ^ b) >> 31) ^ INT_MAX :
+           (fixed_t) (((int_64_t) a << FRACBITS) / b);
 }
 
 #endif /* I386_ASM */
@@ -211,13 +210,12 @@ inline static CONSTFUNC fixed_t FixedDiv(fixed_t a, fixed_t b)
  * (notice that the C standard for % does not guarantee this)
  */
 
-inline static CONSTFUNC fixed_t FixedMod(fixed_t a, fixed_t b)
-{
-  if (b & (b-1)) {
-    fixed_t r = a % b;
-    return ((r<0) ? r+b : r);
-  } else
-    return (a & (b-1));
+inline static CONSTFUNC fixed_t FixedMod(fixed_t a, fixed_t b) {
+    if (b & (b - 1)) {
+        fixed_t r = a % b;
+        return ((r < 0) ? r + b : r);
+    } else
+        return (a & (b - 1));
 }
 
 #endif

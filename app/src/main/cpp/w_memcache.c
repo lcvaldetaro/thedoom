@@ -34,7 +34,9 @@
 
 // use config.h if autoconf made one -- josh
 #ifdef HAVE_CONFIG_H
+
 #include "config.h"
+
 #endif
 
 #include "doomstat.h"
@@ -43,16 +45,17 @@
 #ifdef __GNUG__
 #pragma implementation "w_wad.h"
 #endif
+
 #include "w_wad.h"
 #include "z_zone.h"
 #include "lprintf.h"
 
 static struct {
-  void *cache;
+    void *cache;
 #ifdef TIMEDIAG
-  int locktic;
+    int locktic;
 #endif
-  unsigned int locks;
+    unsigned int locks;
 } *cachelump;
 
 #ifdef HEAPDUMP
@@ -61,7 +64,7 @@ void W_PrintLump(FILE* fp, void* p) {
   for (i=0; i<numlumps; i++)
     if (cachelump[i].cache == p) {
       fprintf(fp, " %8.8s %6u %2d %6d", lumpinfo[i].name,
-	      W_LumpLength(i), cachelump[i].locks, gametic - cachelump[i].locktic);
+          W_LumpLength(i), cachelump[i].locks, gametic - cachelump[i].locktic);
       return;
     }
   fprintf(fp, " not found");
@@ -76,7 +79,7 @@ static void W_ReportLocks(void)
   for (i=0; i<numlumps; i++) {
     if (cachelump[i].locks)
       lprintf(LO_DEBUG, "%8.8s %6u %2d   %6d\n", lumpinfo[i].name,
-	      W_LumpLength(i), cachelump[i].locks, gametic - cachelump[i].locktic);
+          W_LumpLength(i), cachelump[i].locks, gametic - cachelump[i].locktic);
   }
 }
 #endif

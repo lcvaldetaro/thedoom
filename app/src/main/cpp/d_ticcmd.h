@@ -46,14 +46,13 @@
  * plus a checksum for internal state consistency.
  * CPhipps - explicitely signed the elements, since they have to be signed to work right
  */
-typedef struct
-{
-  signed char forwardmove;  /* *2048 for move       */
-  signed char sidemove; /* *2048 for move       */
-  signed short  angleturn;  /* <<16 for angle delta */
-  short consistancy;          /* checks for net game  */
-  byte  chatchar;
-  byte  buttons;
+typedef struct {
+    signed char forwardmove;  /* *2048 for move       */
+    signed char sidemove; /* *2048 for move       */
+    signed short angleturn;  /* <<16 for angle delta */
+    short consistancy;          /* checks for net game  */
+    byte chatchar;
+    byte buttons;
 } ticcmd_t;
 
 #endif

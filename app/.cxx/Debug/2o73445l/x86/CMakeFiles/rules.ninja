@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /Users/luiz/Library/Android/sdk/cmake/3.22.1/bin/cmake --regenerate-during-build -S/Users/luiz/githubvaldetaro/Doom/app -B/Users/luiz/githubvaldetaro/Doom/app/.cxx/Debug/2o73445l/x86
+  command = /Users/luiz/Library/Android/sdk/cmake/3.22.1/bin/cmake --regenerate-during-build -S/Users/luiz/thedoom/app -B/Users/luiz/thedoom/app/.cxx/Debug/2o73445l/x86
   description = Re-running CMake...
   generator = 1
 

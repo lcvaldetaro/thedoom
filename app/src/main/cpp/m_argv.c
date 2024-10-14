@@ -32,13 +32,14 @@
  *-----------------------------------------------------------------------------*/
 
 #include <string.h>
+
 #define M_ARGV_C
 // CPhipps - include the correct header
 #include "doomtype.h"
 #include "m_argv.h"
 
-int    myargc;
-const char * const * myargv; // CPhipps - not sure if ANSI C allows you to
+int myargc;
+const char *const *myargv; // CPhipps - not sure if ANSI C allows you to
 // modify contents of argv, but I can't imagine it does.
 
 //
@@ -49,11 +50,10 @@ const char * const * myargv; // CPhipps - not sure if ANSI C allows you to
 // or 0 if not present
 //
 
-int M_CheckParm(const char *check)
-{
-  signed int i = myargc;
-  while (--i>0)
-    if (!strcasecmp(check, myargv[i]))
-      return i;
-  return 0;
+int M_CheckParm(const char *check) {
+    signed int i = myargc;
+    while (--i > 0)
+        if (!strcasecmp(check, myargv[i]))
+            return i;
+    return 0;
 }

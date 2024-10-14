@@ -37,20 +37,22 @@
 /* killough 4/16/98: Cheat table structure */
 
 extern struct cheat_s {
-  const char *	cheat;
-  const char *const deh_cheat;
-  enum {
-    always   = 0,
-    not_dm   = 1,
-    not_coop = 2,
-    not_demo = 4,
-    not_menu = 8,
-    not_deh = 16,
-    not_net = not_dm | not_coop
-  } const when;
-  void (*const func)();
-  const int arg;
-  uint_64_t code, mask;
+    const char *cheat;
+    const char *const deh_cheat;
+    enum {
+        always = 0,
+        not_dm = 1,
+        not_coop = 2,
+        not_demo = 4,
+        not_menu = 8,
+        not_deh = 16,
+        not_net = not_dm | not_coop
+    } const when;
+
+    void (*const func)();
+
+    const int arg;
+    uint_64_t code, mask;
 } cheat[];
 
 boolean M_FindCheats(int key);

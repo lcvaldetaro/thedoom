@@ -52,20 +52,19 @@ static boolean newthinkerpresent;
 
 // killough 8/29/98: we maintain several separate threads, each containing
 // a special class of thinkers, to allow more efficient searches.
-thinker_t thinkerclasscap[th_all+1];
+thinker_t thinkerclasscap[th_all + 1];
 
 //
 // P_InitThinkers
 //
 
-void P_InitThinkers(void)
-{
-  int i;
+void P_InitThinkers(void) {
+    int i;
 
-  for (i=0; i<NUMTHCLASS; i++)  // killough 8/29/98: initialize threaded lists
-    thinkerclasscap[i].cprev = thinkerclasscap[i].cnext = &thinkerclasscap[i];
+    for (i = 0; i < NUMTHCLASS; i++)  // killough 8/29/98: initialize threaded lists
+        thinkerclasscap[i].cprev = thinkerclasscap[i].cnext = &thinkerclasscap[i];
 
-  thinkercap.prev = thinkercap.next  = &thinkercap;
+    thinkercap.prev = thinkercap.next = &thinkercap;
 }
 
 //
@@ -75,32 +74,31 @@ void P_InitThinkers(void)
 // efficient searches.
 //
 
-void P_UpdateThinker(thinker_t *thinker)
-{
-  register thinker_t *th;
-  // find the class the thinker belongs to
+void P_UpdateThinker(thinker_t *thinker) {
+    register thinker_t *th;
+    // find the class the thinker belongs to
 
-  int class =
-    thinker->function == P_RemoveThinkerDelayed ? th_delete :
-    thinker->function == P_MobjThinker &&
-    ((mobj_t *) thinker)->health > 0 &&
-    (((mobj_t *) thinker)->flags & MF_COUNTKILL ||
-     ((mobj_t *) thinker)->type == MT_SKULL) ?
-    ((mobj_t *) thinker)->flags & MF_FRIEND ?
-    th_friends : th_enemies : th_misc;
+    int class =
+            thinker->function == P_RemoveThinkerDelayed ? th_delete :
+            thinker->function == P_MobjThinker &&
+            ((mobj_t *) thinker)->health > 0 &&
+            (((mobj_t *) thinker)->flags & MF_COUNTKILL ||
+             ((mobj_t *) thinker)->type == MT_SKULL) ?
+            ((mobj_t *) thinker)->flags & MF_FRIEND ?
+            th_friends : th_enemies : th_misc;
 
-  {
-    /* Remove from current thread, if in one */
-    if ((th = thinker->cnext)!= NULL)
-      (th->cprev = thinker->cprev)->cnext = th;
-  }
+    {
+        /* Remove from current thread, if in one */
+        if ((th = thinker->cnext) != NULL)
+            (th->cprev = thinker->cprev)->cnext = th;
+    }
 
-  // Add to appropriate thread
-  th = &thinkerclasscap[class];
-  th->cprev->cnext = thinker;
-  thinker->cnext = th;
-  thinker->cprev = th->cprev;
-  th->cprev = thinker;
+    // Add to appropriate thread
+    th = &thinkerclasscap[class];
+    th->cprev->cnext = thinker;
+    thinker->cnext = th;
+    thinker->cprev = th->cprev;
+    th->cprev = thinker;
 }
 
 //
@@ -108,19 +106,18 @@ void P_UpdateThinker(thinker_t *thinker)
 // Adds a new thinker at the end of the list.
 //
 
-void P_AddThinker(thinker_t* thinker)
-{
-  thinkercap.prev->next = thinker;
-  thinker->next = &thinkercap;
-  thinker->prev = thinkercap.prev;
-  thinkercap.prev = thinker;
+void P_AddThinker(thinker_t *thinker) {
+    thinkercap.prev->next = thinker;
+    thinker->next = &thinkercap;
+    thinker->prev = thinkercap.prev;
+    thinkercap.prev = thinker;
 
-  thinker->references = 0;    // killough 11/98: init reference counter to 0
+    thinker->references = 0;    // killough 11/98: init reference counter to 0
 
-  // killough 8/29/98: set sentinel pointers, and then add to appropriate list
-  thinker->cnext = thinker->cprev = NULL;
-  P_UpdateThinker(thinker);
-  newthinkerpresent = true;
+    // killough 8/29/98: set sentinel pointers, and then add to appropriate list
+    thinker->cnext = thinker->cprev = NULL;
+    P_UpdateThinker(thinker);
+    newthinkerpresent = true;
 }
 
 //
@@ -142,24 +139,22 @@ static thinker_t *currentthinker;
 // that the next step in P_RunThinkers() will get its successor.
 //
 
-void P_RemoveThinkerDelayed(thinker_t *thinker)
-{
-  if (!thinker->references)
-    {
-      { /* Remove from main thinker list */
-        thinker_t *next = thinker->next;
-        /* Note that currentthinker is guaranteed to point to us,
-         * and since we're freeing our memory, we had better change that. So
-         * point it to thinker->prev, so the iterator will correctly move on to
-         * thinker->prev->next = thinker->next */
-        (next->prev = currentthinker = thinker->prev)->next = next;
-      }
-      {
-        /* Remove from current thinker class list */
-        thinker_t *th = thinker->cnext;
-        (th->cprev = thinker->cprev)->cnext = th;
-      }
-      Z_Free(thinker);
+void P_RemoveThinkerDelayed(thinker_t *thinker) {
+    if (!thinker->references) {
+        { /* Remove from main thinker list */
+            thinker_t *next = thinker->next;
+            /* Note that currentthinker is guaranteed to point to us,
+             * and since we're freeing our memory, we had better change that. So
+             * point it to thinker->prev, so the iterator will correctly move on to
+             * thinker->prev->next = thinker->next */
+            (next->prev = currentthinker = thinker->prev)->next = next;
+        }
+        {
+            /* Remove from current thinker class list */
+            thinker_t *th = thinker->cnext;
+            (th->cprev = thinker->cprev)->cnext = th;
+        }
+        Z_Free(thinker);
     }
 }
 
@@ -176,23 +171,21 @@ void P_RemoveThinkerDelayed(thinker_t *thinker)
 // removed automatically as part of the thinker process.
 //
 
-void P_RemoveThinker(thinker_t *thinker)
-{
-  R_StopInterpolationIfNeeded(thinker);
-  thinker->function = P_RemoveThinkerDelayed;
+void P_RemoveThinker(thinker_t *thinker) {
+    R_StopInterpolationIfNeeded(thinker);
+    thinker->function = P_RemoveThinkerDelayed;
 
-  P_UpdateThinker(thinker);
+    P_UpdateThinker(thinker);
 }
 
 /* cph 2002/01/13 - iterator for thinker list
  * WARNING: Do not modify thinkers between calls to this functin
  */
-thinker_t* P_NextThinker(thinker_t* th, th_class cl)
-{
-  thinker_t* top = &thinkerclasscap[cl];
-  if (!th) th = top;
-  th = cl == th_all ? th->next : th->cnext;
-  return th == top ? NULL : th;
+thinker_t *P_NextThinker(thinker_t *th, th_class cl) {
+    thinker_t *top = &thinkerclasscap[cl];
+    if (!th) th = top;
+    th = cl == th_all ? th->next : th->cnext;
+    return th == top ? NULL : th;
 }
 
 /*
@@ -207,12 +200,11 @@ thinker_t* P_NextThinker(thinker_t* th, th_class cl)
  * references, and delay removal until the count is 0.
  */
 
-void P_SetTarget(mobj_t **mop, mobj_t *targ)
-{
-  if (*mop)             // If there was a target already, decrease its refcount
-    (*mop)->thinker.references--;
-  if ((*mop = targ))    // Set new target and if non-NULL, increase its counter
-    targ->thinker.references++;
+void P_SetTarget(mobj_t **mop, mobj_t *targ) {
+    if (*mop)             // If there was a target already, decrease its refcount
+        (*mop)->thinker.references--;
+    if ((*mop = targ))    // Set new target and if non-NULL, increase its counter
+        targ->thinker.references++;
 }
 
 //
@@ -238,54 +230,51 @@ void P_SetTarget(mobj_t **mop, mobj_t *targ)
 // external and using P_RemoveThinkerDelayed() implicitly.
 //
 
-static void P_RunThinkers (void)
-{
-  for (currentthinker = thinkercap.next;
-       currentthinker != &thinkercap;
-       currentthinker = currentthinker->next)
-  {
-    if (newthinkerpresent)
-      R_ActivateThinkerInterpolations(currentthinker);
-    if (currentthinker->function)
-      currentthinker->function(currentthinker);
-  }
-  newthinkerpresent = false;
+static void P_RunThinkers(void) {
+    for (currentthinker = thinkercap.next;
+         currentthinker != &thinkercap;
+         currentthinker = currentthinker->next) {
+        if (newthinkerpresent)
+            R_ActivateThinkerInterpolations(currentthinker);
+        if (currentthinker->function)
+            currentthinker->function(currentthinker);
+    }
+    newthinkerpresent = false;
 }
 
 //
 // P_Ticker
 //
 
-void P_Ticker (void)
-{
-  int i;
+void P_Ticker(void) {
+    int i;
 
-  /* pause if in menu and at least one tic has been run
-   *
-   * killough 9/29/98: note that this ties in with basetic,
-   * since G_Ticker does the pausing during recording or
-   * playback, and compenates by incrementing basetic.
-   *
-   * All of this complicated mess is used to preserve demo sync.
-   */
+    /* pause if in menu and at least one tic has been run
+     *
+     * killough 9/29/98: note that this ties in with basetic,
+     * since G_Ticker does the pausing during recording or
+     * playback, and compenates by incrementing basetic.
+     *
+     * All of this complicated mess is used to preserve demo sync.
+     */
 
-  if (paused || (menuactive && !demoplayback && !netgame &&
-     players[consoleplayer].viewz != 1))
-    return;
+    if (paused || (menuactive && !demoplayback && !netgame &&
+                   players[consoleplayer].viewz != 1))
+        return;
 
-  R_UpdateInterpolations ();
+    R_UpdateInterpolations();
 
-  P_MapStart();
-               // not if this is an intermission screen
-  if(gamestate==GS_LEVEL)
-  for (i=0; i<MAXPLAYERS; i++)
-    if (playeringame[i])
-      P_PlayerThink(&players[i]);
+    P_MapStart();
+    // not if this is an intermission screen
+    if (gamestate == GS_LEVEL)
+        for (i = 0; i < MAXPLAYERS; i++)
+            if (playeringame[i])
+                P_PlayerThink(&players[i]);
 
-  P_RunThinkers();
-  P_UpdateSpecials();
-  P_RespawnSpecials();
-  P_MapEnd();
-  leveltime++;                       // for par times
+    P_RunThinkers();
+    P_UpdateSpecials();
+    P_RespawnSpecials();
+    P_MapEnd();
+    leveltime++;                       // for par times
 }
 

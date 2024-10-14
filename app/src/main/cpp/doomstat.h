@@ -50,20 +50,20 @@
 // Command line parameters.
 //
 
-extern  boolean nomonsters; // checkparm of -nomonsters
-extern  boolean respawnparm;  // checkparm of -respawn
-extern  boolean fastparm; // checkparm of -fast
-extern  boolean devparm;  // DEBUG: launched with -devparm
+extern boolean nomonsters; // checkparm of -nomonsters
+extern boolean respawnparm;  // checkparm of -respawn
+extern boolean fastparm; // checkparm of -fast
+extern boolean devparm;  // DEBUG: launched with -devparm
 
 // -----------------------------------------------------
 // Game Mode - identify IWAD as shareware, retail etc.
 //
 
 extern GameMode_t gamemode;
-extern GameMission_t  gamemission;
+extern GameMission_t gamemission;
 
 // Set if homebrew PWAD stuff has been added.
-extern  boolean modifiedgame;
+extern boolean modifiedgame;
 
 // CPhipps - new compatibility handling
 extern complevel_t compatibility_level, default_compatibility_level;
@@ -76,7 +76,7 @@ extern complevel_t compatibility_level, default_compatibility_level;
 // v1.1-like pitched sounds
 extern int pitched_sounds;        // killough
 
-extern int     default_translucency; // config file says           // phares
+extern int default_translucency; // config file says           // phares
 extern boolean general_translucency; // true if translucency is ok // phares
 
 extern int demo_insurance, default_demo_insurance;      // killough 4/5/98
@@ -85,66 +85,66 @@ extern int demo_insurance, default_demo_insurance;      // killough 4/5/98
 // killough 10/98: compatibility vector
 
 enum {
-  comp_telefrag,
-  comp_dropoff,
-  comp_vile,
-  comp_pain,
-  comp_skull,
-  comp_blazing,
-  comp_doorlight,
-  comp_model,
-  comp_god,
-  comp_falloff,
-  comp_floors,
-  comp_skymap,
-  comp_pursuit,
-  comp_doorstuck,
-  comp_staylift,
-  comp_zombie,
-  comp_stairs,
-  comp_infcheat,
-  comp_zerotags,
-  comp_moveblock,
-  comp_respawn,  /* cph - this is the inverse of comp_respawnfix from eternity */
-  comp_sound,
-  comp_666,
-  comp_soul,
-  comp_maskedanim,
-  COMP_NUM,      /* cph - should be last in sequence */
-  COMP_TOTAL=32  // Some extra room for additional variables
+    comp_telefrag,
+    comp_dropoff,
+    comp_vile,
+    comp_pain,
+    comp_skull,
+    comp_blazing,
+    comp_doorlight,
+    comp_model,
+    comp_god,
+    comp_falloff,
+    comp_floors,
+    comp_skymap,
+    comp_pursuit,
+    comp_doorstuck,
+    comp_staylift,
+    comp_zombie,
+    comp_stairs,
+    comp_infcheat,
+    comp_zerotags,
+    comp_moveblock,
+    comp_respawn,  /* cph - this is the inverse of comp_respawnfix from eternity */
+    comp_sound,
+    comp_666,
+    comp_soul,
+    comp_maskedanim,
+    COMP_NUM,      /* cph - should be last in sequence */
+    COMP_TOTAL = 32  // Some extra room for additional variables
 };
 
 extern int comp[COMP_TOTAL], default_comp[COMP_TOTAL];
 
 // -------------------------------------------
 // Language.
-extern  Language_t   language;
+extern Language_t language;
 
 // -------------------------------------------
 // Selected skill type, map etc.
 //
 
 // Defaults for menu, methinks.
-extern  skill_t   startskill;
-extern  int             startepisode;
-extern  int   startmap;
+extern skill_t startskill;
+extern int startepisode;
+extern int startmap;
 
-extern  boolean   autostart;
+extern boolean autostart;
 
 // Selected by user.
-extern  skill_t         gameskill;
-extern  int   gameepisode;
-extern  int   gamemap;
+extern skill_t gameskill;
+extern int gameepisode;
+extern int gamemap;
 
 // Nightmare mode flag, single player.
-extern  boolean         respawnmonsters;
+extern boolean respawnmonsters;
 
 // Netgame? Only true if >1 player.
-extern  boolean netgame;
+extern boolean netgame;
 
 // Flag: true only if started as net deathmatch.
 // An enum might handle altdeath/cooperative better.
-extern  boolean deathmatch;
+extern boolean deathmatch;
 
 // ------------------------------------------
 // Internal parameters for sound rendering.
@@ -168,55 +168,55 @@ extern unsigned int desired_screenwidth, desired_screenheight;
 //
 
 enum automapmode_e {
-  am_active = 1,  // currently shown
-  am_overlay= 2,  // covers the screen, i.e. not overlay mode
-  am_rotate = 4,  // rotates to the player facing direction
-  am_follow = 8,  // keep the player centred
-  am_grid   =16,  // show grid
+    am_active = 1,  // currently shown
+    am_overlay = 2,  // covers the screen, i.e. not overlay mode
+    am_rotate = 4,  // rotates to the player facing direction
+    am_follow = 8,  // keep the player centred
+    am_grid = 16,  // show grid
 };
 extern enum automapmode_e automapmode; // Mode that the automap is in
 
-extern  boolean menuactive;    // Menu overlayed?
-extern  boolean paused;        // Game Pause?
-extern  boolean nodrawers;
-extern  boolean noblit;
+extern boolean menuactive;    // Menu overlayed?
+extern boolean paused;        // Game Pause?
+extern boolean nodrawers;
+extern boolean noblit;
 
 // This one is related to the 3-screen display mode.
 // ANG90 = left side, ANG270 = right
-extern  int viewangleoffset;
+extern int viewangleoffset;
 
 // Player taking events, and displaying.
-extern  int consoleplayer;
-extern  int displayplayer;
+extern int consoleplayer;
+extern int displayplayer;
 
 // -------------------------------------
 // Scores, rating.
 // Statistics on a given map, for intermission.
 //
-extern  int totalkills, totallive;
-extern  int totalitems;
-extern  int totalsecret;
+extern int totalkills, totallive;
+extern int totalitems;
+extern int totalsecret;
 
 // Timer, for scores.
-extern  int basetic;    /* killough 9/29/98: levelstarttic, adjusted */
-extern  int leveltime;  // tics in game play for par
+extern int basetic;    /* killough 9/29/98: levelstarttic, adjusted */
+extern int leveltime;  // tics in game play for par
 
 // --------------------------------------
 // DEMO playback/recording related stuff.
 
-extern  boolean usergame;
-extern  boolean demoplayback;
-extern  boolean demorecording;
-extern  int demover;
+extern boolean usergame;
+extern boolean demoplayback;
+extern boolean demorecording;
+extern int demover;
 
 // Quit after playing a demo from cmdline.
-extern  boolean   singledemo;
+extern boolean singledemo;
 // Print timing information after quitting.  killough
-extern  boolean   timingdemo;
+extern boolean timingdemo;
 // Run tick clock at fastest speed possible while playing demo.  killough
-extern  boolean   fastdemo;
+extern boolean fastdemo;
 
-extern  gamestate_t  gamestate;
+extern gamestate_t gamestate;
 
 //-----------------------------
 // Internal parameters, fixed.
@@ -224,23 +224,23 @@ extern  gamestate_t  gamestate;
 //  according to user inputs. Partly load from
 //  WAD, partly set at startup time.
 
-extern  int   gametic;
+extern int gametic;
 
 
 // Bookkeeping on players - state.
-extern  player_t  players[MAXPLAYERS];
+extern player_t players[MAXPLAYERS];
 
 // Alive? Disconnected?
-extern  boolean   playeringame[MAXPLAYERS];
-extern  boolean   realplayeringame[MAXPLAYERS];
+extern boolean playeringame[MAXPLAYERS];
+extern boolean realplayeringame[MAXPLAYERS];
 
-extern  mapthing_t *deathmatchstarts;     // killough
-extern  size_t     num_deathmatchstarts; // killough
+extern mapthing_t *deathmatchstarts;     // killough
+extern size_t num_deathmatchstarts; // killough
 
-extern  mapthing_t *deathmatch_p;
+extern mapthing_t *deathmatch_p;
 
 // Player spawn spots.
-extern  mapthing_t playerstarts[];
+extern mapthing_t playerstarts[];
 
 // Intermission stats.
 // Parameters for world map / intermission.
@@ -251,35 +251,35 @@ extern wbstartstruct_t wminfo;
 //
 
 // File handling stuff.
-extern  FILE   *debugfile;
+extern FILE *debugfile;
 
 // if true, load all graphics at level load
-extern  boolean precache;
+extern boolean precache;
 
 // wipegamestate can be set to -1
 //  to force a wipe on the next draw
-extern  gamestate_t     wipegamestate;
+extern gamestate_t wipegamestate;
 
-extern  int             mouseSensitivity_horiz; // killough
-extern  int             mouseSensitivity_vert;
+extern int mouseSensitivity_horiz; // killough
+extern int mouseSensitivity_vert;
 
 // debug flag to cancel adaptiveness
-extern  boolean         singletics;
+extern boolean singletics;
 
-extern  int             bodyqueslot;
+extern int bodyqueslot;
 
 // Needed to store the number of the dummy sky flat.
 // Used for rendering, as well as tracking projectiles etc.
 
-extern int    skyflatnum;
+extern int skyflatnum;
 
-extern  int        maketic;
+extern int maketic;
 
 // Networking and tick handling related.
 #define BACKUPTICS              12
 
-extern  ticcmd_t   netcmds[][BACKUPTICS];
-extern  int        ticdup;
+extern ticcmd_t netcmds[][BACKUPTICS];
+extern int ticdup;
 
 //-----------------------------------------------------------------------------
 

@@ -56,22 +56,28 @@ extern boolean nomusicparm;
 extern int ffmap;
 
 // Called by IO functions when input is detected.
-void D_PostEvent(event_t* ev);
+void D_PostEvent(event_t *ev);
 
 // Demo stuff
 extern boolean advancedemo;
+
 void D_AdvanceDemo(void);
-void D_DoAdvanceDemo (void);
+
+void D_DoAdvanceDemo(void);
 
 //
 // BASE LEVEL
 //
 
 void D_Display(void);
+
 void D_PageTicker(void);
+
 void D_StartTitle(void);
+
 void D_DoomMain(void);
-void D_AddFile (const char *file, wad_source_t source);
+
+void D_AddFile(const char *file, wad_source_t source);
 
 /* cph - MBF-like wad/deh/bex autoload code */
 /* proff 2001/7/1 - added prboom.wad as last entry so it's always loaded and

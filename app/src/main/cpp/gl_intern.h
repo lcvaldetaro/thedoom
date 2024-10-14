@@ -34,27 +34,25 @@
 #ifndef _GL_INTERN_H
 #define _GL_INTERN_H
 
-typedef enum
-{
-  GLDT_UNREGISTERED,
-  GLDT_BROKEN,
-  GLDT_PATCH,
-  GLDT_TEXTURE,
-  GLDT_FLAT
+typedef enum {
+    GLDT_UNREGISTERED,
+    GLDT_BROKEN,
+    GLDT_PATCH,
+    GLDT_TEXTURE,
+    GLDT_FLAT
 } GLTexType;
 
-typedef struct
-{
-  int index;
-  int width,height;
-  int leftoffset,topoffset;
-  int tex_width,tex_height;
-  int realtexwidth, realtexheight;
-  int buffer_width,buffer_height;
-  int buffer_size;
-  int glTexID[CR_LIMIT+MAXPLAYERS];
-  GLTexType textype;
-  boolean mipmap;
+typedef struct {
+    int index;
+    int width, height;
+    int leftoffset, topoffset;
+    int tex_width, tex_height;
+    int realtexwidth, realtexheight;
+    int buffer_width, buffer_height;
+    int buffer_size;
+    int glTexID[CR_LIMIT + MAXPLAYERS];
+    GLTexType textype;
+    boolean mipmap;
 } GLTexture;
 
 extern int gld_max_texturesize;
@@ -73,14 +71,23 @@ extern int last_cm;
 
 //e6y: in some cases textures with a zero index (NO_TEXTURE) should be registered
 GLTexture *gld_RegisterTexture(int texture_num, boolean mipmap, boolean force);
+
 void gld_BindTexture(GLTexture *gltexture);
+
 GLTexture *gld_RegisterPatch(int lump, int cm);
+
 void gld_BindPatch(GLTexture *gltexture, int cm);
+
 GLTexture *gld_RegisterFlat(int lump, boolean mipmap);
+
 void gld_BindFlat(GLTexture *gltexture);
+
 void gld_InitPalettedTextures(void);
+
 int gld_GetTexDimension(int value);
+
 void gld_SetTexturePalette(GLenum target);
+
 void gld_Precache(void);
 
 PFNGLCOLORTABLEEXTPROC gld_ColorTableEXT;

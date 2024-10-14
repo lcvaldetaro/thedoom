@@ -37,7 +37,9 @@
 
 /* use config.h if autoconf made one -- josh */
 #ifdef HAVE_CONFIG_H
+
 #include "config.h"
+
 #endif
 
 // killough 4/25/98: Make gcc extensions mean nothing on other compilers
@@ -67,28 +69,28 @@
 // Game mode handling - identify IWAD version
 //  to handle IWAD dependend animations etc.
 typedef enum {
-  shareware,    // DOOM 1 shareware, E1, M9
-  registered,   // DOOM 1 registered, E3, M27
-  commercial,   // DOOM 2 retail, E1 M34  (DOOM 2 german edition not handled)
-  retail,       // DOOM 1 retail, E4, M36
-  indetermined  // Well, no IWAD found.
+    shareware,    // DOOM 1 shareware, E1, M9
+    registered,   // DOOM 1 registered, E3, M27
+    commercial,   // DOOM 2 retail, E1 M34  (DOOM 2 german edition not handled)
+    retail,       // DOOM 1 retail, E4, M36
+    indetermined  // Well, no IWAD found.
 } GameMode_t;
 
 // Mission packs - might be useful for TC stuff?
 typedef enum {
-  doom,         // DOOM 1
-  doom2,        // DOOM 2
-  pack_tnt,     // TNT mission pack
-  pack_plut,    // Plutonia pack
-  none
+    doom,         // DOOM 1
+    doom2,        // DOOM 2
+    pack_tnt,     // TNT mission pack
+    pack_plut,    // Plutonia pack
+    none
 } GameMission_t;
 
 // Identify language to use, software localization.
 typedef enum {
-  english,
-  french,
-  german,
-  unknown
+    english,
+    french,
+    german,
+    unknown
 } Language_t;
 
 //
@@ -139,10 +141,10 @@ extern int SCREENPITCH;
 // at the intermission screen, the game final animation, or a demo.
 
 typedef enum {
-  GS_LEVEL,
-  GS_INTERMISSION,
-  GS_FINALE,
-  GS_DEMOSCREEN
+    GS_LEVEL,
+    GS_INTERMISSION,
+    GS_FINALE,
+    GS_DEMOSCREEN
 } gamestate_t;
 
 //
@@ -165,12 +167,12 @@ typedef enum {
 #define MTF_RESERVED          256
 
 typedef enum {
-  sk_none=-1, //jff 3/24/98 create unpicked skill setting
-  sk_baby=0,
-  sk_easy,
-  sk_medium,
-  sk_hard,
-  sk_nightmare
+    sk_none = -1, //jff 3/24/98 create unpicked skill setting
+    sk_baby = 0,
+    sk_easy,
+    sk_medium,
+    sk_hard,
+    sk_nightmare
 } skill_t;
 
 //
@@ -178,59 +180,59 @@ typedef enum {
 //
 
 typedef enum {
-  it_bluecard,
-  it_yellowcard,
-  it_redcard,
-  it_blueskull,
-  it_yellowskull,
-  it_redskull,
-  NUMCARDS
+    it_bluecard,
+    it_yellowcard,
+    it_redcard,
+    it_blueskull,
+    it_yellowskull,
+    it_redskull,
+    NUMCARDS
 } card_t;
 
 // The defined weapons, including a marker
 // indicating user has not changed weapon.
 typedef enum {
-  wp_fist,
-  wp_pistol,
-  wp_shotgun,
-  wp_chaingun,
-  wp_missile,
-  wp_plasma,
-  wp_bfg,
-  wp_chainsaw,
-  wp_supershotgun,
+    wp_fist,
+    wp_pistol,
+    wp_shotgun,
+    wp_chaingun,
+    wp_missile,
+    wp_plasma,
+    wp_bfg,
+    wp_chainsaw,
+    wp_supershotgun,
 
-  NUMWEAPONS,
-  wp_nochange              // No pending weapon change.
+    NUMWEAPONS,
+    wp_nochange              // No pending weapon change.
 } weapontype_t;
 
 // Ammunition types defined.
 typedef enum {
-  am_clip,    // Pistol / chaingun ammo.
-  am_shell,   // Shotgun / double barreled shotgun.
-  am_cell,    // Plasma rifle, BFG.
-  am_misl,    // Missile launcher.
-  NUMAMMO,
-  am_noammo   // Unlimited for chainsaw / fist.
+    am_clip,    // Pistol / chaingun ammo.
+    am_shell,   // Shotgun / double barreled shotgun.
+    am_cell,    // Plasma rifle, BFG.
+    am_misl,    // Missile launcher.
+    NUMAMMO,
+    am_noammo   // Unlimited for chainsaw / fist.
 } ammotype_t;
 
 // Power up artifacts.
 typedef enum {
-  pw_invulnerability,
-  pw_strength,
-  pw_invisibility,
-  pw_ironfeet,
-  pw_allmap,
-  pw_infrared,
-  NUMPOWERS
+    pw_invulnerability,
+    pw_strength,
+    pw_invisibility,
+    pw_ironfeet,
+    pw_allmap,
+    pw_infrared,
+    NUMPOWERS
 } powertype_t;
 
 // Power up durations (how many seconds till expiration).
 typedef enum {
-  INVULNTICS  = (30*TICRATE),
-  INVISTICS   = (60*TICRATE),
-  INFRATICS   = (120*TICRATE),
-  IRONTICS    = (60*TICRATE)
+    INVULNTICS = (30 * TICRATE),
+    INVISTICS = (60 * TICRATE),
+    INFRATICS = (120 * TICRATE),
+    IRONTICS = (60 * TICRATE)
 } powerduration_t;
 
 // DOOM keyboard definition.
@@ -306,17 +308,17 @@ typedef enum {
 // Used when resetting the defaults for every item in a Setup group.
 
 typedef enum {
-  ss_none,
-  ss_keys,
-  ss_weap,
-  ss_stat,
-  ss_auto,
-  ss_enem,
-  ss_mess,
-  ss_chat,
-  ss_gen,       /* killough 10/98 */
-  ss_comp,      /* killough 10/98 */
-  ss_max
+    ss_none,
+    ss_keys,
+    ss_weap,
+    ss_stat,
+    ss_auto,
+    ss_enem,
+    ss_mess,
+    ss_chat,
+    ss_gen,       /* killough 10/98 */
+    ss_comp,      /* killough 10/98 */
+    ss_max
 } ss_types;
 
 // phares 3/20/98:

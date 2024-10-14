@@ -10,10 +10,11 @@
 
 /* forward decls */
 static void p_checksum_cleanup(void);
+
 void checksum_gamestate(int tic);
 
 /* vars */
-static void p_checksum_nop(int tic){} /* do nothing */
+static void p_checksum_nop(int tic) {} /* do nothing */
 void (*P_Checksum)(int) = p_checksum_nop;
 
 /*
@@ -29,15 +30,15 @@ void P_RecordChecksum(const char *file) {
     fnsize = strlen(file);
 
     /* special case: write to stdout */
-   // if(0 == strncmp("-",file,MIN(1,fnsize)))
-   //     outfile = stdout;
-   // else {
-        outfile = fopen(file,"wb");
-        if(NULL == outfile) {
-            I_Error("cannot open %s for writing\n",
-                    file);
-        }
-        atexit(p_checksum_cleanup);
+    // if(0 == strncmp("-",file,MIN(1,fnsize)))
+    //     outfile = stdout;
+    // else {
+    outfile = fopen(file, "wb");
+    if (NULL == outfile) {
+        I_Error("cannot open %s for writing\n",
+                file);
+    }
+    atexit(p_checksum_cleanup);
     //}
 
     MD5Init(&md5global);
@@ -50,18 +51,18 @@ void P_ChecksumFinal(void) {
     unsigned char digest[16];
 
     if (!outfile)
-      return;
+        return;
 
     MD5Final(digest, &md5global);
     fprintf(outfile, "final: ");
-    for (i=0; i<16; i++)
-        fprintf(outfile,"%x", digest[i]);
+    for (i = 0; i < 16; i++)
+        fprintf(outfile, "%x", digest[i]);
     fprintf(outfile, "\n");
     MD5Init(&md5global);
 }
 
 static void p_checksum_cleanup(void) {
-    if (outfile ) // && (outfile != stdout))
+    if (outfile) // && (outfile != stdout))
         fclose(outfile);
 }
 
@@ -74,27 +75,27 @@ void checksum_gamestate(int tic) {
     unsigned char digest[16];
     char buffer[2048];
 
-    fprintf(outfile,"%6d, ", tic);
+    fprintf(outfile, "%6d, ", tic);
 
     /* based on "ArchivePlayers" */
     MD5Init(&md5ctx);
-    for (i=0 ; i<MAXPLAYERS ; i++) {
+    for (i = 0; i < MAXPLAYERS; i++) {
         if (!playeringame[i]) continue;
 
 #ifdef HAVE_SNPRINTF
-        snprintf (buffer, sizeof(buffer), "%d", players[i].health);
+        snprintf(buffer, sizeof(buffer), "%d", players[i].health);
 #else
         sprintf (buffer, "%d", players[i].health);
 #endif
-        buffer[sizeof(buffer)-1] = 0;
+        buffer[sizeof(buffer) - 1] = 0;
 
-        MD5Update(&md5ctx, (md5byte const *)&buffer, strlen(buffer));
+        MD5Update(&md5ctx, (md5byte const *) &buffer, strlen(buffer));
     }
     MD5Final(digest, &md5ctx);
-    for (i=0; i<16; i++) {
-        MD5Update(&md5global, (md5byte const *)&digest[i], sizeof(digest[i]));
-        fprintf(outfile,"%x", digest[i]);
+    for (i = 0; i < 16; i++) {
+        MD5Update(&md5global, (md5byte const *) &digest[i], sizeof(digest[i]));
+        fprintf(outfile, "%x", digest[i]);
     }
 
-    fprintf(outfile,"\n");
+    fprintf(outfile, "\n");
 }

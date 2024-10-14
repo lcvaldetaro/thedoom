@@ -45,18 +45,18 @@
 #define AM_MSGEXITED (AM_MSGHEADER | ('x'<<8))
 
 // Called by main loop.
-boolean AM_Responder (event_t* ev);
+boolean AM_Responder(event_t *ev);
 
 // Called by main loop.
-void AM_Ticker (void);
+void AM_Ticker(void);
 
 // Called by main loop,
 // called instead of view drawer if automap active.
-void AM_Drawer (void);
+void AM_Drawer(void);
 
 // Called to force the automap to quit
 // if the level is completed while it is up.
-void AM_Stop (void);
+void AM_Stop(void);
 
 // killough 2/22/98: for saving automap information in savegame:
 
@@ -66,9 +66,8 @@ extern void AM_Start(void);
 
 extern void AM_clearMarks(void);
 
-typedef struct
-{
- fixed_t x,y;
+typedef struct {
+    fixed_t x, y;
 } mpoint_t;
 
 extern mpoint_t *markpoints;

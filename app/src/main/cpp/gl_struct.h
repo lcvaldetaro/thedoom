@@ -37,28 +37,43 @@
 extern int nodesVersion;
 
 void gld_Init(int width, int height);
+
 void gld_InitCommandLine();
 
 void gld_DrawNumPatch(int x, int y, int lump, int cm, enum patch_translation_e flags);
-void gld_DrawBackground(const char* name);
+
+void gld_DrawBackground(const char *name);
+
 void gld_DrawLine(int x0, int y0, int x1, int y1, int BaseColor);
+
 void gld_DrawWeapon(int weaponlump, vissprite_t *vis, int lightlevel);
+
 void gld_FillBlock(int x, int y, int width, int height, int col);
+
 void gld_SetPalette(int palette);
 
-unsigned char *gld_ReadScreen (void);
+unsigned char *gld_ReadScreen(void);
 
 void gld_CleanMemory(void);
+
 void gld_PreprocessLevel(void);
 
 void gld_Set2DMode();
+
 void gld_InitDrawScene(void);
+
 void gld_StartDrawScene(void);
+
 void gld_AddPlane(int subsectornum, visplane_t *floor, visplane_t *ceiling);
+
 void gld_AddWall(seg_t *seg);
+
 void gld_AddSprite(vissprite_t *vspr);
+
 void gld_DrawScene(player_t *player);
+
 void gld_EndDrawScene(void);
+
 void gld_Finish();
 
 #endif // _GL_STRUCT_H
