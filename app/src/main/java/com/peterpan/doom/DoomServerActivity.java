@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import doom.jni.ServerNatives;
 
-public class DoomServer extends Activity
+public class DoomServerActivity extends Activity
         implements ServerNatives.EventListener
 {
     private static final String TAG = "DoomServer";

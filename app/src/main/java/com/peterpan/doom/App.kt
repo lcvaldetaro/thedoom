@@ -3,7 +3,11 @@ package com.peterpan.doom
 import android.app.Application
 import android.content.Context
 import android.os.Build
+import android.os.Looper
 import com.peterpan.util.DoomTools
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
 
 class App : Application()  {
@@ -13,6 +17,7 @@ class App : Application()  {
         lateinit var packageFolder: String
         var versionString = ""
         var versionBuild  = 0L
+        var gameInstalled = false
     }
 
     override fun onCreate() {
@@ -25,6 +30,15 @@ class App : Application()  {
         versionBuild  = getAppBuild(this)
 
         DoomTools.init(packageFolder)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            Looper.prepare()
+            DoomTools.createFolders()
+            DoomTools.copyGameFiles(appContext)
+            DoomTools.copySavedGames(appContext)
+            DoomTools.copySoundTrack(appContext)
+            gameInstalled = true
+        }
     }
 }
 

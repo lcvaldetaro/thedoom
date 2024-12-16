@@ -15,8 +15,8 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.peterpan.doom.DoomClient;
-import com.peterpan.doom.DoomClient.eNavMethod;
+import com.peterpan.doom.DoomClientActivity;
+import com.peterpan.doom.DoomClientActivity.eNavMethod;
 import com.peterpan.doom.R;
 
 public class DialogTool {
@@ -157,7 +157,7 @@ public class DialogTool {
 							v.setVisibility(View.GONE);
 							v1.setVisibility(View.GONE);
 
-							DoomClient.mNavMethod = eNavMethod.KBD;
+							DoomClientActivity.mNavMethod = eNavMethod.KBD;
 							break;
 
 						case 1:
@@ -166,7 +166,7 @@ public class DialogTool {
 							// if ( mSensorManager != null)
 							// mSensorManager.unregisterListener(mSensor);
 
-							DoomClient.mNavMethod = eNavMethod.PANEL;
+							DoomClientActivity.mNavMethod = eNavMethod.PANEL;
 
 							// show arrows
 							v.setVisibility(View.VISIBLE);
@@ -291,7 +291,7 @@ public class DialogTool {
 	 * @param text
 	 */
 	public static void PostMessageBox(final Context ctx, final String text) {
-		DoomClient.mHandler.post(new Runnable() {
+		DoomClientActivity.mHandler.post(new Runnable() {
 			public void run() {
 				MessageBox(ctx, ctx.getString(R.string.app_name), text);
 			}

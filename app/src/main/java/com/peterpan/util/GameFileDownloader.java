@@ -4,7 +4,7 @@ package com.peterpan.util;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
-import com.peterpan.doom.DoomClient;
+import com.peterpan.doom.DoomClientActivity;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -34,7 +34,7 @@ public class GameFileDownloader
 				
 				if (ok) {
 					// ready to go!
-					DialogTool.Toast(DoomClient.mHandler, ctx, "Ready. Tap Menu > Start");
+					DialogTool.Toast(DoomClientActivity.mHandler, ctx, "Ready. Tap Menu > Start");
 				}
 				
 			}

@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
 import android.view.KeyEvent;
-import com.peterpan.doom.DoomClient;
-import com.peterpan.doom.DoomClient.eNavMethod;
+import com.peterpan.doom.DoomClientActivity;
+import com.peterpan.doom.DoomClientActivity.eNavMethod;
 import com.peterpan.doom.R;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -181,16 +181,16 @@ public class DoomTools
 		default:
 			// Nav 1AQW
 			if ( key == KeyEvent.KEYCODE_1) {
-				key = ( DoomClient.mNavMethod == eNavMethod.KBD) ? KEY_UPARROW : key + 41;
+				key = ( DoomClientActivity.mNavMethod == eNavMethod.KBD) ? KEY_UPARROW : key + 41;
 			}
 			else if ( key == KeyEvent.KEYCODE_A) {
-				key = ( DoomClient.mNavMethod == eNavMethod.KBD) ? KEY_DOWNARROW : key + 68;
+				key = ( DoomClientActivity.mNavMethod == eNavMethod.KBD) ? KEY_DOWNARROW : key + 68;
 			}
 			else if ( key == KeyEvent.KEYCODE_Q) {
-				key = ( DoomClient.mNavMethod == eNavMethod.KBD) ? KEY_LEFTARROW : key + 68;
+				key = ( DoomClientActivity.mNavMethod == eNavMethod.KBD) ? KEY_LEFTARROW : key + 68;
 			}
 			else if ( key == KeyEvent.KEYCODE_W) {
-				key = ( DoomClient.mNavMethod == eNavMethod.KBD) ? KEY_RIGHTARROW : key + 68;
+				key = ( DoomClientActivity.mNavMethod == eNavMethod.KBD) ? KEY_RIGHTARROW : key + 68;
 			}
 			// A..Z
 			else if (key >= 29 && key <= 54) {

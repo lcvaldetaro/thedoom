@@ -1,6 +1,5 @@
 package com.peterpan.doom;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,10 +27,10 @@ import doom.jni.Natives;
 import com.peterpan.util.DialogTool;
 import com.peterpan.util.DoomTools;
 
-public class DoomClient extends BaseActivity implements Natives.EventListener
+public class DoomClientActivity extends BaseActivity implements Natives.EventListener
 {
     private static final String TAG = "DoomClient";
-    private static boolean installed = false;
+    private static boolean installed = true;
     private static boolean first_time = true;
 
     private boolean pressed[] = {false, false};
@@ -81,7 +80,7 @@ public class DoomClient extends BaseActivity implements Natives.EventListener
 
     public boolean portrait = true;
 
-    private DoomClient dClient = this;
+    private DoomClientActivity dClient = this;
 
 
     /**
@@ -205,7 +204,7 @@ public class DoomClient extends BaseActivity implements Natives.EventListener
         final View v2 = findViewById(R.id.another_ctls);
         //final View v3 = findViewById(R.id.guns_ctls);
         final View v4 = findViewById(R.id.trick_ctls);
-        DoomClient.mNavMethod = eNavMethod.PANEL;
+        DoomClientActivity.mNavMethod = eNavMethod.PANEL;
 
         // show controls
         v0.setVisibility(View.VISIBLE);
@@ -213,12 +212,6 @@ public class DoomClient extends BaseActivity implements Natives.EventListener
         v2.setVisibility(View.VISIBLE);
         //v3.setVisibility(View.VISIBLE);
         v4.setVisibility(View.VISIBLE);
-
-        //AdBuddiz.setTestModeActive();
-        //AdBuddiz.setPublisherKey("TEST_PUBLISHER_KEY");
-        //AdBuddiz.cacheAds(this); // this = current Activity
-        //AdBuddiz.showAd(this);
-
     }
 
     @Override
@@ -232,7 +225,6 @@ public class DoomClient extends BaseActivity implements Natives.EventListener
         super.onStop();
 //    	unLoadSensors();
     }
-
 
     /**
      * App menu
@@ -296,7 +288,7 @@ public class DoomClient extends BaseActivity implements Natives.EventListener
 
             case 4:
                 // Help
-                DialogTool.launchBrowser(DoomClient.this, "http://playerx.sf.net/doom/controls.html");
+                DialogTool.launchBrowser(DoomClientActivity.this, "http://playerx.sf.net/doom/controls.html");
                 return true;
             case 5:
                 // Cleanup
@@ -305,7 +297,7 @@ public class DoomClient extends BaseActivity implements Natives.EventListener
                     return true;
                 }
 
-                DoomTools.cleanUp(DoomClient.this, wadIdx);
+                DoomTools.cleanUp(DoomClientActivity.this, wadIdx);
                 return true;
 
             case 6:
@@ -708,7 +700,7 @@ public class DoomClient extends BaseActivity implements Natives.EventListener
     public void OnMessage(String text, int level) {
 
         if ( level > 0)
-            DialogTool.Toast(mHandler, DoomClient.this, text);
+            DialogTool.Toast(mHandler, DoomClientActivity.this, text);
         else
             Log.d(TAG, "**Doom Message: " + text);
     }
@@ -759,7 +751,7 @@ public class DoomClient extends BaseActivity implements Natives.EventListener
      */
     public void OnStartMusic(String name, int loop) {
         if ( mSound && mAudioMgr != null)
-            mAudioMgr.startMusic(DoomClient.this, name, loop);
+            mAudioMgr.startMusic(DoomClientActivity.this, name, loop);
     }
 
     /**
@@ -847,12 +839,15 @@ public class DoomClient extends BaseActivity implements Natives.EventListener
         findViewById(R.id.btn_exit).setOnTouchListener(new View.OnTouchListener(){
             public boolean onTouch(View v, MotionEvent evt) {
                 int action = evt.getAction();
-                if ( action == MotionEvent.ACTION_UP) {
+                Log.d(TAG, "exit clicked - mGameStarted = " + mGameStarted);
+               // if (action == MotionEvent.ACTION_UP) {
                     if (mGameStarted)
                         DialogTool.showExitDialog(dClient);
                     else
-                        DoomTools.hardExit(0);
-                }
+                        System.exit(0);
+              //  }
+
+
                 return true;
             }
         });
@@ -861,7 +856,7 @@ public class DoomClient extends BaseActivity implements Natives.EventListener
         findViewById(R.id.btn_down).setOnTouchListener(new View.OnTouchListener(){
             public boolean onTouch(View v, MotionEvent evt) {
                 int action = evt.getAction();
-                if ( action == MotionEvent.ACTION_DOWN) {
+                if (action == MotionEvent.ACTION_DOWN) {
                     pressed[0] = true;
                     checkTrick(false);
                     Natives.sendNativeKeyEvent(Natives.EV_KEYDOWN, DoomTools.KEY_DOWNARROW);
@@ -1214,7 +1209,4 @@ public class DoomClient extends BaseActivity implements Natives.EventListener
             installed = true;
         }
     }
-
-
-
 }
