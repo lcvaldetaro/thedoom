@@ -20,25 +20,39 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.lifecycleScope
-import com.peterpan.doom.App.Companion.appContext
-import com.peterpan.util.DoomTools
-import kotlinx.coroutines.launch
-import java.lang.Thread.sleep
+import androidx.lifecycle.ViewModelProvider
+import club.gepetto.circum.CircumActivity
 
-open class InstallActivity : BaseActivity() {
+open class InstallActivity : CircumActivity<Any>() {
     val TAG = "SplashActivity"
     lateinit var thisActivity: InstallActivity
+    lateinit var doomCircumModel: DoomCircumModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         thisActivity = this
-        setContent {
-            GameLoadingState()
-        }
+        doomCircumModel = ViewModelProvider(this).get(DoomCircumModel::class.java)
+        setCircumModel(doomCircumModel)
     }
 
     override fun onResume() {
         super.onResume()
+        if (App.gameInstalled)
+            finish()
+    }
+
+    override fun onStateUpdate(state: Any) {
+        super.onStateUpdate(state)
+        Log.d(TAG, "state = ${state}")
+        when (state) {
+            is DoomState.Loading -> {
+                setContent { GameLoadingState() }
+            }
+            is DoomState.Loaded -> {
+                App.gameInstalled = true
+                startDoomClientActivity()
+            }
+        }
     }
 
     fun startDoomClientActivity () {

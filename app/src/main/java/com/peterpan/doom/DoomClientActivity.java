@@ -302,7 +302,8 @@ public class DoomClientActivity extends BaseActivity implements Natives.EventLis
 
             case 6:
                 // Exit
-                DoomTools.hardExit(0);
+                //DoomTools.hardExit(0);
+                finish();
                 return true;
 
         }
@@ -841,10 +842,14 @@ public class DoomClientActivity extends BaseActivity implements Natives.EventLis
                 int action = evt.getAction();
                 Log.d(TAG, "exit clicked - mGameStarted = " + mGameStarted);
                // if (action == MotionEvent.ACTION_UP) {
-                    if (mGameStarted)
+                    if (mGameStarted) {
                         DialogTool.showExitDialog(dClient);
-                    else
-                        System.exit(0);
+                    }
+                    else {
+                        Log.d(TAG," will exit");
+                        //System.exit(0);
+                        finish();
+                    }
               //  }
 
 
@@ -1135,7 +1140,8 @@ public class DoomClientActivity extends BaseActivity implements Natives.EventLis
     public void OnQuit(int code) {
         // TODO Not yet implemented in the JNI lib
         Log.d(TAG, "Doom Hard Stop.");
-        DoomTools.hardExit(0);
+        //DoomTools.hardExit(0);
+        finish();
     }
 
     private void setImageSize(int w, int h ) {

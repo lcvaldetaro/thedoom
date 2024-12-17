@@ -202,7 +202,7 @@ public class DialogTool {
 		dialog.show();
 	}
 
-	static public void showExitDialog(final Context ctx) {
+	static public void showExitDialog(final Activity ctx) {
 		final String[] mListItems = new String[] { "Exit", "Don't Exit"};
 
 		AlertDialog dialog = new AlertDialog.Builder(ctx)
@@ -212,7 +212,8 @@ public class DialogTool {
 
 						switch (which) {
 						case 0:
-							DoomTools.hardExit(0);
+							//DoomTools.hardExit(0);
+							ctx.finish();
 							break;
 
 						case 1:

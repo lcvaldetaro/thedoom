@@ -30,15 +30,6 @@ class App : Application()  {
         versionBuild  = getAppBuild(this)
 
         DoomTools.init(packageFolder)
-
-        CoroutineScope(Dispatchers.IO).launch {
-            Looper.prepare()
-            DoomTools.createFolders()
-            DoomTools.copyGameFiles(appContext)
-            DoomTools.copySavedGames(appContext)
-            DoomTools.copySoundTrack(appContext)
-            gameInstalled = true
-        }
     }
 }
 
