@@ -13,7 +13,7 @@ class DoomCircumModel : CircumModel<DoomState, DoomIntentCommand, DoomEffect>() 
     override fun onAttach(state: DoomState?, newState: DoomState?) {
         if (state == null) {
             // Initial instantiation
-            loadGameFiles()
+            installGameFiles()
             setState(DoomState.Loading)
         }
         else {
@@ -22,7 +22,7 @@ class DoomCircumModel : CircumModel<DoomState, DoomIntentCommand, DoomEffect>() 
         }
     }
 
-    fun loadGameFiles() {
+    private fun installGameFiles() {
         CoroutineScope(Dispatchers.IO).launch {
             Looper.prepare() // needed to issue toasts
             DoomTools.createFolders()
@@ -36,9 +36,9 @@ class DoomCircumModel : CircumModel<DoomState, DoomIntentCommand, DoomEffect>() 
 }
 
 sealed interface DoomState {
-   object Loading : DoomState
-   object Loaded : DoomState
+   data object Loading : DoomState
+   data object Loaded : DoomState
 }
 
-object DoomIntentCommand
-object DoomEffect
+data object DoomIntentCommand
+data object DoomEffect
