@@ -3,7 +3,6 @@ package com.peterpan.doom
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -24,26 +23,16 @@ import androidx.lifecycle.ViewModelProvider
 import club.gepetto.circum.CircumActivity
 
 open class InstallActivity : CircumActivity<Any>() {
-    val TAG = "SplashActivity"
-    lateinit var thisActivity: InstallActivity
-    lateinit var doomCircumModel: DoomCircumModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        thisActivity = this
-        doomCircumModel = ViewModelProvider(this).get(DoomCircumModel::class.java)
-        setCircumModel(doomCircumModel)
-    }
 
-    override fun onResume() {
-        super.onResume()
-        if (App.gameInstalled)
-            finish()
+        setCircumModel(ViewModelProvider(this).get(DoomCircumModel::class.java))
     }
 
     override fun onStateUpdate(state: Any) {
         super.onStateUpdate(state)
-        Log.d(TAG, "state = ${state}")
+        
         when (state) {
             is DoomState.Loading -> {
                 setContent { GameLoadingState() }
@@ -57,6 +46,7 @@ open class InstallActivity : CircumActivity<Any>() {
 
     fun startDoomClientActivity () {
         val intent = Intent(this, DoomClientActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         this.startActivity(intent)
     }
 }
