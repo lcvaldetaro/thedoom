@@ -4,14 +4,13 @@ import android.content.Intent
 import androidx.activity.compose.setContent
 import android.os.Bundle
 import club.gepetto.circum.CircumActivity
-import club.gepetto.circum.circumModel
 import com.peterpan.doom.ui.GameLoadingState
 
 open class InstallActivity : CircumActivity<Any>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setCircumModel(circumModel(this, DoomCircumModel::class.java))
+        setCircumModel(circumModel(DoomCircumModel::class.java))
     }
 
     override fun onStateUpdate(state: Any) {
