@@ -10,7 +10,7 @@ open class InstallActivity : CircumActivity<Any>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setCircumModel(circumModel(DoomCircumModel::class.java))
+        setCircumModel(DoomCircumModel::class.java)
     }
 
     override fun onStateUpdate(state: Any) {

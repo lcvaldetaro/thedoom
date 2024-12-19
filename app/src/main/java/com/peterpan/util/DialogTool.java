@@ -214,6 +214,7 @@ public class DialogTool {
 						case 0:
 							//DoomTools.hardExit(0);
 							ctx.finish();
+							System.exit(0);
 							break;
 
 						case 1:

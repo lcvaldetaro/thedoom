@@ -847,8 +847,8 @@ public class DoomClientActivity extends BaseActivity implements Natives.EventLis
                     }
                     else {
                         Log.d(TAG," will exit");
-                        //System.exit(0);
                         finish();
+                        System.exit(0);
                     }
               //  }
 
