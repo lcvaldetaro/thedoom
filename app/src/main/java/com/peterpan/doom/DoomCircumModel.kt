@@ -10,16 +10,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DoomCircumModel : CircumModel<DoomState, DoomIntentCommand, DoomEffect>() {
-    override fun onAttach(state: DoomState?, newState: DoomState?) {
-        if (state == null) {
-            // Initial instantiation
-            installGameFiles()
-            setState(DoomState.Loading)
-        }
-        else {
-            // reconfiguration
-            setState(DoomState.Loaded)
-        }
+
+    override fun onAttach() {
+        setState(DoomState.Loading)
+        installGameFiles()
     }
 
     private fun installGameFiles() {
