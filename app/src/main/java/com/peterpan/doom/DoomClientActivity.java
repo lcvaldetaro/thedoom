@@ -194,11 +194,6 @@ public class DoomClientActivity extends BaseActivity implements Natives.EventLis
         // Pan controls
         setupPanControls();
 
-       // if (!installed) {
-       //     Thread thrL = new Thread(null, new installWorker(), "Install Worker");
-       //     thrL.start();
-       // }
-
         final View v0 = findViewById(R.id.pan_ctls);
         final View v1 = findViewById(R.id.other_ctls);
         final View v2 = findViewById(R.id.another_ctls);
@@ -572,7 +567,6 @@ public class DoomClientActivity extends BaseActivity implements Natives.EventLis
         final String[] argv;
 
         // Window size: P 320x320 L: 320x200 (will autoscale to fit the screen)
-        //mOrientation = getWindowManager().getDefaultDisplay().getOrientation();
         if (portrait) {
             if ( mMultiPlayer)
                 argv = new String[]{"doom" , "-width", "480", "-height", "360", "-iwad", wad , "-net", mServerPort};
@@ -587,7 +581,6 @@ public class DoomClientActivity extends BaseActivity implements Natives.EventLis
         }
 
         Log.d(TAG, "Starting doom thread with wad " + wad + " sound enabled? " + mSound  		+ " Orientation:" + mOrientation );
-        //DialogTool.Toast(dClient, "Game is loading.... \nPress the Android Back button for the game menu.");
         new Thread(new Runnable() {
             public void run() {
                 mGameStarted = true;
@@ -1196,26 +1189,6 @@ public class DoomClientActivity extends BaseActivity implements Natives.EventLis
 
     public boolean isPortrait() {
         return portrait;
-        //int ori = getWindowManager().getDefaultDisplay().getOrientation();
-        //Log.e(TAG, "orientation is " + ori);
-        //if (ori == Surface.ROTATION_0 || ori == Surface.ROTATION_180)
-        //	return true;
-        //return false;
     }
 
-    /*
-    private class installWorker implements Runnable {
-        public void run() {
-            Log.d(TAG,"Inside thread");
-            Looper.prepare();
-            // create directories & install
-            DoomTools.createFolders();
-            DoomTools.copyGameFiles(dClient.getBaseContext());
-            DoomTools.copySavedGames(dClient.getBaseContext());
-            DoomTools.copySoundTrack (dClient.getBaseContext());
-            installed = true;
-        }
-    }
-
-     */
 }
