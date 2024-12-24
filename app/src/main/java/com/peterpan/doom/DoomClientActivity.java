@@ -194,10 +194,10 @@ public class DoomClientActivity extends BaseActivity implements Natives.EventLis
         // Pan controls
         setupPanControls();
 
-        if (!installed) {
-            Thread thrL = new Thread(null, new installWorker(), "Install Worker");
-            thrL.start();
-        }
+       // if (!installed) {
+       //     Thread thrL = new Thread(null, new installWorker(), "Install Worker");
+       //     thrL.start();
+       // }
 
         final View v0 = findViewById(R.id.pan_ctls);
         final View v1 = findViewById(R.id.other_ctls);
@@ -1203,6 +1203,7 @@ public class DoomClientActivity extends BaseActivity implements Natives.EventLis
         //return false;
     }
 
+    /*
     private class installWorker implements Runnable {
         public void run() {
             Log.d(TAG,"Inside thread");
@@ -1215,4 +1216,6 @@ public class DoomClientActivity extends BaseActivity implements Natives.EventLis
             installed = true;
         }
     }
+
+     */
 }
