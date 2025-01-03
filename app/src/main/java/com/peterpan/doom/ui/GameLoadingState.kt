@@ -2,6 +2,7 @@ package com.peterpan.doom.ui
 
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,6 +39,11 @@ fun GameLoadingState (
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
         )
+        Box(
+            Modifier
+                .matchParentSize()
+                .background(Color.Gray.copy(alpha = 0.75f))
+        )
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -45,7 +51,8 @@ fun GameLoadingState (
             CircularProgressIndicator()
             Text(
                 text = "Loading game...",
-                color = if (isSystemInDarkTheme()) Color.White else Color.Black,
+                color = if (isSystemInDarkTheme()) Color.Black else Color.White,
+                modifier = Modifier.background(if (isSystemInDarkTheme()) Color.White else Color.Black),
                 fontWeight = FontWeight.ExtraBold
             )
         }
