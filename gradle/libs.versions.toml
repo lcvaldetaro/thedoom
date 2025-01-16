@@ -8,7 +8,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 activityCompose = "1.10.0"
 composeBom = "2025.01.00"
-circumVersion = "1.0.22"
+circumVersion = "1.0.23"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityCompose" }

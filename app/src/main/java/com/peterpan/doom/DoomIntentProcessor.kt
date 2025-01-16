@@ -1,7 +1,7 @@
 package com.peterpan.doom
 
 import android.os.Looper
-import club.gepetto.circum.CircumModel
+import club.gepetto.circum.CircumIntentProcessor
 import com.peterpan.doom.App.Companion.appContext
 import com.peterpan.util.DoomTools
 import com.peterpan.util.DoomTools.sleep
@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DoomCircumModel : CircumModel<DoomState, DoomIntentCommand, DoomEffect>() {
+class DoomIntentProcessor : CircumIntentProcessor<DoomState, DoomIntentCommand, DoomEffect>() {
 
     override fun onAttach() {
         setState(DoomState.Loading)

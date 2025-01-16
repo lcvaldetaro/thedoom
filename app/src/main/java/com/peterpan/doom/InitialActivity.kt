@@ -6,11 +6,11 @@ import android.os.Bundle
 import club.gepetto.circum.CircumActivity
 import com.peterpan.doom.ui.GameLoadingState
 
-open class InstallActivity : CircumActivity<Any>() {
+open class InitialActivity : CircumActivity<Any>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setCircumModel(DoomCircumModel::class.java)
+        setIntentProcessor(DoomIntentProcessor::class.java)
     }
 
     override fun onStateUpdate(state: Any) {
@@ -22,15 +22,11 @@ open class InstallActivity : CircumActivity<Any>() {
             }
             is DoomState.Loaded -> {
                 App.gameInstalled = true
-                startDoomClientActivity()
+                val intent = Intent(this, DoomClientActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                this.startActivity(intent)
             }
         }
-    }
-
-    fun startDoomClientActivity () {
-        val intent = Intent(this, DoomClientActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        this.startActivity(intent)
     }
 }
 
