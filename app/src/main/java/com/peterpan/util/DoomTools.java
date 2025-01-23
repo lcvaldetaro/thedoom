@@ -536,7 +536,7 @@ public class DoomTools
 			 if (failed)
 				 file.delete();
 		 }
-		 DialogTool.Toast(ctx, "Saved game files installed");
+		 DialogTool.Toast(ctx, "Saved game files restored");
 	}
 	
 	
