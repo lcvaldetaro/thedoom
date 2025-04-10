@@ -2,12 +2,12 @@
 agp = "8.9.1"
 appcompat = "1.7.0"
 kotlin = "2.1.10"
-coreKtx = "1.15.0"
+coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 activityCompose = "1.10.1"
-composeBom = "2025.03.01"
+composeBom = "2025.04.00"
 circumVersion = "1.0.26"
 
 [libraries]
