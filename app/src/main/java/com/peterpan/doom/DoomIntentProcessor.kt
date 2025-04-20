@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class DoomIntentProcessor : CircumIntentProcessor<DoomState, DoomIntentCommand, DoomEffect>() {
 
-    override fun onAttach() {
+    init {
         setState(DoomState.Loading)
         installGameFiles()
     }
