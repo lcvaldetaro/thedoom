@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.support.uppercaseFirstChar
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -6,14 +8,14 @@ plugins {
 
 android {
     namespace = "com.peterpan.doom"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.peterpan.doom"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,6 +39,16 @@ android {
     externalNativeBuild {
         cmake {
             path ("CMakeLists.txt")
+        }
+    }
+
+    applicationVariants.configureEach { // TODO
+        if (buildType.name == "release") {
+            val bundleFinalizeTaskName = "sign${name.uppercaseFirstChar()}Bundle"
+            val nameB = "bundle${name.uppercaseFirstChar()}"
+            tasks.named(nameB) {
+               println ("task $nameB")
+            }
         }
     }
 }
