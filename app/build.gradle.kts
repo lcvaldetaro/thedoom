@@ -42,12 +42,19 @@ android {
         }
     }
 
-    applicationVariants.configureEach { // TODO
+    applicationVariants.configureEach {
         if (buildType.name == "release") {
-            val bundleFinalizeTaskName = "sign${name.uppercaseFirstChar()}Bundle"
-            val nameB = "bundle${name.uppercaseFirstChar()}"
-            tasks.named(nameB) {
-               println ("task $nameB")
+            var originalOutputFile = File("")
+            outputs.forEach { file -> originalOutputFile = file.outputFile }
+            tasks.named("bundle${name.uppercaseFirstChar()}") {
+               doLast {
+                   val newFileName = "${applicationId}-release-${versionName}(${versionCode}).aab"
+                   val parent = originalOutputFile.parent.toString().replace("apk", "bundle")
+                   val originalBundle = file("${parent}/app-release.aab")
+
+                   println("renaming ${parent}/app-release.aab to ${parent}/${newFileName}")
+                   originalBundle.renameTo(file("$parent/$newFileName"))
+               }
             }
         }
     }
