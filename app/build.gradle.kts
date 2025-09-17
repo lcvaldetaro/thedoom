@@ -45,7 +45,7 @@ android {
     applicationVariants.configureEach {
         if (buildType.name == "release") {
             var originalOutputFile = File("")
-            outputs.forEach { file -> originalOutputFile = file.outputFile }
+            outputs.forEach { file -> originalOutputFile = file.outputFile}
             tasks.named("bundle${name.uppercaseFirstChar()}") {
                doLast {
                    val newFileName = "${applicationId}-release-${versionName}(${versionCode}).aab"
