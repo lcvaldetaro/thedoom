@@ -16,4 +16,8 @@ local.properties
 /**/build/*
 /**/build-cache/*
 
+/.idea
+/.gradle
+/.kotlin
+
 
