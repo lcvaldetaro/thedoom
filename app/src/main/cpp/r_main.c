@@ -335,7 +335,7 @@ boolean setsizeneeded;
 int setblocks;
 
 void R_SetViewSize(int blocks) {
-    setsizeneeded = true;
+    setsizeneeded = xtrue;
     setblocks = blocks;
 }
 
@@ -346,7 +346,7 @@ void R_SetViewSize(int blocks) {
 void R_ExecuteSetViewSize(void) {
     int i;
 
-    setsizeneeded = false;
+    setsizeneeded = xfalse;
 
     if (setblocks == 11) {
         scaledviewwidth = SCREENWIDTH;

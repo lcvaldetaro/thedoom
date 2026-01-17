@@ -205,7 +205,7 @@ void S_Start(void) {
         else
             mnum = spmus[gamemap - 1];
     }
-    S_ChangeMusic(mnum, true);
+    S_ChangeMusic(mnum, xtrue);
 }
 
 void S_StartSoundAtVolume(void *origin_p, int sfx_id, int volume) {
@@ -326,7 +326,7 @@ void S_PauseSound(void) {
 
     if (mus_playing && !mus_paused) {
         I_PauseSong(mus_playing->handle);
-        mus_paused = true;
+        mus_paused = xtrue;
     }
 }
 
@@ -337,7 +337,7 @@ void S_ResumeSound(void) {
 
     if (mus_playing && mus_paused) {
         I_ResumeSong(mus_playing->handle);
-        mus_paused = false;
+        mus_paused = xfalse;
     }
 }
 
@@ -426,7 +426,7 @@ void S_StartMusic(int m_id) {
     //jff 1/22/98 return if music is not enabled
     if (!mus_card || nomusicparm)
         return;
-    S_ChangeMusic(m_id, false);
+    S_ChangeMusic(m_id, xfalse);
 }
 
 // JNI Callback

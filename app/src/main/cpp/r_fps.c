@@ -39,7 +39,7 @@
 #include "r_demo.h"
 #include "r_fps.h"
 
-int movement_smooth = false;
+int movement_smooth = xfalse;
 
 typedef enum {
     INTERP_SectorFloor,
@@ -81,7 +81,7 @@ boolean WasRenderedInTryRunTics;
 void R_InterpolateView(player_t *player, fixed_t frac) {
     if (movement_smooth) {
         if (NoInterpolateView) {
-            NoInterpolateView = false;
+            NoInterpolateView = xfalse;
             original_view_vars.viewx = player->mo->x;
             original_view_vars.viewy = player->mo->y;
             original_view_vars.viewz = player->viewz;
@@ -103,7 +103,7 @@ void R_InterpolateView(player_t *player, fixed_t frac) {
 }
 
 void R_ResetViewInterpolation() {
-    NoInterpolateView = true;
+    NoInterpolateView = xtrue;
 }
 
 static void R_CopyInterpToOld(int i) {
@@ -278,11 +278,11 @@ void R_DoInterpolations(fixed_t smoothratio) {
         return;
 
     if (smoothratio == FRACUNIT) {
-        didInterp = false;
+        didInterp = xfalse;
         return;
     }
 
-    didInterp = true;
+    didInterp = xtrue;
 
     for (i = numinterpolations - 1; i >= 0; --i) {
         R_DoAnInterpolation(i, smoothratio);
@@ -296,7 +296,7 @@ void R_RestoreInterpolations() {
         return;
 
     if (didInterp) {
-        didInterp = false;
+        didInterp = xfalse;
         for (i = numinterpolations - 1; i >= 0; --i) {
             R_CopyBakToInterp(i);
         }

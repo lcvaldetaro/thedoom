@@ -70,7 +70,7 @@ void HUlib_clearTextLine(hu_textline_t *t) {
     t->linelen =         // killough 1/23 98: support multiple lines
     t->len = 0;
     t->l[0] = 0;
-    t->needsupdate = true;
+    t->needsupdate = xtrue;
 }
 
 //
@@ -107,7 +107,7 @@ boolean HUlib_addCharToTextLine
          char ch) {
     // killough 1/23/98 -- support multiple lines
     if (t->linelen == HU_MAXLINELENGTH)
-        return false;
+        return xfalse;
     else {
         t->linelen++;
         if (ch == '\n')
@@ -116,7 +116,7 @@ boolean HUlib_addCharToTextLine
         t->l[t->len++] = ch;
         t->l[t->len] = 0;
         t->needsupdate = 4;
-        return true;
+        return xtrue;
     }
 
 }
@@ -130,11 +130,11 @@ boolean HUlib_addCharToTextLine
 // Returns false if already empty, true if the character deleted
 //
 static boolean HUlib_delCharFromTextLine(hu_textline_t *t) {
-    if (!t->len) return false;
+    if (!t->len) return xfalse;
     else {
         t->l[--t->len] = 0;
         t->needsupdate = 4;
-        return true;
+        return xtrue;
     }
 }
 
@@ -258,7 +258,7 @@ void HUlib_initSText
 
     s->h = h;
     s->on = on;
-    s->laston = true;
+    s->laston = xtrue;
     s->cl = 0;
     for (i = 0; i < h; i++)
         HUlib_initTextLine
@@ -337,7 +337,7 @@ void HUlib_drawSText(hu_stext_t *s) {
         l = &s->l[idx];
 
         // need a decision made here on whether to skip the draw
-        HUlib_drawTextLine(l, false); // no cursor, please
+        HUlib_drawTextLine(l, xfalse); // no cursor, please
     }
 }
 
@@ -520,7 +520,7 @@ void HUlib_drawMText(hu_mtext_t *m) {
         }
 
         // need a decision made here on whether to skip the draw
-        HUlib_drawTextLine(l, false); // no cursor, please
+        HUlib_drawTextLine(l, xfalse); // no cursor, please
     }
 }
 
@@ -601,7 +601,7 @@ void HUlib_initIText
          boolean *on) {
     it->lm = 0; // default left margin is start of text
     it->on = on;
-    it->laston = true;
+    it->laston = xtrue;
     HUlib_initTextLine(&it->l, x, y, font, startchar, cm);
 }
 
@@ -681,9 +681,9 @@ boolean HUlib_keyInIText
     else if (ch == key_backspace)                   // phares
         HUlib_delCharFromIText(it);
     else if (ch != key_enter)                       // phares
-        return false;                                 // did not eat key
+        return xfalse;                                 // did not eat key
 
-    return true;                                    // ate the key
+    return xtrue;                                    // ate the key
 }
 
 //
@@ -699,7 +699,7 @@ void HUlib_drawIText(hu_itext_t *it) {
 
     if (!*it->on)
         return;
-    HUlib_drawTextLine(l, true); // draw the line w/ cursor
+    HUlib_drawTextLine(l, xtrue); // draw the line w/ cursor
 }
 
 //

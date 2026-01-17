@@ -79,12 +79,12 @@ int EV_DoGenFloor
     rtn = 0;
 
     // check if a manual trigger, if so do just the sector on the backside
-    manual = false;
+    manual = xfalse;
     if (Trig == PushOnce || Trig == PushMany) {
         if (!(sec = line->backsector))
             return rtn;
         secnum = sec - sectors;
-        manual = true;
+        manual = xtrue;
         goto manual_floor;
     }
 
@@ -273,12 +273,12 @@ int EV_DoGenCeiling
     rtn = 0;
 
     // check if a manual trigger, if so do just the sector on the backside
-    manual = false;
+    manual = xfalse;
     if (Trig == PushOnce || Trig == PushMany) {
         if (!(sec = line->backsector))
             return rtn;
         secnum = sec - sectors;
-        manual = true;
+        manual = xtrue;
         goto manual_ceiling;
     }
 
@@ -472,12 +472,12 @@ int EV_DoGenLift
         P_ActivateInStasis(line->tag);
 
     // check if a manual trigger, if so do just the sector on the backside
-    manual = false;
+    manual = xfalse;
     if (Trig == PushOnce || Trig == PushMany) {
         if (!(sec = line->backsector))
             return rtn;
         secnum = sec - sectors;
-        manual = true;
+        manual = xtrue;
         goto manual_lift;
     }
 
@@ -503,7 +503,7 @@ int EV_DoGenLift
         plat->sector = sec;
         plat->sector->floordata = plat;
         plat->thinker.function = T_PlatRaise;
-        plat->crush = false;
+        plat->crush = xfalse;
         plat->tag = line->tag;
 
         plat->type = genLift;
@@ -623,12 +623,12 @@ int EV_DoGenStairs
     rtn = 0;
 
     // check if a manual trigger, if so do just the sector on the backside
-    manual = false;
+    manual = xfalse;
     if (Trig == PushOnce || Trig == PushMany) {
         if (!(sec = line->backsector))
             return rtn;
         secnum = sec - sectors;
-        manual = true;
+        manual = xtrue;
         goto manual_stair;
     }
 
@@ -696,7 +696,7 @@ int EV_DoGenStairs
         height = sec->floorheight + floor->direction * stairsize;
         floor->floordestheight = height;
         texture = sec->floorpic;
-        floor->crush = false;
+        floor->crush = xfalse;
         floor->type = genBuildStair; // jff 3/31/98 do not leave uninited
 
         sec->stairlock = -2;         // jff 2/26/98 set up lock on current sector
@@ -758,7 +758,7 @@ int EV_DoGenStairs
                 floor->sector = sec;
                 floor->speed = speed;
                 floor->floordestheight = height;
-                floor->crush = false;
+                floor->crush = xfalse;
                 floor->type = genBuildStair; // jff 3/31/98 do not leave uninited
 
                 ok = 1;
@@ -803,12 +803,12 @@ int EV_DoGenCrusher
     rtn = P_ActivateInStasisCeiling(line);
 
     // check if a manual trigger, if so do just the sector on the backside
-    manual = false;
+    manual = xfalse;
     if (Trig == PushOnce || Trig == PushMany) {
         if (!(sec = line->backsector))
             return rtn;
         secnum = sec - sectors;
-        manual = true;
+        manual = xtrue;
         goto manual_crusher;
     }
 
@@ -834,7 +834,7 @@ int EV_DoGenCrusher
         P_AddThinker(&ceiling->thinker);
         sec->ceilingdata = ceiling; //jff 2/22/98
         ceiling->thinker.function = T_MoveCeiling;
-        ceiling->crush = true;
+        ceiling->crush = xtrue;
         ceiling->direction = -1;
         ceiling->sector = sec;
         ceiling->texture = sec->ceilingpic;
@@ -894,12 +894,12 @@ int EV_DoGenLockedDoor
     rtn = 0;
 
     // check if a manual trigger, if so do just the sector on the backside
-    manual = false;
+    manual = xfalse;
     if (Trig == PushOnce || Trig == PushMany) {
         if (!(sec = line->backsector))
             return rtn;
         secnum = sec - sectors;
-        manual = true;
+        manual = xtrue;
         goto manual_locked;
     }
 
@@ -999,12 +999,12 @@ int EV_DoGenDoor
     rtn = 0;
 
     // check if a manual trigger, if so do just the sector on the backside
-    manual = false;
+    manual = xfalse;
     if (Trig == PushOnce || Trig == PushMany) {
         if (!(sec = line->backsector))
             return rtn;
         secnum = sec - sectors;
-        manual = true;
+        manual = xtrue;
         goto manual_door;
     }
 

@@ -184,7 +184,7 @@ static hu_textline_t w_gkeys;  //jff 3/7/98 graphic keys widget for hud
 static hu_textline_t w_monsec; //jff 2/16/98 new kill/secret widget for hud
 static hu_mtext_t w_rtext;  //jff 2/26/98 text message refresh widget
 
-static boolean always_off = false;
+static boolean always_off = xfalse;
 static char chat_dest[MAXPLAYERS];
 boolean chat_on;
 static boolean message_on;
@@ -194,7 +194,7 @@ static boolean message_nottobefuckedwith;
 static int message_counter;
 extern int showMessages;
 extern boolean automapactive;
-static boolean headsupactive = false;
+static boolean headsupactive = xfalse;
 
 //jff 2/16/98 hud supported automap colors added
 int hudcolor_titl;  // color range of automap level title
@@ -357,7 +357,7 @@ void HU_Init(void) {
 // Passed nothing, returns nothing
 //
 static void HU_Stop(void) {
-    headsupactive = false;
+    headsupactive = xfalse;
 }
 
 //
@@ -380,10 +380,10 @@ void HU_Start(void) {
         HU_Stop();
 
     plr = &players[displayplayer];        // killough 3/7/98
-    message_on = false;
-    message_dontfuckwithme = false;
-    message_nottobefuckedwith = false;
-    chat_on = false;
+    message_on = xfalse;
+    message_dontfuckwithme = xfalse;
+    message_nottobefuckedwith = xfalse;
+    chat_on = xfalse;
 
     // create the message widget
     // messages to player in upper-left of screen
@@ -662,7 +662,7 @@ void HU_Start(void) {
                 );
 
     // now allow the heads-up display to run
-    headsupactive = true;
+    headsupactive = xtrue;
 }
 
 //
@@ -717,7 +717,7 @@ void HU_Drawer(void) {
     // draw the automap widgets if automap is displayed
     if (automapmode & am_active) {
         // map title
-        HUlib_drawTextLine(&w_title, false);
+        HUlib_drawTextLine(&w_title, xfalse);
 
         //jff 2/16/98 output new coord display
         // x-coord
@@ -727,7 +727,7 @@ void HU_Drawer(void) {
             s = hud_coordstrx;
             while (*s)
                 HUlib_addCharToTextLine(&w_coordx, *(s++));
-            HUlib_drawTextLine(&w_coordx, false);
+            HUlib_drawTextLine(&w_coordx, xfalse);
 
             //jff 3/3/98 split coord display into x,y,z lines
             // y-coord
@@ -736,7 +736,7 @@ void HU_Drawer(void) {
             s = hud_coordstry;
             while (*s)
                 HUlib_addCharToTextLine(&w_coordy, *(s++));
-            HUlib_drawTextLine(&w_coordy, false);
+            HUlib_drawTextLine(&w_coordy, xfalse);
 
             //jff 3/3/98 split coord display into x,y,z lines
             //jff 2/22/98 added z
@@ -746,7 +746,7 @@ void HU_Drawer(void) {
             s = hud_coordstrz;
             while (*s)
                 HUlib_addCharToTextLine(&w_coordz, *(s++));
-            HUlib_drawTextLine(&w_coordz, false);
+            HUlib_drawTextLine(&w_coordz, xfalse);
         }
     }
 
@@ -818,7 +818,7 @@ void HU_Drawer(void) {
                 HUlib_addCharToTextLine(&w_ammo, *(s++));
         }
         // display the ammo widget every frame
-        HUlib_drawTextLine(&w_ammo, false);
+        HUlib_drawTextLine(&w_ammo, xfalse);
 
         // do the hud health display
         if (doit) {
@@ -870,7 +870,7 @@ void HU_Drawer(void) {
                 HUlib_addCharToTextLine(&w_health, *(s++));
         }
         // display the health widget every frame
-        HUlib_drawTextLine(&w_health, false);
+        HUlib_drawTextLine(&w_health, xfalse);
 
         // do the hud armor display
         if (doit) {
@@ -921,7 +921,7 @@ void HU_Drawer(void) {
                 HUlib_addCharToTextLine(&w_armor, *(s++));
         }
         // display the armor widget every frame
-        HUlib_drawTextLine(&w_armor, false);
+        HUlib_drawTextLine(&w_armor, xfalse);
 
         // do the hud weapon display
         if (doit) {
@@ -985,7 +985,7 @@ void HU_Drawer(void) {
                 HUlib_addCharToTextLine(&w_weapon, *(s++));
         }
         // display the weapon widget every frame
-        HUlib_drawTextLine(&w_weapon, false);
+        HUlib_drawTextLine(&w_weapon, xfalse);
 
         if (doit && hud_active > 1) {
             int k;
@@ -1164,7 +1164,7 @@ void HU_Drawer(void) {
             s = hud_keysstr; //jff 3/7/98 display key titles/key text or frags
             while (*s)
                 HUlib_addCharToTextLine(&w_keys, *(s++));
-            HUlib_drawTextLine(&w_keys, false);
+            HUlib_drawTextLine(&w_keys, xfalse);
 
             //jff 3/17/98 show graphic keys in non-DM only
             if (!deathmatch) //jff 3/7/98 display graphic keys
@@ -1174,7 +1174,7 @@ void HU_Drawer(void) {
                 while (*s)
                     HUlib_addCharToTextLine(&w_gkeys, *(s++));
                 // display the widget
-                HUlib_drawTextLine(&w_gkeys, false);
+                HUlib_drawTextLine(&w_gkeys, xfalse);
             }
         }
 
@@ -1200,7 +1200,7 @@ void HU_Drawer(void) {
             }
             // display the kills/items/secrets each frame, if optioned
             if (hud_active > 1)
-                HUlib_drawTextLine(&w_monsec, false);
+                HUlib_drawTextLine(&w_monsec, xfalse);
         }
     }
 
@@ -1210,7 +1210,7 @@ void HU_Drawer(void) {
 
     //jff 4/21/98 if setup has disabled message list while active, turn it off
     if (hud_msg_lines <= 1)
-        message_list = false;
+        message_list = xfalse;
 
     // if the message review not enabled, show the standard message widget
     if (!message_list)
@@ -1261,8 +1261,8 @@ void HU_Ticker(void) {
 
     // tick down message counter if message is up
     if (message_counter && !--message_counter) {
-        message_on = false;
-        message_nottobefuckedwith = false;
+        message_on = xfalse;
+        message_nottobefuckedwith = xfalse;
     }
     if (bsdown && bscounter++ > 9) {
         HUlib_keyInIText(&w_chat, (unsigned char) key_backspace);
@@ -1283,7 +1283,7 @@ void HU_Ticker(void) {
             // clear the message to avoid posting multiple times
             plr->message = 0;
             // note a message is displayed
-            message_on = true;
+            message_on = xtrue;
             // start the message persistence counter
             message_counter = HU_MSGTIMEOUT;
             // transfer "Messages Off" exception to the "being displayed" variable
@@ -1314,8 +1314,8 @@ void HU_Ticker(void) {
                                                     player_names[i],
                                                     w_inputbuffer[i].l.l);
 
-                            message_nottobefuckedwith = true;
-                            message_on = true;
+                            message_nottobefuckedwith = xtrue;
+                            message_on = xtrue;
                             message_counter = HU_MSGTIMEOUT;
                             if (gamemode == commercial)
                                 S_StartSound(0, sfx_radio);
@@ -1383,9 +1383,9 @@ boolean HU_Responder(event_t *ev) {
 
     static char lastmessage[HU_MAXLINELENGTH + 1];
     const char *macromessage; // CPhipps - const char*
-    boolean eatkey = false;
-    static boolean shiftdown = false;
-    static boolean altdown = false;
+    boolean eatkey = xfalse;
+    static boolean shiftdown = xfalse;
+    static boolean altdown = xfalse;
     unsigned char c;
     int i;
     int numplayers;
@@ -1398,17 +1398,17 @@ boolean HU_Responder(event_t *ev) {
 
     if (ev->data1 == key_shift) {
         shiftdown = ev->type == ev_keydown;
-        return false;
+        return xfalse;
     } else if (ev->data1 == key_alt) {
         altdown = ev->type == ev_keydown;
-        return false;
+        return xfalse;
     } else if (ev->data1 == key_backspace) {
         bsdown = ev->type == ev_keydown;
         bscounter = 0;
     }
 
     if (ev->type != ev_keydown)
-        return false;
+        return xfalse;
 
     if (!chat_on) {
         if (ev->data1 == key_enter)                                 // phares
@@ -1422,23 +1422,23 @@ boolean HU_Responder(event_t *ev) {
 #endif
             if (!message_list)              // if not message list, refresh message
             {
-                message_on = true;
+                message_on = xtrue;
                 message_counter = HU_MSGTIMEOUT;
             }
-            eatkey = true;
+            eatkey = xtrue;
         }//jff 2/26/98 no chat if message review is displayed
             // killough 10/02/98: no chat if demo playback
             // no chat in -solo-net mode
         else if (!demoplayback && !message_list && netgame && numplayers > 1) {
             if (ev->data1 == key_chat) {
-                eatkey = chat_on = true;
+                eatkey = chat_on = xtrue;
                 HUlib_resetIText(&w_chat);
                 HU_queueChatChar(HU_BROADCAST);
             } else if (numplayers > 2) {
                 for (i = 0; i < MAXPLAYERS; i++) {
                     if (ev->data1 == destination_keys[i]) {
                         if (playeringame[i] && i != consoleplayer) {
-                            eatkey = chat_on = true;
+                            eatkey = chat_on = xtrue;
                             HUlib_resetIText(&w_chat);
                             HU_queueChatChar((char) (i + 1));
                             break;
@@ -1466,7 +1466,7 @@ boolean HU_Responder(event_t *ev) {
         if (altdown) {
             c = c - '0';
             if (c > 9)
-                return false;
+                return xfalse;
             macromessage = chat_macros[c];
 
             // kill last message with a '\n'
@@ -1478,10 +1478,10 @@ boolean HU_Responder(event_t *ev) {
             HU_queueChatChar((char) key_enter);                            // phares
 
             // leave chat mode and notify that it was sent
-            chat_on = false;
+            chat_on = xfalse;
             strcpy(lastmessage, chat_macros[c]);
             plr->message = lastmessage;
-            eatkey = true;
+            eatkey = xtrue;
         } else {
             if (shiftdown || (c >= 'a' && c <= 'z'))
                 c = shiftxform[c];
@@ -1491,13 +1491,13 @@ boolean HU_Responder(event_t *ev) {
 
             if (c == key_enter)                                     // phares
             {
-                chat_on = false;
+                chat_on = xfalse;
                 if (w_chat.l.len) {
                     strcpy(lastmessage, w_chat.l.l);
                     plr->message = lastmessage;
                 }
             } else if (c == key_escape)                               // phares
-                chat_on = false;
+                chat_on = xfalse;
         }
     }
     return eatkey;

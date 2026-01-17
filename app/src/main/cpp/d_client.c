@@ -88,7 +88,7 @@ int ticdup = 1;
 static int xtratics = 0;
 int wanted_player_number;
 
-static boolean isExtraDDisplay = false;
+static boolean isExtraDDisplay = xfalse;
 
 static void D_QuitNetGame(void);
 
@@ -106,7 +106,7 @@ void D_InitNetGame(void) {
     if (i && i < myargc - 1) i++;
 
     if (!(netgame = server = !!i)) {
-        playeringame[consoleplayer = 0] = true;
+        playeringame[consoleplayer = 0] = xtrue;
         // e6y
         // for play, recording or playback using "single-player coop" mode.
         // Equivalent to using prboom_server with -N 1
@@ -165,9 +165,9 @@ void D_InitNetGame(void) {
     }
     localcmds = netcmds[displayplayer = consoleplayer];
     for (i = 0; i < numplayers; i++)
-        playeringame[i] = true;
+        playeringame[i] = xtrue;
     for (; i < MAXPLAYERS; i++)
-        playeringame[i] = false;
+        playeringame[i] = xfalse;
     if (!playeringame[consoleplayer]) I_Error("D_InitNetGame: consoleplayer not in game");
 }
 
@@ -183,9 +183,9 @@ void D_InitNetGame (void)
   netgame = (M_CheckParm("-solo-net") != 0);
 
   for (i=0; i<doomcom->numplayers; i++)
-    playeringame[i] = true;
+    playeringame[i] = xtrue;
   for (; i<MAXPLAYERS; i++)
-    playeringame[i] = false;
+    playeringame[i] = xfalse;
 
   consoleplayer = displayplayer = doomcom->consoleplayer;
 }
@@ -214,9 +214,9 @@ boolean D_NetGetWad(const char *name) {
 #if defined(HAVE_WAIT_H)
     size_t psize = sizeof(packet_header_t) + strlen(name) + 500;
     packet_header_t *packet;
-    boolean done = false;
+    boolean done = xfalse;
 
-    if (!server || strchr(name, '/')) return false; // If it contains path info, reject
+    if (!server || strchr(name, '/')) return xfalse; // If it contains path info, reject
 
     do {
       // Send WAD request to remote
@@ -268,7 +268,7 @@ boolean D_NetGetWad(const char *name) {
     }
     return done;
 #else /* HAVE_WAIT_H */
-    return false;
+    return xfalse;
 #endif
 }
 
@@ -311,8 +311,8 @@ void NetUpdate(void) {
                 {
                     int j;
                     for (j = 0; j < MAXPLAYERS; j++)
-                        if (j != consoleplayer) playeringame[j] = false;
-                    server = false;
+                        if (j != consoleplayer) playeringame[j] = xfalse;
+                    server = xfalse;
                     doom_printf("Server is down\nAll other players are no longer in the game\n");
                 }
                     break;
@@ -424,7 +424,7 @@ static void CheckQueuedPackets(void) {
                 case PKT_QUIT: // Player quit the game
                 {
                     int pn = *(byte *) (queuedpacket[i] + 1);
-                    playeringame[pn] = false;
+                    playeringame[pn] = xfalse;
                     doom_printf("Player %d left the game\n", pn);
                 }
                     break;
@@ -510,13 +510,13 @@ void TryRunTics(void) {
             }
             //if ((displaytime) < (tic_vars.next-SDL_GetTicks()))
             {
-                WasRenderedInTryRunTics = true;
+                WasRenderedInTryRunTics = xtrue;
                 if (V_GetMode() == VID_MODEGL ?
                     movement_smooth :
                     movement_smooth && gamestate == wipegamestate) {
-                    isExtraDDisplay = true;
+                    isExtraDDisplay = xtrue;
                     D_Display();
-                    isExtraDDisplay = false;
+                    isExtraDDisplay = xfalse;
                 }
             }
         } else break;

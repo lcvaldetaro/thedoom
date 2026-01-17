@@ -84,7 +84,7 @@ result_e T_MovePlane
                         lastpos = sector->floorheight;
                         sector->floorheight = dest;
                         flag = P_CheckSector(sector, crush); //jff 3/19/98 use faster chk
-                        if (flag == true) {
+                        if (flag == xtrue) {
                             sector->floorheight = lastpos;
                             P_CheckSector(sector, crush);      //jff 3/19/98 use faster chk
                         }
@@ -96,7 +96,7 @@ result_e T_MovePlane
                         /* cph - make more compatible with original Doom, by
                          *  reintroducing this code. This means floors can't lower
                          *  if objects are stuck in the ceiling */
-                        if ((flag == true) && comp[comp_floors]) {
+                        if ((flag == xtrue) && comp[comp_floors]) {
                             sector->floorheight = lastpos;
                             P_ChangeSector(sector, crush);
                             return crushed;
@@ -114,7 +114,7 @@ result_e T_MovePlane
                         lastpos = sector->floorheight;
                         sector->floorheight = destheight;
                         flag = P_CheckSector(sector, crush); //jff 3/19/98 use faster chk
-                        if (flag == true) {
+                        if (flag == xtrue) {
                             sector->floorheight = lastpos;
                             P_CheckSector(sector, crush);      //jff 3/19/98 use faster chk
                         }
@@ -124,10 +124,10 @@ result_e T_MovePlane
                         lastpos = sector->floorheight;
                         sector->floorheight += speed;
                         flag = P_CheckSector(sector, crush); //jff 3/19/98 use faster chk
-                        if (flag == true) {
+                        if (flag == xtrue) {
                             /* jff 1/25/98 fix floor crusher */
                             if (comp[comp_floors]) {
-                                if (crush == true)
+                                if (crush == xtrue)
                                     return crushed;
                             }
                             sector->floorheight = lastpos;
@@ -153,7 +153,7 @@ result_e T_MovePlane
                         sector->ceilingheight = destheight;
                         flag = P_CheckSector(sector, crush); //jff 3/19/98 use faster chk
 
-                        if (flag == true) {
+                        if (flag == xtrue) {
                             sector->ceilingheight = lastpos;
                             P_CheckSector(sector, crush);      //jff 3/19/98 use faster chk
                         }
@@ -164,8 +164,8 @@ result_e T_MovePlane
                         sector->ceilingheight -= speed;
                         flag = P_CheckSector(sector, crush); //jff 3/19/98 use faster chk
 
-                        if (flag == true) {
-                            if (crush == true)
+                        if (flag == xtrue) {
+                            if (crush == xtrue)
                                 return crushed;
                             sector->ceilingheight = lastpos;
                             P_CheckSector(sector, crush);      //jff 3/19/98 use faster chk
@@ -180,7 +180,7 @@ result_e T_MovePlane
                         lastpos = sector->ceilingheight;
                         sector->ceilingheight = dest;
                         flag = P_CheckSector(sector, crush); //jff 3/19/98 use faster chk
-                        if (flag == true) {
+                        if (flag == xtrue) {
                             sector->ceilingheight = lastpos;
                             P_CheckSector(sector, crush);      //jff 3/19/98 use faster chk
                         }
@@ -422,7 +422,7 @@ int EV_DoFloor
         sec->floordata = floor; //jff 2/22/98
         floor->thinker.function = T_MoveFloor;
         floor->type = floortype;
-        floor->crush = false;
+        floor->crush = xfalse;
 
         // setup the thinker according to the linedef type
         switch (floortype) {
@@ -475,7 +475,7 @@ int EV_DoFloor
                 break;
 
             case raiseFloorCrush:
-                floor->crush = true;
+                floor->crush = xtrue;
             case raiseFloor:
                 floor->direction = 1;
                 floor->sector = sec;
@@ -724,13 +724,13 @@ int EV_BuildStairs
                     speed = FLOORSPEED / 4;
                     stairsize = 8 * FRACUNIT;
                     if (!demo_compatibility)
-                        floor->crush = false; //jff 2/27/98 fix uninitialized crush field
+                        floor->crush = xfalse; //jff 2/27/98 fix uninitialized crush field
                     break;
                 case turbo16:
                     speed = FLOORSPEED * 4;
                     stairsize = 16 * FRACUNIT;
                     if (!demo_compatibility)
-                        floor->crush = true;  //jff 2/27/98 fix uninitialized crush field
+                        floor->crush = xtrue;  //jff 2/27/98 fix uninitialized crush field
                     break;
             }
             floor->speed = speed;
@@ -799,7 +799,7 @@ int EV_BuildStairs
                     floor->type = buildStair; //jff 3/31/98 do not leave uninited
                     //jff 2/27/98 fix uninitialized crush field
                     if (!demo_compatibility)
-                        floor->crush = type == build8 ? false : true;
+                        floor->crush = type == build8 ? xfalse : xtrue;
                     ok = 1;
                     break;
                 }
@@ -887,7 +887,7 @@ int EV_DoDonut(line_t *line) {
             s2->floordata = floor; //jff 2/22/98
             floor->thinker.function = T_MoveFloor;
             floor->type = donutRaise;
-            floor->crush = false;
+            floor->crush = xfalse;
             floor->direction = 1;
             floor->sector = s2;
             floor->speed = FLOORSPEED / 2;
@@ -902,7 +902,7 @@ int EV_DoDonut(line_t *line) {
             s1->floordata = floor; //jff 2/22/98
             floor->thinker.function = T_MoveFloor;
             floor->type = lowerFloor;
-            floor->crush = false;
+            floor->crush = xfalse;
             floor->direction = -1;
             floor->sector = s1;
             floor->speed = FLOORSPEED / 2;

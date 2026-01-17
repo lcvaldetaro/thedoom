@@ -429,7 +429,7 @@ static void WI_slamBackground(void) {
 // The ticker is used to detect keys
 //  because of timing issues in netgames.
 boolean WI_Responder(event_t *ev) {
-    return false;
+    return xfalse;
 }
 
 
@@ -498,7 +498,7 @@ WI_drawOnLnode  // draw stuff at a location by episode/map#
         (int n,
          const char *const c[]) {
     int i;
-    boolean fits = false;
+    boolean fits = xfalse;
 
     i = 0;
     do {
@@ -518,7 +518,7 @@ WI_drawOnLnode  // draw stuff at a location by episode/map#
             && right < 320
             && top >= 0
             && bottom < 200) {
-            fits = true;
+            fits = xtrue;
         } else {
             i++;
         }
@@ -824,7 +824,7 @@ void WI_updateNoState(void) {
         G_WorldDone();
 }
 
-static boolean snl_pointeron = false;
+static boolean snl_pointeron = xfalse;
 
 
 // ====================================================================
@@ -924,7 +924,7 @@ void WI_drawShowNextLoc(void) {
 // Returns: void
 //
 void WI_drawNoState(void) {
-    snl_pointeron = true;
+    snl_pointeron = xtrue;
     WI_drawShowNextLoc();
 }
 
@@ -1046,7 +1046,7 @@ void WI_updateDeathmatchStats(void) {
         if (!(bcnt & 3))
             S_StartSound(0, sfx_pistol);  // noise while counting
 
-        stillticking = false;
+        stillticking = xfalse;
 
         for (i = 0; i < MAXPLAYERS; i++) {
             if (playeringame[i]) {
@@ -1064,7 +1064,7 @@ void WI_updateDeathmatchStats(void) {
                         if (dm_frags[i][j] < -999)
                             dm_frags[i][j] = -999;
 
-                        stillticking = true;
+                        stillticking = xtrue;
                     }
                 }
                 dm_totals[i] = WI_fragSum(i);
@@ -1275,7 +1275,7 @@ void WI_updateNetgameStats(void) {
         if (!(bcnt & 3))
             S_StartSound(0, sfx_pistol);  // pop
 
-        stillticking = false;
+        stillticking = xfalse;
 
         for (i = 0; i < MAXPLAYERS; i++) {
             if (!playeringame[i])
@@ -1286,7 +1286,7 @@ void WI_updateNetgameStats(void) {
             if (cnt_kills[i] >= (plrs[i].skills * 100) / wbs->maxkills)
                 cnt_kills[i] = (plrs[i].skills * 100) / wbs->maxkills;
             else
-                stillticking = true; // still got stuff to tally
+                stillticking = xtrue; // still got stuff to tally
         }
 
         if (!stillticking) {
@@ -1297,7 +1297,7 @@ void WI_updateNetgameStats(void) {
         if (!(bcnt & 3))
             S_StartSound(0, sfx_pistol);
 
-        stillticking = false;
+        stillticking = xfalse;
 
         for (i = 0; i < MAXPLAYERS; i++) {
             if (!playeringame[i])
@@ -1307,7 +1307,7 @@ void WI_updateNetgameStats(void) {
             if (cnt_items[i] >= (plrs[i].sitems * 100) / wbs->maxitems)
                 cnt_items[i] = (plrs[i].sitems * 100) / wbs->maxitems;
             else
-                stillticking = true;
+                stillticking = xtrue;
         }
 
         if (!stillticking) {
@@ -1318,7 +1318,7 @@ void WI_updateNetgameStats(void) {
         if (!(bcnt & 3))
             S_StartSound(0, sfx_pistol);
 
-        stillticking = false;
+        stillticking = xfalse;
 
         for (i = 0; i < MAXPLAYERS; i++) {
             if (!playeringame[i])
@@ -1331,7 +1331,7 @@ void WI_updateNetgameStats(void) {
             if (cnt_secret[i] >= (wbs->maxsecret ? (plrs[i].ssecret * 100) / wbs->maxsecret : compatibility_level < lxdoom_1_compatibility ? 0 : 100))
                 cnt_secret[i] = wbs->maxsecret ? (plrs[i].ssecret * 100) / wbs->maxsecret : 100;
             else
-                stillticking = true;
+                stillticking = xtrue;
         }
 
         if (!stillticking) {
@@ -1342,7 +1342,7 @@ void WI_updateNetgameStats(void) {
         if (!(bcnt & 3))
             S_StartSound(0, sfx_pistol);
 
-        stillticking = false;
+        stillticking = xfalse;
 
         for (i = 0; i < MAXPLAYERS; i++) {
             if (!playeringame[i])
@@ -1353,7 +1353,7 @@ void WI_updateNetgameStats(void) {
             if (cnt_frags[i] >= (fsum = WI_fragSum(i)))
                 cnt_frags[i] = fsum;
             else
-                stillticking = true;
+                stillticking = xtrue;
         }
 
         if (!stillticking) {
@@ -1633,16 +1633,16 @@ void WI_checkForAccelerate(void) {
             if (player->cmd.buttons & BT_ATTACK) {
                 if (!player->attackdown)
                     acceleratestage = 1;
-                player->attackdown = true;
+                player->attackdown = xtrue;
             } else
-                player->attackdown = false;
+                player->attackdown = xfalse;
 
             if (player->cmd.buttons & BT_USE) {
                 if (!player->usedown)
                     acceleratestage = 1;
-                player->usedown = true;
+                player->usedown = xtrue;
             } else
-                player->usedown = false;
+                player->usedown = xfalse;
         }
     }
 }
@@ -1661,9 +1661,9 @@ void WI_Ticker(void) {
     if (bcnt == 1) {
         // intermission music
         if (gamemode == commercial)
-            S_ChangeMusic(mus_dm2int, true);
+            S_ChangeMusic(mus_dm2int, xtrue);
         else
-            S_ChangeMusic(mus_inter, true);
+            S_ChangeMusic(mus_inter, xtrue);
     }
 
     WI_checkForAccelerate();

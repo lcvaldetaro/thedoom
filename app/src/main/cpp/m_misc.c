@@ -142,7 +142,7 @@ int M_ReadFile(char const *name, byte **buffer) {
 //
 
 int usemouse;
-boolean precache = true; /* if true, load all graphics at start */
+boolean precache = xtrue; /* if true, load all graphics at start */
 
 extern int mousebfire;
 extern int mousebstrafe;
@@ -958,7 +958,7 @@ void M_LoadDefaults(void) {
     f = fopen(defaultfile, "r");
     if (f) {
         while (!feof(f)) {
-            isstring = false;
+            isstring = xfalse;
             if (fscanf(f, "%79s %[^\n]\n", def, strparm) == 2) {
 
                 //jff 3/3/98 skip lines not starting with an alphanum
@@ -969,7 +969,7 @@ void M_LoadDefaults(void) {
                 if (strparm[0] == '"') {
                     // get a string default
 
-                    isstring = true;
+                    isstring = xtrue;
                     len = strlen(strparm);
                     newstring = (char *) malloc(len);
                     strparm[len - 1] = 0; // clears trailing double-quote mark

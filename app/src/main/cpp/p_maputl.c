@@ -342,7 +342,7 @@ boolean P_BlockLinesIterator(int x, int y, boolean func(line_t *)) {
     const long *list;   // killough 3/1/98: for removal of blockmap limit
 
     if (x < 0 || y < 0 || x >= bmapwidth || y >= bmapheight)
-        return true;
+        return xtrue;
     offset = y * bmapwidth + x;
     offset = *(blockmap + offset);
     list = blockmaplump + offset;     // original was reading         // phares
@@ -361,9 +361,9 @@ boolean P_BlockLinesIterator(int x, int y, boolean func(line_t *)) {
             continue;       // line has already been checked
         ld->validcount = validcount;
         if (!func(ld))
-            return false;
+            return xfalse;
     }
-    return true;  // everything was checked
+    return xtrue;  // everything was checked
 }
 
 //
@@ -376,8 +376,8 @@ boolean P_BlockThingsIterator(int x, int y, boolean func(mobj_t *)) {
     if (!(x < 0 || y < 0 || x >= bmapwidth || y >= bmapheight))
         for (mobj = blocklinks[y * bmapwidth + x]; mobj; mobj = mobj->bnext)
             if (!func(mobj))
-                return false;
-    return true;
+                return xfalse;
+    return xtrue;
 }
 
 //
@@ -427,23 +427,23 @@ boolean PIT_AddLineIntercepts(line_t *ld) {
     }
 
     if (s1 == s2)
-        return true;        // line isn't crossed
+        return xtrue;        // line isn't crossed
 
     // hit the line
     P_MakeDivline(ld, &dl);
     frac = P_InterceptVector(&trace, &dl);
 
     if (frac < 0)
-        return true;        // behind source
+        return xtrue;        // behind source
 
     check_intercept();    // killough
 
     intercept_p->frac = frac;
-    intercept_p->isaline = true;
+    intercept_p->isaline = xtrue;
     intercept_p->d.line = ld;
     intercept_p++;
 
-    return true;  // continue
+    return xtrue;  // continue
 }
 
 //
@@ -475,7 +475,7 @@ boolean PIT_AddThingIntercepts(mobj_t *thing) {
     s2 = P_PointOnDivlineSide(x2, y2, &trace);
 
     if (s1 == s2)
-        return true;                // line isn't crossed
+        return xtrue;                // line isn't crossed
 
     dl.x = x1;
     dl.y = y1;
@@ -485,16 +485,16 @@ boolean PIT_AddThingIntercepts(mobj_t *thing) {
     frac = P_InterceptVector(&trace, &dl);
 
     if (frac < 0)
-        return true;                // behind source
+        return xtrue;                // behind source
 
     check_intercept();            // killough
 
     intercept_p->frac = frac;
-    intercept_p->isaline = false;
+    intercept_p->isaline = xfalse;
     intercept_p->d.thing = thing;
     intercept_p++;
 
-    return true;          // keep going
+    return xtrue;          // keep going
 }
 
 //
@@ -514,12 +514,12 @@ boolean P_TraverseIntercepts(traverser_t func, fixed_t maxfrac) {
             if (scan->frac < dist)
                 dist = (in = scan)->frac;
         if (dist > maxfrac)
-            return true;    // checked everything in range
+            return xtrue;    // checked everything in range
         if (!func(in))
-            return false;           // don't bother going farther
+            return xfalse;           // don't bother going farther
         in->frac = INT_MAX;
     }
-    return true;                  // everything was traversed
+    return xtrue;                  // everything was traversed
 }
 
 //
@@ -608,11 +608,11 @@ boolean P_PathTraverse(fixed_t x1, fixed_t y1, fixed_t x2, fixed_t y2,
     for (count = 0; count < 64; count++) {
         if (flags & PT_ADDLINES)
             if (!P_BlockLinesIterator(mapx, mapy, PIT_AddLineIntercepts))
-                return false; // early out
+                return xfalse; // early out
 
         if (flags & PT_ADDTHINGS)
             if (!P_BlockThingsIterator(mapx, mapy, PIT_AddThingIntercepts))
-                return false; // early out
+                return xfalse; // early out
 
         if (mapx == xt2 && mapy == yt2)
             break;

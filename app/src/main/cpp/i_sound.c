@@ -89,8 +89,8 @@ int snd_card = 1;
 int mus_card = 1;
 int detect_voices = 0; // God knows
 
-static boolean sound_inited = false;
-static boolean first_sound_init = true;
+static boolean sound_inited = xfalse;
+static boolean first_sound_init = xtrue;
 
 // Needed for calling the actual sound output.
 static int SAMPLECOUNT = 512;
@@ -364,7 +364,7 @@ boolean I_SoundIsPlaying(int handle) {
 
 
 boolean I_AnySoundStillPlaying(void) {
-    boolean result = false;
+    boolean result = xfalse;
     int i;
 
     for (i = 0; i < MAX_CHANNELS; i++)
@@ -492,7 +492,7 @@ void I_ShutdownSound(void) {
         // Vladimir SDL_CloseAudio();
 #endif
         lprintf(LO_INFO, "\n");
-        sound_inited = false;
+        sound_inited = xfalse;
     }
 }
 
@@ -558,7 +558,7 @@ void I_InitSound(void) {
 
     if (first_sound_init) {
         atexit(I_ShutdownSound);
-        first_sound_init = false;
+        first_sound_init = xfalse;
     }
 
     if (!nomusicparm)

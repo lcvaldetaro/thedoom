@@ -87,7 +87,7 @@ static int wipe_initMelt(int ticks) {
 }
 
 static int wipe_doMelt(int ticks) {
-    boolean done = true;
+    boolean done = xtrue;
     int i;
     const int depth = V_GetPixelDepth();
 
@@ -95,7 +95,7 @@ static int wipe_doMelt(int ticks) {
         for (i = 0; i < (SCREENWIDTH); i++) {
             if (y_lookup[i] < 0) {
                 y_lookup[i]++;
-                done = false;
+                done = xfalse;
                 continue;
             }
             if (y_lookup[i] < SCREENHEIGHT) {
@@ -128,7 +128,7 @@ static int wipe_doMelt(int ticks) {
                     d += wipe_scr.byte_pitch;
                     s += wipe_scr_end.byte_pitch;
                 }
-                done = false;
+                done = xfalse;
             }
         }
     }
@@ -156,7 +156,7 @@ int wipe_StartScreen(void) {
     wipe_scr_start.byte_pitch = screens[0].byte_pitch;
     wipe_scr_start.short_pitch = screens[0].short_pitch;
     wipe_scr_start.int_pitch = screens[0].int_pitch;
-    wipe_scr_start.not_on_heap = false;
+    wipe_scr_start.not_on_heap = xfalse;
     V_AllocScreen(&wipe_scr_start);
     screens[SRC_SCR] = wipe_scr_start;
     V_CopyRect(0, 0, 0, SCREENWIDTH, SCREENHEIGHT, 0, 0, SRC_SCR, VPT_NONE); // Copy start screen to buffer
@@ -169,7 +169,7 @@ int wipe_EndScreen(void) {
     wipe_scr_end.byte_pitch = screens[0].byte_pitch;
     wipe_scr_end.short_pitch = screens[0].short_pitch;
     wipe_scr_end.int_pitch = screens[0].int_pitch;
-    wipe_scr_end.not_on_heap = false;
+    wipe_scr_end.not_on_heap = xfalse;
     V_AllocScreen(&wipe_scr_end);
     screens[DEST_SCR] = wipe_scr_end;
     V_CopyRect(0, 0, 0, SCREENWIDTH, SCREENHEIGHT, 0, 0, DEST_SCR, VPT_NONE); // Copy end screen to buffer

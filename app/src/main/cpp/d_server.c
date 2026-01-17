@@ -489,7 +489,7 @@ int server_main(int argc, char **argv) {
         int backoffcounter[MAXPLAYERS] = {0, 0, 0, 0};
         int curplayers = 0;
         int confirming = 0;
-        boolean ingame = false;
+        boolean ingame = xfalse;
         ticcmd_t netcmds[MAXPLAYERS][BACKUPTICS];
 
         while (1) {
@@ -653,7 +653,7 @@ int server_main(int argc, char **argv) {
                 int i;
                 packet_header_t gopacket;
                 packet = &gopacket;
-                ingame = true;
+                ingame = xtrue;
                 printf("All players joined, beginning game.\n");
                 for (i = 0; i < MAXPLAYERS; i++) {
                     if (playerstate[i] == pc_confirmedready) {

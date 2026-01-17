@@ -105,7 +105,7 @@ static void R_InstallSpriteLump(int lump, unsigned frame,
             if (sprtemp[frame].lump[r] == -1) {
                 sprtemp[frame].lump[r] = lump - firstspritelump;
                 sprtemp[frame].flip[r] = (byte) flipped;
-                sprtemp[frame].rotate = false; //jff 4/24/98 if any subbed, rotless
+                sprtemp[frame].rotate = xfalse; //jff 4/24/98 if any subbed, rotless
             }
         return;
     }
@@ -115,7 +115,7 @@ static void R_InstallSpriteLump(int lump, unsigned frame,
     if (sprtemp[frame].lump[--rotation] == -1) {
         sprtemp[frame].lump[rotation] = lump - firstspritelump;
         sprtemp[frame].flip[rotation] = (byte) flipped;
-        sprtemp[frame].rotate = true; //jff 4/24/98 only change if rot used
+        sprtemp[frame].rotate = xtrue; //jff 4/24/98 only change if rot used
     }
 }
 
@@ -200,12 +200,12 @@ static void R_InitSpriteDefs(const char *const *namelist) {
                     R_InstallSpriteLump(j + firstspritelump,
                                         lump->name[4] - 'A',
                                         lump->name[5] - '0',
-                                        false);
+                                        xfalse);
                     if (lump->name[6])
                         R_InstallSpriteLump(j + firstspritelump,
                                             lump->name[6] - 'A',
                                             lump->name[7] - '0',
-                                            true);
+                                            xtrue);
                 }
             } while ((j = hash[j].next) >= 0);
 
@@ -662,7 +662,7 @@ static void R_DrawPSprite(pspdef_t *psp, int lightlevel) {
     int width;
     fixed_t topoffset;
 
-    avis.isplayersprite = true;
+    avis.isplayersprite = xtrue;
 
     // decide which patch to use
 

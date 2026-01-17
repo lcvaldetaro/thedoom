@@ -92,7 +92,7 @@ side_t *sides;
 
 int firstglvertex = 0;
 int nodesVersion = 0;
-boolean forceOldBsp = false;
+boolean forceOldBsp = xfalse;
 
 // figgi 08/21/00 -- glSegs
 typedef struct {
@@ -175,7 +175,7 @@ static boolean P_CheckForZDoomNodes(int lumpnum, int gl_lumpnum) {
     if (*(const int *) data == ZGLN)
         I_Error("P_CheckForZDoomNodes: ZDoom GL nodes not supported yet");
 
-    return false;
+    return xfalse;
 }
 
 //
@@ -186,7 +186,7 @@ static void P_GetNodesVersion(int lumpnum, int gl_lumpnum) {
     const void *data;
 
     data = W_CacheLumpNum(gl_lumpnum + ML_GL_VERTS);
-    if ((gl_lumpnum > lumpnum) && (forceOldBsp == false) && (compatibility_level >= prboom_2_compatibility)) {
+    if ((gl_lumpnum > lumpnum) && (forceOldBsp == xfalse) && (compatibility_level >= prboom_2_compatibility)) {
         if (*(const int *) data == gNd2) {
             data = W_CacheLumpNum(gl_lumpnum + ML_GL_SEGS);
             if (*(const int *) data == gNd3) {
@@ -370,7 +370,7 @@ static void P_LoadSegs(int lump) {
         li->v1 = &vertexes[v1];
         li->v2 = &vertexes[v2];
 
-        li->miniseg = false; // figgi -- there are no minisegs in classic BSP nodes
+        li->miniseg = xfalse; // figgi -- there are no minisegs in classic BSP nodes
         li->length = GetDistance(li->v2->x - li->v1->x, li->v2->y - li->v1->y);
         li->angle = (SHORT(ml->angle)) << 16;
         li->offset = (SHORT(ml->offset)) << 16;
@@ -429,7 +429,7 @@ static void P_LoadGLSegs(int lump) {
         {
             ldef = &lines[ml->linedef];
             segs[i].linedef = ldef;
-            segs[i].miniseg = false;
+            segs[i].miniseg = xfalse;
             segs[i].angle = R_PointToAngle2(segs[i].v1->x, segs[i].v1->y, segs[i].v2->x, segs[i].v2->y);
 
             segs[i].sidedef = &sides[ldef->sidenum[ml->side]];
@@ -445,7 +445,7 @@ static void P_LoadGLSegs(int lump) {
             else
                 segs[i].offset = GetOffset(segs[i].v1, ldef->v1);
         } else {
-            segs[i].miniseg = true;
+            segs[i].miniseg = xtrue;
             segs[i].angle = 0;
             segs[i].offset = 0;
             segs[i].length = 0;
@@ -1381,7 +1381,7 @@ static void P_RemoveSlimeTrails(void)         // killough 10/98
     {
         const line_t *l;
 
-        if (segs[i].miniseg == true)        //figgi -- skip minisegs
+        if (segs[i].miniseg == xtrue)        //figgi -- skip minisegs
             return;
 
         l = segs[i].linedef;            // The parent linedef

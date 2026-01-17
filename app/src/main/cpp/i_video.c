@@ -342,10 +342,10 @@ inline static boolean I_SkipFrame(void) {
     switch (gamestate) {
         case GS_LEVEL:
             if (!paused)
-                return false;
+                return xfalse;
         default:
             // Skip odd frames
-            return (frameno & 1) ? true : false;
+            return (frameno & 1) ? xtrue : xfalse;
     }
 }
 
@@ -796,7 +796,7 @@ void I_UpdateVideoMode(void) {
   lprintf(LO_INFO, "I_UpdateVideoMode: 0x%x, %s, %s\n", init_flags, screen->pixels ? "SDL buffer" : "own buffer", SDL_MUSTLOCK(screen) ? "lock-and-copy": "direct access");
 */
 
-    mouse_currently_grabbed = false;
+    mouse_currently_grabbed = xfalse;
 
     // Get the info needed to render to the display
 /*
@@ -810,7 +810,7 @@ void I_UpdateVideoMode(void) {
   }
   else
   { */
-    screens[0].not_on_heap = false;
+    screens[0].not_on_heap = xfalse;
 //  }
 
     V_AllocScreens();

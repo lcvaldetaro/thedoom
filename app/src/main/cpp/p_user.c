@@ -378,10 +378,10 @@ void P_PlayerThink(player_t *player) {
     if (cmd->buttons & BT_USE) {
         if (!player->usedown) {
             P_UseLines(player);
-            player->usedown = true;
+            player->usedown = xtrue;
         }
     } else
-        player->usedown = false;
+        player->usedown = xfalse;
 
     // cycle psprites
 

@@ -240,7 +240,7 @@ boolean P_CheckAmmo(player_t *player) {
     // Return if current ammunition sufficient.
 
     if (ammo == am_noammo || player->ammo[ammo] >= count)
-        return true;
+        return xtrue;
 
     // Out of ammo, pick a weapon to change to.
     //
@@ -255,7 +255,7 @@ boolean P_CheckAmmo(player_t *player) {
         P_SetPsprite(player, ps_weapon, weaponinfo[player->readyweapon].downstate);
     }
 
-    return false;
+    return xfalse;
 }
 
 //
@@ -316,12 +316,12 @@ void A_WeaponReady(player_t *player, pspdef_t *psp) {
     if (player->cmd.buttons & BT_ATTACK) {
         if (!player->attackdown || (player->readyweapon != wp_missile &&
                                     player->readyweapon != wp_bfg)) {
-            player->attackdown = true;
+            player->attackdown = xtrue;
             P_FireWeapon(player);
             return;
         }
     } else
-        player->attackdown = false;
+        player->attackdown = xfalse;
 
     // bob the weapon based on movement speed
     {
@@ -635,7 +635,7 @@ void A_FireShotgun(player_t *player, pspdef_t *psp) {
     P_BulletSlope(player->mo);
 
     for (i = 0; i < 7; i++)
-        P_GunShot(player->mo, false);
+        P_GunShot(player->mo, xfalse);
 }
 
 //

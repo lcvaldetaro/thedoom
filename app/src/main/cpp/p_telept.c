@@ -82,7 +82,7 @@ int EV_Teleport(line_t *line, int side, mobj_t *thing) {
         if (player && player->mo != thing)
             player = NULL;
 
-        if (!P_TeleportMove(thing, m->x, m->y, false)) /* killough 8/9/98 */
+        if (!P_TeleportMove(thing, m->x, m->y, xfalse)) /* killough 8/9/98 */
             return 0;
 
         if (compatibility_level != finaldoom_compatibility)
@@ -162,7 +162,7 @@ int EV_SilentTeleport(line_t *line, int side, mobj_t *thing) {
         player_t *player = thing->player;
 
         // Attempt to teleport, aborting if blocked
-        if (!P_TeleportMove(thing, m->x, m->y, false)) /* killough 8/9/98 */
+        if (!P_TeleportMove(thing, m->x, m->y, xfalse)) /* killough 8/9/98 */
             return 0;
 
         // Rotate thing according to difference in angles
@@ -288,7 +288,7 @@ int EV_SilentLineTeleport(line_t *line, int side, mobj_t *thing,
                     x += l->dy < 0 != side ? -1 : 1;
 
             // Attempt to teleport, aborting if blocked
-            if (!P_TeleportMove(thing, x, y, false)) /* killough 8/9/98 */
+            if (!P_TeleportMove(thing, x, y, xfalse)) /* killough 8/9/98 */
                 return 0;
 
             // e6y

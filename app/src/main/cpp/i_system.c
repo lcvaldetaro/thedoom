@@ -425,21 +425,21 @@ unsigned long I_GetRandomTimeSeed(void) {
 
 static unsigned int start_displaytime;
 static unsigned int displaytime;
-static boolean InDisplay = false;
+static boolean InDisplay = xfalse;
 
 boolean I_StartDisplay(void) {
     if (InDisplay)
-        return false;
+        return xfalse;
 
     start_displaytime = I_GetTime(); //DL_GetTicks();
-    InDisplay = true;
-    return true;
+    InDisplay = xtrue;
+    return xtrue;
 }
 
 void I_EndDisplay(void) {
     //displaytime = SDL_GetTicks() - start_displaytime;
     displaytime = I_GetTime() - start_displaytime;
-    InDisplay = false;
+    InDisplay = xfalse;
 }
 
 

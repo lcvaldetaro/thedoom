@@ -120,7 +120,7 @@ void T_VerticalDoor(vldoor_t *door) {
                             door->sector,
                             door->speed,
                             door->sector->floorheight,
-                            false,
+                            xfalse,
                             1,
                             door->direction
                     );
@@ -214,7 +214,7 @@ void T_VerticalDoor(vldoor_t *door) {
                             door->sector,
                             door->speed,
                             door->topheight,
-                            false,
+                            xfalse,
                             1,
                             door->direction
                     );

@@ -110,7 +110,7 @@ static int dehfgetc(DEHFILE *fp) {
 int HelperThing = -1;     // in P_SpawnMapThing to substitute helper thing
 
 // variables used in other routines
-boolean deh_pars = FALSE; // in wi_stuff to allow pars in modified games
+boolean deh_pars = xfalse; // in wi_stuff to allow pars in modified games
 
 // #include "d_deh.h" -- we don't do that here but we declare the
 // variables.  This externalizes everything that there is a string
@@ -1065,7 +1065,7 @@ static const deh_block deh_blocks[] = { // CPhipps - static const
 };
 
 // flag to skip included deh-style text, used with INCLUDE NOTEXT directive
-static boolean includenotext = false;
+static boolean includenotext = xfalse;
 
 // MOBJINFO - Dehacked block name = "Thing"
 // Usage: Thing nn (name)
@@ -1428,7 +1428,7 @@ void ProcessDehFile(const char *filename, const char *outfilename, int lumpnum) 
 
     // Open output file if we're writing output
     if (outfilename && *outfilename && !fileout) {
-        static boolean firstfile = true; // to allow append to output log
+        static boolean firstfile = xtrue; // to allow append to output log
         printf("ProcessDehFile Could not open -dehout file\n");
         /*
       if (!strcmp(outfilename, "-"))
@@ -1441,7 +1441,7 @@ void ProcessDehFile(const char *filename, const char *outfilename, int lumpnum) 
             fileout = stdout;
           }
 	*/
-        firstfile = false;
+        firstfile = xfalse;
     }
 
     // killough 10/98: allow DEH files to come from wad lumps
@@ -1502,7 +1502,7 @@ void ProcessDehFile(const char *filename, const char *outfilename, int lumpnum) 
             // file but using the BEX format to handle strings
 
             if (!strnicmp(nextfile = ptr_lstrip(inbuffer + 7), "NOTEXT", 6))
-                includenotext = true, nextfile = ptr_lstrip(nextfile + 6);
+                includenotext = xtrue, nextfile = ptr_lstrip(nextfile + 6);
 
             if (fileout)
                 fprintf(fileout, "Branching to include file %s...\n", nextfile);
@@ -1588,7 +1588,7 @@ static void deh_procBexCodePointers(DEHFILE *fpin, FILE *fpout, char *line) {
         strcpy(key, "A_");  // reusing the key area to prefix the mnemonic
         strcat(key, ptr_lstrip(mnemonic));
 
-        found = FALSE;
+        found = xfalse;
         i = -1; // incremented to start at zero at the top of the loop
         do  // Ty 05/16/98 - fix loop logic to look for null ending entry
         {
@@ -1599,7 +1599,7 @@ static void deh_procBexCodePointers(DEHFILE *fpin, FILE *fpout, char *line) {
                     fprintf(fpout,
                             " - applied %s from codeptr[%d] to states[%d]\n",
                             deh_bexptrs[i].lookup, i, indexnum);
-                found = TRUE;
+                found = xtrue;
             }
         } while (!found && (deh_bexptrs[i].cptr != NULL));
 
@@ -2254,7 +2254,7 @@ static void deh_procPars(DEHFILE *fpin, FILE *fpout, char *line) // extension
                     oldpar = cpars[level - 1];
                     if (fpout) fprintf(fpout, "Changed par time for MAP%02d from %d to %d\n", level, oldpar, partime);
                     cpars[level - 1] = partime;
-                    deh_pars = TRUE;
+                    deh_pars = xtrue;
                 }
             }
         } else { // is 3
@@ -2274,7 +2274,7 @@ static void deh_procPars(DEHFILE *fpin, FILE *fpout, char *line) // extension
                     fprintf(fpout,
                             "Changed par time for E%dM%d from %d to %d\n",
                             episode, level, oldpar, partime);
-                deh_pars = TRUE;
+                deh_pars = xtrue;
             }
         }
     }
@@ -2343,7 +2343,7 @@ static void deh_procCheat(DEHFILE *fpin, FILE *fpout, char *line) // done
                         !strncasecmp(cheat[i].cheat,
                                      cheat[iy].cheat,
                                      strlen(cheat[i].cheat)) && i != iy)
-          cheat[i].deh_modified = true;
+          cheat[i].deh_modified = xtrue;
                 }
 #endif
                     cheat[iy].cheat = strdup(p);
@@ -2448,7 +2448,7 @@ static void deh_procText(DEHFILE *fpin, FILE *fpout, char *line) {
     int i; // loop variable
     int fromlen, tolen;  // as specified on the text block line
     int usedlen;  // shorter of fromlen and tolen if not matched
-    boolean found = FALSE;  // to allow early exit once found
+    boolean found = xfalse;  // to allow early exit once found
     char *line2 = NULL;   // duplicate line for rerouting
 
     // Ty 04/11/98 - Included file may have NOTEXT skip flag set
@@ -2505,7 +2505,7 @@ static void deh_procText(DEHFILE *fpin, FILE *fpout, char *line) {
 
                     strncpy(s, &inbuffer[fromlen], tolen);
                 }
-                found = TRUE;
+                found = xtrue;
                 break;  // only one will match--quit early
             }
             ++i;  // next array element
@@ -2529,7 +2529,7 @@ static void deh_procText(DEHFILE *fpin, FILE *fpout, char *line) {
                             S_sfx[i].name, usedlen, &inbuffer[fromlen]);
 
                 S_sfx[i].name = strdup(&inbuffer[fromlen]);
-                found = TRUE;
+                found = xtrue;
                 break;  // only one matches, quit early
             }
         }
@@ -2546,7 +2546,7 @@ static void deh_procText(DEHFILE *fpin, FILE *fpout, char *line) {
                                 S_music[i].name, usedlen, &inbuffer[fromlen]);
 
                     S_music[i].name = strdup(&inbuffer[fromlen]);
-                    found = TRUE;
+                    found = xtrue;
                     break;  // only one matches, quit early
                 }
             }
@@ -2592,7 +2592,7 @@ static void deh_procStrings(DEHFILE *fpin, FILE *fpout, char *line) {
     // a time as needed
     // holds the final result of the string after concatenation
     static char *holdstring = NULL;
-    boolean found = false;  // looking for string continuation
+    boolean found = xfalse;  // looking for string continuation
 
     if (fpout) fprintf(fpout, "Processing extended string substitution\n");
 
@@ -2667,7 +2667,7 @@ boolean deh_procStringSub(char *key, char *lookfor, char *newstring, FILE *fpout
     boolean found; // loop exit flag
     int i;  // looper
 
-    found = false;
+    found = xfalse;
     for (i = 0; i < deh_numstrlookup; i++) {
         found = lookfor ?
                 !stricmp(*deh_strlookup[i].ppstr, lookfor) :
@@ -2676,7 +2676,7 @@ boolean deh_procStringSub(char *key, char *lookfor, char *newstring, FILE *fpout
         if (found) {
             char *t;
             *deh_strlookup[i].ppstr = t = strdup(newstring); // orphan originalstring
-            found = true;
+            found = xtrue;
             // Handle embedded \n's in the incoming string, convert to 0x0a's
             {
                 const char *s;
@@ -3038,11 +3038,11 @@ boolean deh_GetData(char *s, char *k, uint_64_t *l, char **strval, FILE *fpout) 
     buffer[--i] = '\0';  // terminate the key before the '='
     if (!*t)  // end of string with no equal sign
     {
-        okrc = FALSE;
+        okrc = xfalse;
     } else {
         if (!*++t) {
             val = 0;  // in case "thiskey =" with no value
-            okrc = FALSE;
+            okrc = xfalse;
         }
         // we've incremented t
         // e6y: Correction of wrong processing of Bits parameter if its value is equal to zero

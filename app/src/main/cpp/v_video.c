@@ -226,7 +226,7 @@ void V_Init(void) {
     // reset the all
     for (i = 0; i < NUM_SCREENS; i++) {
         screens[i].data = NULL;
-        screens[i].not_on_heap = false;
+        screens[i].not_on_heap = xfalse;
         screens[i].width = 0;
         screens[i].height = 0;
         screens[i].byte_pitch = 0;

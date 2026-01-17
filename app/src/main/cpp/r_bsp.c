@@ -386,7 +386,7 @@ static void R_AddLine (seg_t *line)
   // Single sided line?
   if (backsector)
     // killough 3/8/98, 4/4/98: hack for invisible ceilings / deep water
-    backsector = R_FakeFlat(backsector, &tempsec, NULL, NULL, true);
+    backsector = R_FakeFlat(backsector, &tempsec, NULL, NULL, xtrue);
 
   /* cph - roll up linedef properties in flags */
   if ((linedef = curline->linedef)->r_validcount != gametic)
@@ -437,7 +437,7 @@ static boolean R_CheckBBox(const fixed_t *bspcoord)
       (viewy >= bspcoord[BOXTOP ] ? 0 : viewy > bspcoord[BOXBOTTOM] ? 4 : 8);
 
     if (boxpos == 5)
-      return true;
+      return xtrue;
 
     check = checkcoord[boxpos];
     angle1 = R_PointToAngle (bspcoord[check[0]], bspcoord[check[1]]) - viewangle;
@@ -456,8 +456,8 @@ static boolean R_CheckBBox(const fixed_t *bspcoord)
       angle2 = INT_MIN;
   }
 
-  if ((signed)angle2 >= (signed)clipangle) return false; // Both off left edge
-  if ((signed)angle1 <= -(signed)clipangle) return false; // Both off right edge
+  if ((signed)angle2 >= (signed)clipangle) return xfalse; // Both off left edge
+  if ((signed)angle1 <= -(signed)clipangle) return xfalse; // Both off right edge
   if ((signed)angle1 >= (signed)clipangle) angle1 = clipangle; // Clip at left edge
   if ((signed)angle2 <= -(signed)clipangle) angle2 = 0-clipangle; // Clip at right edge
 
@@ -473,13 +473,13 @@ static boolean R_CheckBBox(const fixed_t *bspcoord)
 
     // Does not cross a pixel.
     if (sx1 == sx2)
-      return false;
+      return xfalse;
 
-    if (!memchr(solidcol+sx1, 0, sx2-sx1)) return false;
+    if (!memchr(solidcol+sx1, 0, sx2-sx1)) return xfalse;
     // All columns it covers are already solidly covered
   }
 
-  return true;
+  return xtrue;
 }
 
 //
@@ -515,7 +515,7 @@ static void R_Subsector(int num)
 
   // killough 3/8/98, 4/4/98: Deep water / fake ceiling effect
   frontsector = R_FakeFlat(frontsector, &tempsec, &floorlightlevel,
-                           &ceilinglightlevel, false);   // killough 4/11/98
+                           &ceilinglightlevel, xfalse);   // killough 4/11/98
 
   // killough 3/7/98: Add (x,y) offsets to flats, add deep water check
   // killough 3/16/98: add floorlightlevel
@@ -623,7 +623,7 @@ static void R_Subsector(int num)
   R_AddSprites(sub, (floorlightlevel+ceilinglightlevel)/2);
   while (count--)
   {
-    if (line->miniseg == false)
+    if (line->miniseg == xfalse)
       R_AddLine (line);
     line++;
     curline = NULL; /* cph 2001/11/18 - must clear curline now we're done with it, so R_ColourMap doesn't try using it for other things */

@@ -104,7 +104,7 @@ boolean nomonsters;     // working -nomonsters
 boolean respawnparm;    // working -respawn
 boolean fastparm;       // working -fast
 
-boolean singletics = false; // debug flag to cancel adaptiveness
+boolean singletics = xfalse; // debug flag to cancel adaptiveness
 
 //jff 1/22/98 parms for disabling music and sound
 boolean nosfxparm;
@@ -203,12 +203,12 @@ extern boolean setsizeneeded;
 extern int showMessages;
 
 void D_Display(void) {
-    static boolean inhelpscreensstate = false;
-    static boolean isborderstate = false;
-    static boolean borderwillneedredraw = false;
+    static boolean inhelpscreensstate = xfalse;
+    static boolean isborderstate = xfalse;
+    static boolean borderwillneedredraw = xfalse;
     static gamestate_t oldgamestate = -1;
     boolean wipe;
-    boolean viewactive = false, isborder = false;
+    boolean viewactive = xfalse, isborder = xfalse;
 
     if (nodrawers)                    // for comparative timing / profiling
         return;
@@ -338,7 +338,7 @@ static const char *auto_shot_fname;
 static void D_DoomLoop(void) {
 
     for (;;) {
-        WasRenderedInTryRunTics = false;
+        WasRenderedInTryRunTics = xfalse;
 
         // frame syncronous IO operations
         I_StartFrame();
@@ -419,7 +419,7 @@ static void D_PageDrawer(void) {
 // Called after each demo or intro demosequence finishes
 //
 void D_AdvanceDemo(void) {
-    advancedemo = true;
+    advancedemo = xtrue;
 }
 
 /* killough 11/98: functions to perform demo sequences
@@ -523,7 +523,7 @@ static struct {
 
 void D_DoAdvanceDemo(void) {
     players[consoleplayer].playerstate = PST_LIVE;  /* not reborn */
-    advancedemo = usergame = paused = false;
+    advancedemo = usergame = paused = xfalse;
     gameaction = ga_nothing;
 
     pagetic = TICRATE * 11;         /* killough 11/98: default behavior */
@@ -663,7 +663,7 @@ static void CheckIWAD(const char *iwadname, GameMode_t *gmode, boolean *hassec) 
         // Lack of wolf-3d levels also detected here
 
         *gmode = indetermined;
-        *hassec = false;
+        *hassec = xfalse;
         if (cm >= 30) {
             *gmode = commercial;
             *hassec = sc >= 2;
@@ -983,7 +983,7 @@ static void DoLooseFiles(void) {
     boolean skip[MAXARGVS]; // CPhipps - should these be skipped at the end
 
     for (i = 0; i < MAXARGVS; i++)
-        skip[i] = false;
+        skip[i] = xfalse;
 
     for (i = 1; i < myargc; i++) {
         if (*myargv[i] == '-') break;  // quit at first switch
@@ -1000,33 +1000,33 @@ static void DoLooseFiles(void) {
             dehs[dehcount++] = strdup(myargv[i]);
         if (myargv[i][j - 4] != '.')  // assume wad if no extension
             wads[wadcount++] = strdup(myargv[i]);
-        skip[i] = true; // nuke that entry so it won't repeat later
+        skip[i] = xtrue; // nuke that entry so it won't repeat later
     }
 
     // Now, if we didn't find any loose files, we can just leave.
     if (wadcount + lmpcount + dehcount == 0) return;  // ******* early return ****
 
     if ((p = M_CheckParm("-file"))) {
-        skip[p] = true;    // nuke the entry
+        skip[p] = xtrue;    // nuke the entry
         while (++p != myargc && *myargv[p] != '-') {
             wads[wadcount++] = strdup(myargv[p]);
-            skip[p] = true;  // null any we find and save
+            skip[p] = xtrue;  // null any we find and save
         }
     }
 
     if ((p = M_CheckParm("-deh"))) {
-        skip[p] = true;    // nuke the entry
+        skip[p] = xtrue;    // nuke the entry
         while (++p != myargc && *myargv[p] != '-') {
             dehs[dehcount++] = strdup(myargv[p]);
-            skip[p] = true;  // null any we find and save
+            skip[p] = xtrue;  // null any we find and save
         }
     }
 
     if ((p = M_CheckParm("-playdemo"))) {
-        skip[p] = true;    // nuke the entry
+        skip[p] = xtrue;    // nuke the entry
         while (++p != myargc && *myargv[p] != '-') {
             lmps[lmpcount++] = strdup(myargv[p]);
-            skip[p] = true;  // null any we find and save
+            skip[p] = xtrue;  // null any we find and save
         }
     }
 
@@ -1123,12 +1123,12 @@ static void D_DoomMainSetup(void) {
         int i;
 
         do {
-            rsp_found = false;
+            rsp_found = xfalse;
             for (i = 0; i < myargc; i++)
                 if (myargv[i][0] == '@')
-                    rsp_found = true;
+                    rsp_found = xtrue;
             FindResponseFile();
-        } while (rsp_found == true);
+        } while (rsp_found == xtrue);
     }
 
     lprintf(LO_INFO, "M_LoadDefaults: Load system defaults.\n");
@@ -1137,7 +1137,7 @@ static void D_DoomMainSetup(void) {
     // figgi 09/18/00-- added switch to force classic bsp nodes
     if (M_CheckParm("-forceoldbsp")) {
         extern boolean forceOldBsp;
-        forceOldBsp = true;
+        forceOldBsp = xtrue;
     }
 
     DoLooseFiles();  // Ty 08/29/98 - handle "loose" files on command line
@@ -1226,24 +1226,24 @@ static void D_DoomMainSetup(void) {
         sidemove[1] = sidemove[1] * scale / 100;
     }
 
-    modifiedgame = false;
+    modifiedgame = xfalse;
 
     // get skill / episode / map from parms
 
     startskill = sk_none; // jff 3/24/98 was sk_medium, just note not picked
     startepisode = 1;
     startmap = 1;
-    autostart = false;
+    autostart = xfalse;
 
     if ((p = M_CheckParm("-skill")) && p < myargc - 1) {
         startskill = myargv[p + 1][0] - '1';
-        autostart = true;
+        autostart = xtrue;
     }
 
     if ((p = M_CheckParm("-episode")) && p < myargc - 1) {
         startepisode = myargv[p + 1][0] - '0';
         startmap = 1;
-        autostart = true;
+        autostart = xtrue;
     }
 
     if ((p = M_CheckParm("-timer")) && p < myargc - 1 && deathmatch) {
@@ -1261,7 +1261,7 @@ static void D_DoomMainSetup(void) {
         // Ty 08/29/98 - moved this check later so we can have -warp alone: && p < myargc-1)
     {
         startmap = 0; // Ty 08/29/98 - allow "-warp x" to go to first map in wad(s)
-        autostart = true; // Ty 08/29/98 - move outside the decision tree
+        autostart = xtrue; // Ty 08/29/98 - move outside the decision tree
         if (gamemode == commercial) {
             if (p < myargc - 1)
                 startmap = atoi(myargv[p + 1]);   // Ty 08/29/98 - add test if last parm
@@ -1374,7 +1374,7 @@ static void D_DoomMainSetup(void) {
                 else {
                     D_AddFile(fpath, source_auto_load);
                 }
-                modifiedgame = true;
+                modifiedgame = xtrue;
                 free(fpath);
             }
         }
@@ -1421,14 +1421,14 @@ static void D_DoomMainSetup(void) {
     if ((p = M_CheckParm("-file"))) {
         // the parms after p are wadfile/lump names,
         // until end of parms or another - preceded parm
-        modifiedgame = true;            // homebrew levels
+        modifiedgame = xtrue;            // homebrew levels
         while (++p != myargc && *myargv[p] != '-')
             D_AddFile(myargv[p], source_pwad);
     }
 
     if (!(p = M_CheckParm("-playdemo")) || p >= myargc - 1) {   /* killough */
         if ((p = M_CheckParm("-fastdemo")) && p < myargc - 1)    /* killough */
-            fastdemo = true;             // run at fastest speed possible
+            fastdemo = xtrue;             // run at fastest speed possible
         else
             p = M_CheckParm("-timedemo");
     }
@@ -1537,7 +1537,7 @@ static void D_DoomMainSetup(void) {
     else {
         slot = M_CheckParm("-loadgame");
         if ((p = M_CheckParm("-record")) && ++p < myargc) {
-            autostart = true;
+            autostart = xtrue;
             G_RecordDemo(myargv[p]);
         }
     }
@@ -1547,23 +1547,23 @@ static void D_DoomMainSetup(void) {
     }
 
     if ((p = M_CheckParm("-fastdemo")) && ++p < myargc) {                                 // killough
-        fastdemo = true;                // run at fastest speed possible
-        timingdemo = true;              // show stats after quit
+        fastdemo = xtrue;                // run at fastest speed possible
+        timingdemo = xtrue;              // show stats after quit
         G_DeferedPlayDemo(myargv[p]);
-        singledemo = true;              // quit after one demo
+        singledemo = xtrue;              // quit after one demo
     } else if ((p = M_CheckParm("-timedemo")) && ++p < myargc) {
-        singletics = true;
-        timingdemo = true;            // show stats after quit
+        singletics = xtrue;
+        timingdemo = xtrue;            // show stats after quit
         G_DeferedPlayDemo(myargv[p]);
-        singledemo = true;            // quit after one demo
+        singledemo = xtrue;            // quit after one demo
     } else if ((p = M_CheckParm("-playdemo")) && ++p < myargc) {
         G_DeferedPlayDemo(myargv[p]);
-        singledemo = true;          // quit after one demo
+        singledemo = xtrue;          // quit after one demo
     }
 
     if (slot && ++slot < myargc) {
         slot = atoi(myargv[slot]);        // killough 3/16/98: add slot info
-        G_LoadGame(slot, true);           // killough 5/15/98: add command flag // cph - no filename
+        G_LoadGame(slot, xtrue);           // killough 5/15/98: add command flag // cph - no filename
     } else if (!singledemo) {                  /* killough 12/98 */
         if (autostart || netgame) {
 
@@ -1594,10 +1594,10 @@ void D_DoomMain(void) {
 
 void GetFirstMap(int *ep, int *map) {
     int i, j; // used to generate map name
-    boolean done = false;  // Ty 09/13/98 - to exit inner loops
+    boolean done = xfalse;  // Ty 09/13/98 - to exit inner loops
     char test[6];  // MAPxx or ExMx plus terminator for testing
     char name[6];  // MAPxx or ExMx plus terminator for display
-    boolean newlevel = false;  // Ty 10/04/98 - to test for new level
+    boolean newlevel = xfalse;  // Ty 10/04/98 - to test for new level
     int ix;  // index for lookup
 
     strcpy(name, ""); // initialize
@@ -1615,8 +1615,8 @@ void GetFirstMap(int *ep, int *map) {
                     if (lumpinfo[ix].source == source_pwad) {
                         *map = i;
                         strcpy(name, test);  // Ty 10/04/98
-                        done = true;  // Ty 09/13/98
-                        newlevel = true; // Ty 10/04/98
+                        done = xtrue;  // Ty 09/13/98
+                        newlevel = xtrue; // Ty 10/04/98
                     } else {
                         if (!*name)  // found one, not pwad.  First default.
                             strcpy(name, test);
@@ -1638,8 +1638,8 @@ void GetFirstMap(int *ep, int *map) {
                             *ep = i;
                             *map = j;
                             strcpy(name, test); // Ty 10/04/98
-                            done = true;  // Ty 09/13/98
-                            newlevel = true; // Ty 10/04/98
+                            done = xtrue;  // Ty 09/13/98
+                            newlevel = xtrue; // Ty 10/04/98
                         } else {
                             if (!*name)  // found one, not pwad.  First default.
                                 strcpy(name, test);

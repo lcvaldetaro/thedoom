@@ -159,7 +159,7 @@ static boolean P_CrossSubsector(int num) {
         // solid wrt this LOS
         if (!(line->flags & ML_TWOSIDED) || (openbottom >= opentop) ||
             (opentop < los.minz) || (openbottom > los.maxz))
-            return false;
+            return xfalse;
 
         { // crosses a two sided line
             /* cph 2006/07/15 - oops, we missed this in 2.4.0 & .1;
@@ -181,11 +181,11 @@ static boolean P_CrossSubsector(int num) {
             }
 
             if (los.topslope <= los.bottomslope)
-                return false;               // stop
+                return xfalse;               // stop
         }
     }
     // passed the subsector ok
-    return true;
+    return xtrue;
 }
 
 //
@@ -262,7 +262,7 @@ boolean P_CheckSight(mobj_t *t1, mobj_t *t2) {
     // Check in REJECT table.
 
     if (rejectmatrix[pnum >> 3] & (1 << (pnum & 7)))   // can't possibly be connected
-        return false;
+        return xfalse;
 
     // killough 4/19/98: make fake floors and ceilings block monster view
 
@@ -277,14 +277,14 @@ boolean P_CheckSight(mobj_t *t1, mobj_t *t2) {
            t1->z >= sectors[s2->heightsec].floorheight) ||
           (t2->z >= sectors[s2->heightsec].ceilingheight &&
            t1->z + t2->height <= sectors[s2->heightsec].ceilingheight))))
-        return false;
+        return xfalse;
 
     /* killough 11/98: shortcut for melee situations
      * same subsector? obviously visible
      * cph - compatibility optioned for demo sync, cf HR06-UV.LMP */
     if ((t1->subsector == t2->subsector) &&
         (compatibility_level >= mbf_compatibility))
-        return true;
+        return xtrue;
 
     // An unobstructed LOS is possible.
     // Now look from eyes of t1 to any part of t2.

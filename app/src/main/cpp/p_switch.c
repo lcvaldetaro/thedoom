@@ -241,7 +241,7 @@ P_UseSpecialLine
     // b.m. side test was broken in boom201
     if ((demoplayback ? (demover != 201) : (compatibility_level != boom_201_compatibility)))
         if (side) //jff 6/1/98 fix inadvertent deletion of side test
-            return false;
+            return xfalse;
 
     //jff 02/04/98 add check here for generalized floor/ceil mover
     if (!demo_compatibility) {
@@ -255,56 +255,56 @@ P_UseSpecialLine
         } else if ((unsigned) line->special >= GenFloorBase) {
             if (!thing->player)
                 if ((line->special & FloorChange) || !(line->special & FloorModel))
-                    return false; // FloorModel is "Allow Monsters" if FloorChange is 0
+                    return xfalse; // FloorModel is "Allow Monsters" if FloorChange is 0
             if (!line->tag && ((line->special & 6) != 6)) //jff 2/27/98 all non-manual
-                return false;                         // generalized types require tag
+                return xfalse;                         // generalized types require tag
             linefunc = EV_DoGenFloor;
         } else if ((unsigned) line->special >= GenCeilingBase) {
             if (!thing->player)
                 if ((line->special & CeilingChange) || !(line->special & CeilingModel))
-                    return false;   // CeilingModel is "Allow Monsters" if CeilingChange is 0
+                    return xfalse;   // CeilingModel is "Allow Monsters" if CeilingChange is 0
             if (!line->tag && ((line->special & 6) != 6)) //jff 2/27/98 all non-manual
-                return false;                         // generalized types require tag
+                return xfalse;                         // generalized types require tag
             linefunc = EV_DoGenCeiling;
         } else if ((unsigned) line->special >= GenDoorBase) {
             if (!thing->player) {
                 if (!(line->special & DoorMonster))
-                    return false;   // monsters disallowed from this door
+                    return xfalse;   // monsters disallowed from this door
                 if (line->flags & ML_SECRET) // they can't open secret doors either
-                    return false;
+                    return xfalse;
             }
             if (!line->tag && ((line->special & 6) != 6)) //jff 3/2/98 all non-manual
-                return false;                         // generalized types require tag
+                return xfalse;                         // generalized types require tag
             linefunc = EV_DoGenDoor;
         } else if ((unsigned) line->special >= GenLockedBase) {
             if (!thing->player)
-                return false;   // monsters disallowed from unlocking doors
+                return xfalse;   // monsters disallowed from unlocking doors
             if (!P_CanUnlockGenDoor(line, thing->player))
-                return false;
+                return xfalse;
             if (!line->tag && ((line->special & 6) != 6)) //jff 2/27/98 all non-manual
-                return false;                         // generalized types require tag
+                return xfalse;                         // generalized types require tag
 
             linefunc = EV_DoGenLockedDoor;
         } else if ((unsigned) line->special >= GenLiftBase) {
             if (!thing->player)
                 if (!(line->special & LiftMonster))
-                    return false; // monsters disallowed
+                    return xfalse; // monsters disallowed
             if (!line->tag && ((line->special & 6) != 6)) //jff 2/27/98 all non-manual
-                return false;                         // generalized types require tag
+                return xfalse;                         // generalized types require tag
             linefunc = EV_DoGenLift;
         } else if ((unsigned) line->special >= GenStairsBase) {
             if (!thing->player)
                 if (!(line->special & StairMonster))
-                    return false; // monsters disallowed
+                    return xfalse; // monsters disallowed
             if (!line->tag && ((line->special & 6) != 6)) //jff 2/27/98 all non-manual
-                return false;                         // generalized types require tag
+                return xfalse;                         // generalized types require tag
             linefunc = EV_DoGenStairs;
         } else if ((unsigned) line->special >= GenCrusherBase) {
             if (!thing->player)
                 if (!(line->special & CrusherMonster))
-                    return false; // monsters disallowed
+                    return xfalse; // monsters disallowed
             if (!line->tag && ((line->special & 6) != 6)) //jff 2/27/98 all non-manual
-                return false;                         // generalized types require tag
+                return xfalse;                         // generalized types require tag
             linefunc = EV_DoGenCrusher;
         }
 
@@ -314,21 +314,21 @@ P_UseSpecialLine
                     if (!side)
                         if (linefunc(line))
                             line->special = 0;
-                    return true;
+                    return xtrue;
                 case PushMany:
                     if (!side)
                         linefunc(line);
-                    return true;
+                    return xtrue;
                 case SwitchOnce:
                     if (linefunc(line))
                         P_ChangeSwitchTexture(line, 0);
-                    return true;
+                    return xtrue;
                 case SwitchMany:
                     if (linefunc(line))
                         P_ChangeSwitchTexture(line, 1);
-                    return true;
+                    return xtrue;
                 default:  // if not a switch/push type, do nothing here
-                    return false;
+                    return xfalse;
             }
     }
 
@@ -336,7 +336,7 @@ P_UseSpecialLine
     if (!thing->player) {
         // never open secret doors
         if (line->flags & ML_SECRET)
-            return false;
+            return xfalse;
 
         switch (line->special) {
             case 1:         // MANUAL DOOR RAISE
@@ -351,13 +351,13 @@ P_UseSpecialLine
                 break;
 
             default:
-                return false;
+                return xfalse;
                 break;
         }
     }
 
     if (!P_CheckTag(line))  //jff 2/27/98 disallow zero tag on some types
-        return false;
+        return xfalse;
 
     // Dispatch to handler according to linedef type
     switch (line->special) {
@@ -396,7 +396,7 @@ P_UseSpecialLine
              */
             if (thing->player && thing->player->health <= 0 && !comp[comp_zombie]) {
                 S_StartSound(thing, sfx_noway);
-                return false;
+                return xfalse;
             }
 
             P_ChangeSwitchTexture(line, 0);
@@ -475,7 +475,7 @@ P_UseSpecialLine
              */
             if (thing->player && thing->player->health <= 0 && !comp[comp_zombie]) {
                 S_StartSound(thing, sfx_noway);
-                return false;
+                return xfalse;
             }
 
             P_ChangeSwitchTexture(line, 0);
@@ -1124,5 +1124,5 @@ P_UseSpecialLine
             P_ChangeSwitchTexture(line, 1);
             break;
     }
-    return true;
+    return xtrue;
 }

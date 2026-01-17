@@ -73,7 +73,7 @@ void T_MoveCeiling(ceiling_t *ceiling) {
                             ceiling->sector,
                             ceiling->speed,
                             ceiling->topheight,
-                            false,
+                            xfalse,
                             1,
                             ceiling->direction
                     );
@@ -269,12 +269,12 @@ int EV_DoCeiling
         sec->ceilingdata = ceiling;               //jff 2/22/98
         ceiling->thinker.function = T_MoveCeiling;
         ceiling->sector = sec;
-        ceiling->crush = false;
+        ceiling->crush = xfalse;
 
         // setup ceiling structure according to type of function
         switch (type) {
             case fastCrushAndRaise:
-                ceiling->crush = true;
+                ceiling->crush = xtrue;
                 ceiling->topheight = sec->ceilingheight;
                 ceiling->bottomheight = sec->floorheight + (8 * FRACUNIT);
                 ceiling->direction = -1;
@@ -283,7 +283,7 @@ int EV_DoCeiling
 
             case silentCrushAndRaise:
             case crushAndRaise:
-                ceiling->crush = true;
+                ceiling->crush = xtrue;
                 ceiling->topheight = sec->ceilingheight;
             case lowerAndCrush:
             case lowerToFloor:

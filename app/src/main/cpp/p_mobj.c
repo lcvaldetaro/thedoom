@@ -62,7 +62,7 @@ boolean P_SetMobjState(mobj_t *mobj, statenum_t state) {
     statenum_t *seenstate = seenstate_tab;      // pointer to table
     static int recursion;                       // detects recursion
     statenum_t i = state;                       // initial state
-    boolean ret = true;                         // return value
+    boolean ret = xtrue;                         // return value
     statenum_t tempstate[NUMSTATES];            // for use with recursion
 
     if (recursion++)                            // if recursion detected,
@@ -72,7 +72,7 @@ boolean P_SetMobjState(mobj_t *mobj, statenum_t state) {
         if (state == S_NULL) {
             mobj->state = (state_t *) S_NULL;
             P_RemoveMobj(mobj);
-            ret = false;
+            ret = xfalse;
             break;                 // killough 4/9/98
         }
 
@@ -202,7 +202,7 @@ static void P_XYMovement(mobj_t *mo) {
 
         // killough 3/15/98: Allow objects to drop off
 
-        if (!P_TryMove(mo, ptryx, ptryy, true)) {
+        if (!P_TryMove(mo, ptryx, ptryy, xtrue)) {
             // blocked move
 
             // killough 8/11/98: bouncing off walls
@@ -1041,7 +1041,7 @@ void P_SpawnPlayer(int n, const mapthing_t *mthing) {
 
     if (deathmatch)
         for (i = 0; i < NUMCARDS; i++)
-            p->cards[i] = true;
+            p->cards[i] = xtrue;
 
     if (mthing->type - 1 == consoleplayer) {
         ST_Start(); // wake up the status bar
@@ -1070,10 +1070,10 @@ boolean P_IsDoomnumAllowed(int doomnum) {
             case 84:  // Wolf SS
             case 88:  // Boss Brain
             case 89:  // Boss Shooter
-                return false;
+                return xfalse;
         }
 
-    return true;
+    return xtrue;
 }
 
 //
@@ -1353,7 +1353,7 @@ void P_CheckMissileSpawn(mobj_t *th) {
 
     // killough 3/15/98: no dropoff (really = don't care for missiles)
 
-    if (!P_TryMove(th, th->x, th->y, false))
+    if (!P_TryMove(th, th->x, th->y, xfalse))
         P_ExplodeMissile(th);
 }
 

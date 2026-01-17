@@ -104,7 +104,7 @@ void T_PlatRaise(plat_t *plat) {
             break;
 
         case down: // plat moving down
-            res = T_MovePlane(plat->sector, plat->speed, plat->low, false, 0, -1);
+            res = T_MovePlane(plat->sector, plat->speed, plat->low, xfalse, 0, -1);
 
             // handle reaching end of down stroke
             if (res == pastdest) {
@@ -211,7 +211,7 @@ int EV_DoPlat
         plat->sector = sec;
         plat->sector->floordata = plat; //jff 2/23/98 multiple thinkers
         plat->thinker.function = T_PlatRaise;
-        plat->crush = false;
+        plat->crush = xfalse;
         plat->tag = line->tag;
 
         //jff 1/26/98 Avoid raise plat bouncing a head off a ceiling and then
@@ -290,7 +290,7 @@ int EV_DoPlat
             case toggleUpDn: //jff 3/14/98 add new type to support instant toggle
                 plat->speed = PLATSPEED;  //not used
                 plat->wait = 35 * PLATWAIT; //not used
-                plat->crush = true; //jff 3/14/98 crush anything in the way
+                plat->crush = xtrue; //jff 3/14/98 crush anything in the way
 
                 // set up toggling between ceiling, floor inclusive
                 plat->low = sec->ceilingheight;

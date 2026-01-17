@@ -150,7 +150,7 @@ void R_RenderMaskedSegRange(drawseg_t *ds, int x1, int x2) {
         texnum = texturetranslation[texnum];
 
     // killough 4/13/98: get correct lightlevel for 2s normal textures
-    rw_lightlevel = R_FakeFlat(frontsector, &tempsec, NULL, NULL, false)->lightlevel;
+    rw_lightlevel = R_FakeFlat(frontsector, &tempsec, NULL, NULL, xfalse)->lightlevel;
 
     maskedtexturecol = ds->maskedtexturecol;
 
@@ -461,7 +461,7 @@ void R_StoreWallRange(const int start, const int stop) {
         maxdrawsegs = newmax;
     }
 
-    if (curline->miniseg == false) // figgi -- skip minisegs
+    if (curline->miniseg == xfalse) // figgi -- skip minisegs
         curline->linedef->flags |= ML_MAPPED;
 
 #ifdef GL_DOOM
@@ -560,7 +560,7 @@ void R_StoreWallRange(const int start, const int stop) {
         midtexheight = (linedef->r_flags & RF_MID_TILE) ? 0 : textureheight[midtexture] >> FRACBITS;
 
         // a single sided line is terminal, so it must mark ends
-        markfloor = markceiling = true;
+        markfloor = markceiling = xtrue;
 
         if (linedef->flags & ML_DONTPEGBOTTOM) {         // bottom of texture at bottom
             fixed_t vtop = frontsector->floorheight +
@@ -656,7 +656,7 @@ void R_StoreWallRange(const int start, const int stop) {
 
         if (backsector->ceilingheight <= frontsector->floorheight
             || backsector->floorheight >= frontsector->ceilingheight)
-            markceiling = markfloor = true;   // closed door
+            markceiling = markfloor = xtrue;   // closed door
 
         if (worldhigh < worldtop)   // top texture
         {
@@ -679,7 +679,7 @@ void R_StoreWallRange(const int start, const int stop) {
         // allocate space for masked texture tables
         if (sidedef->midtexture)    // masked midtexture
         {
-            maskedtexture = true;
+            maskedtexture = xtrue;
             ds_p->maskedtexturecol = maskedtexturecol = lastopening - rw_x;
             lastopening += rw_stopx - rw_x;
         }
@@ -710,10 +710,10 @@ void R_StoreWallRange(const int start, const int stop) {
     // killough 3/7/98: add deep water check
     if (frontsector->heightsec == -1) {
         if (frontsector->floorheight >= viewz)       // above view plane
-            markfloor = false;
+            markfloor = xfalse;
         if (frontsector->ceilingheight <= viewz &&
             frontsector->ceilingpic != skyflatnum)   // below view plane
-            markceiling = false;
+            markceiling = xfalse;
     }
 
     // calculate incremental stepping values for texture edges

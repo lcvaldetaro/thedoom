@@ -781,7 +781,7 @@ boolean P_CanUnlockGenDoor
                     ) {
                 player->message = s_PD_ANY; // Ty 03/27/98 - externalized
                 S_StartSound(player->mo, sfx_oof);             // killough 3/20/98
-                return false;
+                return xfalse;
             }
             break;
         case RCard:
@@ -792,7 +792,7 @@ boolean P_CanUnlockGenDoor
                     ) {
                 player->message = skulliscard ? s_PD_REDK : s_PD_REDC; // Ty 03/27/98 - externalized
                 S_StartSound(player->mo, sfx_oof);             // killough 3/20/98
-                return false;
+                return xfalse;
             }
             break;
         case BCard:
@@ -803,7 +803,7 @@ boolean P_CanUnlockGenDoor
                     ) {
                 player->message = skulliscard ? s_PD_BLUEK : s_PD_BLUEC; // Ty 03/27/98 - externalized
                 S_StartSound(player->mo, sfx_oof);             // killough 3/20/98
-                return false;
+                return xfalse;
             }
             break;
         case YCard:
@@ -814,7 +814,7 @@ boolean P_CanUnlockGenDoor
                     ) {
                 player->message = skulliscard ? s_PD_YELLOWK : s_PD_YELLOWC; // Ty 03/27/98 - externalized
                 S_StartSound(player->mo, sfx_oof);             // killough 3/20/98
-                return false;
+                return xfalse;
             }
             break;
         case RSkull:
@@ -825,7 +825,7 @@ boolean P_CanUnlockGenDoor
                     ) {
                 player->message = skulliscard ? s_PD_REDK : s_PD_REDS; // Ty 03/27/98 - externalized
                 S_StartSound(player->mo, sfx_oof);             // killough 3/20/98
-                return false;
+                return xfalse;
             }
             break;
         case BSkull:
@@ -836,7 +836,7 @@ boolean P_CanUnlockGenDoor
                     ) {
                 player->message = skulliscard ? s_PD_BLUEK : s_PD_BLUES; // Ty 03/27/98 - externalized
                 S_StartSound(player->mo, sfx_oof);             // killough 3/20/98
-                return false;
+                return xfalse;
             }
             break;
         case YSkull:
@@ -847,7 +847,7 @@ boolean P_CanUnlockGenDoor
                     ) {
                 player->message = skulliscard ? s_PD_YELLOWK : s_PD_YELLOWS; // Ty 03/27/98 - externalized
                 S_StartSound(player->mo, sfx_oof);             // killough 3/20/98
-                return false;
+                return xfalse;
             }
             break;
         case AllKeys:
@@ -865,7 +865,7 @@ boolean P_CanUnlockGenDoor
                     ) {
                 player->message = s_PD_ALL6; // Ty 03/27/98 - externalized
                 S_StartSound(player->mo, sfx_oof);             // killough 3/20/98
-                return false;
+                return xfalse;
             }
             if
                     (
@@ -881,11 +881,11 @@ boolean P_CanUnlockGenDoor
                     ) {
                 player->message = s_PD_ALL3; // Ty 03/27/98 - externalized
                 S_StartSound(player->mo, sfx_oof);             // killough 3/20/98
-                return false;
+                return xfalse;
             }
             break;
     }
-    return true;
+    return xtrue;
 }
 
 
@@ -913,7 +913,7 @@ boolean PUREFUNC P_SectorActive(special_e t, const sector_t *sec) {
             case lighting_special:
                 return sec->lightingdata != NULL;
         }
-    return true; // don't know which special, must be active, shouldn't be here
+    return xtrue; // don't know which special, must be active, shouldn't be here
 }
 
 
@@ -1709,24 +1709,24 @@ void P_CrossSpecialLine(line_t *line, int side, mobj_t *thing) {
 
                     case 243: //jff 3/6/98 make fit within DCK's 256 linedef types
                         // killough 2/16/98: W1 silent teleporter (linedef-linedef kind)
-                        if (EV_SilentLineTeleport(line, side, thing, false))
+                        if (EV_SilentLineTeleport(line, side, thing, xfalse))
                             line->special = 0;
                         break;
 
                     case 262: //jff 4/14/98 add silent line-line reversed
-                        if (EV_SilentLineTeleport(line, side, thing, true))
+                        if (EV_SilentLineTeleport(line, side, thing, xtrue))
                             line->special = 0;
                         break;
 
                     case 264: //jff 4/14/98 add monster-only silent line-line reversed
                         if (!thing->player &&
-                            EV_SilentLineTeleport(line, side, thing, true))
+                            EV_SilentLineTeleport(line, side, thing, xtrue))
                             line->special = 0;
                         break;
 
                     case 266: //jff 4/14/98 add monster-only silent line-line
                         if (!thing->player &&
-                            EV_SilentLineTeleport(line, side, thing, false))
+                            EV_SilentLineTeleport(line, side, thing, xfalse))
                             line->special = 0;
                         break;
 
@@ -1874,21 +1874,21 @@ void P_CrossSpecialLine(line_t *line, int side, mobj_t *thing) {
 
                     case 244: //jff 3/6/98 make fit within DCK's 256 linedef types
                         // killough 2/16/98: WR silent teleporter (linedef-linedef kind)
-                        EV_SilentLineTeleport(line, side, thing, false);
+                        EV_SilentLineTeleport(line, side, thing, xfalse);
                         break;
 
                     case 263: //jff 4/14/98 add silent line-line reversed
-                        EV_SilentLineTeleport(line, side, thing, true);
+                        EV_SilentLineTeleport(line, side, thing, xtrue);
                         break;
 
                     case 265: //jff 4/14/98 add monster-only silent line-line reversed
                         if (!thing->player)
-                            EV_SilentLineTeleport(line, side, thing, true);
+                            EV_SilentLineTeleport(line, side, thing, xtrue);
                         break;
 
                     case 267: //jff 4/14/98 add monster-only silent line-line
                         if (!thing->player)
-                            EV_SilentLineTeleport(line, side, thing, false);
+                            EV_SilentLineTeleport(line, side, thing, xfalse);
                         break;
 
                     case 269: //jff 4/14/98 add monster-only silent
@@ -2196,7 +2196,7 @@ void P_UpdateSpecials(void) {
     int i;
 
     // Downcount level timer, exit level if elapsed
-    if (levelTimer == true) {
+    if (levelTimer == xtrue) {
         levelTimeCount--;
         if (!levelTimeCount)
             G_ExitLevel();
@@ -2205,9 +2205,9 @@ void P_UpdateSpecials(void) {
     // Check frag counters, if frag limit reached, exit level // Ty 03/18/98
     //  Seems like the total frags should be kept in a simple
     //  array somewhere, but until they are...
-    if (levelFragLimit == true)  // we used -frags so compare count
+    if (levelFragLimit == xtrue)  // we used -frags so compare count
     {
-        int k, m, fragcount, exitflag = false;
+        int k, m, fragcount, exitflag = xfalse;
         for (k = 0; k < MAXPLAYERS; k++) {
             if (!playeringame[k]) continue;
             fragcount = 0;
@@ -2215,10 +2215,10 @@ void P_UpdateSpecials(void) {
                 if (!playeringame[m]) continue;
                 fragcount += (m != k) ? players[k].frags[m] : -players[k].frags[m];
             }
-            if (fragcount >= levelFragLimitCount) exitflag = true;
-            if (exitflag == true) break; // skip out of the loop--we're done
+            if (fragcount >= levelFragLimitCount) exitflag = xtrue;
+            if (exitflag == xtrue) break; // skip out of the loop--we're done
         }
-        if (exitflag == true)
+        if (exitflag == xtrue)
             G_ExitLevel();
     }
 
@@ -2292,11 +2292,11 @@ void P_SpawnSpecials(void) {
         episode = 2;
 
     // See if -timer needs to be used.
-    levelTimer = false;
+    levelTimer = xfalse;
 
     i = M_CheckParm("-avg");   // Austin Virtual Gaming 20 min timer on DM play
     if (i && deathmatch) {
-        levelTimer = true;
+        levelTimer = xtrue;
         levelTimeCount = 20 * 60 * TICRATE;
     }
 
@@ -2304,18 +2304,18 @@ void P_SpawnSpecials(void) {
     if (i && deathmatch) {
         int time;
         time = atoi(myargv[i + 1]) * 60 * TICRATE;
-        levelTimer = true;
+        levelTimer = xtrue;
         levelTimeCount = time;
     }
 
     // See if -frags has been used
-    levelFragLimit = false;
+    levelFragLimit = xfalse;
     i = M_CheckParm("-frags");  // Ty 03/18/98 Added -frags support
     if (i && deathmatch) {
         int frags;
         frags = atoi(myargv[i + 1]);
         if (frags <= 0) frags = 10;  // default 10 if no count provided
-        levelFragLimit = true;
+        levelFragLimit = xtrue;
         levelFragLimitCount = frags;
     }
 
@@ -2995,7 +2995,7 @@ static boolean PIT_PushThing(mobj_t *thing) {
             thing->momy += FixedMul(speed, finesine[pushangle]);
         }
     }
-    return true;
+    return xtrue;
 }
 
 /////////////////////////////
